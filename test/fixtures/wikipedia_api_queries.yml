@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  wikipedia_page_id: 1
+  show_name: MyString
+  infobox: MyText
+
+two:
+  wikipedia_page_id: 1
+  show_name: MyString
+  infobox: MyText

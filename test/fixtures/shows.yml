@@ -1,0 +1,51 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  wikipedia_page_id: 1
+  show_name: MyString
+  first_aired: 2013-11-23 16:50:30
+  last_aired: 2013-11-23 16:50:30
+  show_active: false
+  number_of_episodes: 1
+  number_of_seasons: 1
+  genre_1: MyString
+  genre_2: MyString
+  genre_3: MyString
+  genre_4: MyString
+  genre_5: MyString
+  format_1: MyString
+  format_2: MyString
+  format_3: MyString
+  format_4: MyString
+  format_5: MyString
+  country_1: MyString
+  country_2: MyString
+  country_3: MyString
+  network_1: MyString
+  network_2: MyString
+  language: MyString
+
+two:
+  wikipedia_page_id: 1
+  show_name: MyString
+  first_aired: 2013-11-23 16:50:30
+  last_aired: 2013-11-23 16:50:30
+  show_active: false
+  number_of_episodes: 1
+  number_of_seasons: 1
+  genre_1: MyString
+  genre_2: MyString
+  genre_3: MyString
+  genre_4: MyString
+  genre_5: MyString
+  format_1: MyString
+  format_2: MyString
+  format_3: MyString
+  format_4: MyString
+  format_5: MyString
+  country_1: MyString
+  country_2: MyString
+  country_3: MyString
+  network_1: MyString
+  network_2: MyString
+  language: MyString
