@@ -2,21 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50138401-41a6-45d8-9758-d7e9f0a8eca4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/shared/_navigation.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/shows/children.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/shows/drama.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/shows/serialized.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/shows/test_page.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/parse_and_save.rake" afterPath="$PROJECT_DIR$/lib/tasks/parse_and_save.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/show.rb" afterPath="$PROJECT_DIR$/app/models/show.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/shows_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/shows_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tvratr_v2.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="50138401-41a6-45d8-9758-d7e9f0a8eca4" time="1385413599887" ignored="false" />
+    <file path="/Dummy.txt" changelist="50138401-41a6-45d8-9758-d7e9f0a8eca4" time="1385427236298" ignored="false" />
     <file path="/show.rb" changelist="50138401-41a6-45d8-9758-d7e9f0a8eca4" time="1385420329481" ignored="false" />
     <file path="/query_and_save.rake" changelist="50138401-41a6-45d8-9758-d7e9f0a8eca4" time="1385276004709" ignored="false" />
     <file path="/Ruby Console" changelist="50138401-41a6-45d8-9758-d7e9f0a8eca4" time="1385425239406" ignored="false" />
@@ -91,7 +81,13 @@
         <entry file="file://$PROJECT_DIR$/app/views/shows/drama.html.erb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="47" column="40" selection-start="1346" selection-end="1346" vertical-scroll-proportion="-12.0">
-              <folding />
+              <folding>
+                <marker date="1385417696000" expanded="true" signature="93:1297" placeholder="..." />
+                <marker date="1385417696000" expanded="true" signature="103:442" placeholder="..." />
+                <marker date="1385417696000" expanded="true" signature="110:431" placeholder="..." />
+                <marker date="1385417696000" expanded="true" signature="453:1288" placeholder="..." />
+                <marker date="1385417696000" expanded="true" signature="539:1265" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -136,7 +132,10 @@
         <entry file="file://$PROJECT_DIR$/app/views/shared/_navigation.html.erb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="8" column="54" selection-start="408" selection-end="408" vertical-scroll-proportion="-5.230769">
-              <folding />
+              <folding>
+                <marker date="1385421249000" expanded="true" signature="17:407" placeholder="..." />
+                <marker date="1385421249000" expanded="true" signature="24:400" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -904,12 +903,18 @@
       <created>1385253674255</created>
       <updated>1385253674255</updated>
     </task>
+    <task id="LOCAL-00001" summary="Updates to view pages and some changes to parsing scripts">
+      <created>1385427240634</created>
+      <updated>1385427240634</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="16" y="22" width="1349" height="669" extended-state="0" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288364" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32715008" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -924,7 +929,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288364" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -972,7 +976,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates to view pages and some changes to parsing scripts" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -986,6 +990,7 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="Updates to view pages and some changes to parsing scripts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1036,7 +1041,13 @@
     <entry file="file://$PROJECT_DIR$/app/views/shows/drama.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="47" column="40" selection-start="1346" selection-end="1346" vertical-scroll-proportion="-12.0">
-          <folding />
+          <folding>
+            <marker date="1385417696000" expanded="true" signature="93:1297" placeholder="..." />
+            <marker date="1385417696000" expanded="true" signature="103:442" placeholder="..." />
+            <marker date="1385417696000" expanded="true" signature="110:431" placeholder="..." />
+            <marker date="1385417696000" expanded="true" signature="453:1288" placeholder="..." />
+            <marker date="1385417696000" expanded="true" signature="539:1265" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1071,7 +1082,10 @@
     <entry file="file://$PROJECT_DIR$/app/views/shared/_navigation.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="54" selection-start="408" selection-end="408" vertical-scroll-proportion="-5.230769">
-          <folding />
+          <folding>
+            <marker date="1385421249000" expanded="true" signature="17:407" placeholder="..." />
+            <marker date="1385421249000" expanded="true" signature="24:400" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
