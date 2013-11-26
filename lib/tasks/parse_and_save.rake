@@ -3,10 +3,11 @@ task :parse_and_save_genre_data => :environment do
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
     string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
-    string2 = /\bgenre\b\s*=(?:\[\[)?(.+?)(?:(\]\]))?(?=\s\|)/m.match(string) #search for genre string
+    string2 = string.gsub(/\\n/i," ") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
+    string3 = /\bgenre\b\s*=(?:\[\[)?(.+?)(?:\]\])?(?=\s\|)/m.match(string2) #search for genre string
 
     # this code checks in genre string is nil, in which case end variables must first get set to nil.
-    if string2.nil?
+    if string3.nil?
       @genre1 = nil
       @genre2 = nil
       @genre3 = nil
@@ -14,14 +15,14 @@ task :parse_and_save_genre_data => :environment do
       @genre5 = nil
     else
       # the first 3 lines here help further parse the code and isolate each genre. Each show can have multiple genres.
-      string3 = string2.to_s.gsub(/<\/?[^>]*>/, "") #takes out html tags from code.
-      string4 = string3.gsub("genre","").gsub(/unbulleted list|plainlist/i,"") #takes out genre and a few other words.
-      string5 = string4.scan(/\w+[\']?[\-]?\s*[\\]?\w+[\']?[\-]?\s?\w+[\']?[\-]?/m) #regex used to isolate each genre name.
-      @genre1 = string5[0]
-      @genre2 = string5[1]
-      @genre3 = string5[2]
-      @genre4 = string5[3]
-      @genre5 = string5[4]
+      string4 = string3.to_s.gsub(/<\/?[^>]*>/, "") #takes out html tags from code.
+      string5 = string4.gsub("genre","").gsub(/unbulleted list|plainlist/i,"") #takes out genre and a few other words.
+      string6 = string5.scan(/\w+[\']?[\-]?\s*[\\]?\w+[\']?[\-]?\s?\w+[\']?[\-]?/m) #regex used to isolate each genre name.
+      @genre1 = string6[0]
+      @genre2 = string6[1]
+      @genre3 = string6[2]
+      @genre4 = string6[3]
+      @genre5 = string6[4]
     end
 
     #find the appropriate entry in the Show model and save the first aired date:

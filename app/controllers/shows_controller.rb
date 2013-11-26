@@ -4,7 +4,23 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.json
   def index
+    @shows = Show.all
+  end
+
+  def serialized
     @shows = Show.where(:serialized => true)
+  end
+
+  def drama
+    @shows = Show.where('genre_1 like ?', '%drama%')
+  end
+
+  def children
+    @shows = Show.where('genre_1 like ?', '%children%')
+  end
+
+  def test_page
+    @wikipediaapiquery = WikipediaApiQuery.all
   end
 
   # GET /shows/1

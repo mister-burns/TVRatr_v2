@@ -1,6 +1,13 @@
 TvratrV2::Application.routes.draw do
   root :to => "shows#index"
-  resources :shows
+  resources :shows do
+    collection do
+      get :serialized
+      get :drama
+      get :children
+      get :test_page
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

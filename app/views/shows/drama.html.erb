@@ -1,0 +1,48 @@
+<h1>Listing shows</h1>
+<p1>Number of labels in database: <%= @shows.count %></p1><br>
+
+<table>
+  <thead>
+  <tr>
+    <th>Show Name</th>
+    <th>Wikipedia Page ID</th>
+    <th>Genre</th>
+    <th>Format</th>
+    <th>Serialized</th>
+    <th>First Aired</th>
+    <th>Last Aired</th>
+    <th>Number of Seasons</th>
+    <th>Number of Episodes</th>
+    <th>Network</th>
+    <th>Country</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @shows.order('last_aired DESC', 'first_aired DESC').each do |show| %>
+      <tr>
+        <td><%= show.modifed_show_name %></td>
+        <td><%= show.wikipedia_page_id %></td>
+        <td><%= show.genre_1.to_s.titleize %></td>
+        <td><%= show.format_1.to_s.titleize %></td>
+        <td><%= show.serialized %></td>
+        <td><%= show.modifed_first_aired %></td>
+        <td><%= show.modifed_last_aired %></td>
+        <td><%= show.number_of_seasons %></td>
+        <td><%= show.number_of_episodes %></td>
+        <td><%= show.network_1 %></td>
+        <td><%= show.country_1 %></td>
+        <td><%= link_to 'Show', show %></td>
+        <td><%= link_to 'Edit', edit_show_path(show) %></td>
+        <td><%= link_to 'Destroy', show, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Show', new_show_path %>
