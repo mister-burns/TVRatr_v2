@@ -1,22 +1,23 @@
 class ShowsController < ApplicationController
   before_action :set_show, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /shows
   # GET /shows.json
   def index
-    @shows = Show.all
+    @shows = Show.order(sort_column + " " + sort_direction).limit(100)
   end
 
   def serialized
-    @shows = Show.where(:serialized => true)
+    @shows = Show.where(:serialized => true).order(sort_column + " " + sort_direction)
   end
 
   def drama
-    @shows = Show.where('genre_1 like ?', '%drama%')
+    @shows = Show.where('genre_1 like ?', '%drama%').order(sort_column + " " + sort_direction)
   end
 
   def children
-    @shows = Show.where('genre_1 like ?', '%children%')
+    @shows = Show.where('genre_1 like ?', '%children%').order(sort_column + " " + sort_direction)
   end
 
   def test_page
@@ -87,4 +88,15 @@ class ShowsController < ApplicationController
     def show_params
       params[:show]
     end
+
+    # This method is set up to provide a default to the column sorting if the params hash is empty. From railscast 228.
+    def sort_column
+      Show.column_names.include?(params[:sort]) ? params[:sort] : "last_aired"
+    end
+
+    # This method is set up to provide a default to the column sorting if the params hash is empty. From railscast 228.
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+    end
+
 end

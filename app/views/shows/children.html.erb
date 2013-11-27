@@ -5,30 +5,30 @@
 <table class="table table-striped">
   <thead>
   <tr>
-    <th>Show Name</th>
+    <th><%= sortable "show_name", "Show Name" %></th>
     <th>Wikipedia Page ID</th>
-    <th>Genre</th>
-    <th>Format</th>
+    <th><%= sortable "genre_1", "Genre" %></th>
+    <th><%= sortable "format_1", "Format" %></th>
     <th>Serialized</th>
-    <th>First Aired</th>
-    <th>Last Aired</th>
-    <th>Number of Seasons</th>
-    <th>Number of Episodes</th>
-    <th>Network</th>
-    <th>Country</th>
+    <th><%= sortable "first_aired", "First Aired" %></th>
+    <th><%= sortable "last_aired", "Last Aired" %></th>
+    <th><%= sortable "number_of_seasons", "Number of Seasons" %></th>
+    <th><%= sortable "number_of_episodes", "Number of Episodes" %></th>
+    <th><%= sortable "network_1", "Network" %></th>
+    <th><%= sortable "country_1", "Country" %></th>
     <th><%=t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
   <tbody>
-  <% @shows.order('last_aired DESC', 'first_aired DESC').each do |show| %>
+  <% @shows.each do |show| %>
       <tr>
         <td><%= show.show_name %></td>
         <td><%= show.wikipedia_page_id %></td>
         <td><%= show.genre_1 %></td>
         <td><%= show.format_1 %></td>
         <td><%= show.serialized %></td>
-        <td><%= show.modifed_first_aired %></td>
-        <td><%= show.modifed_last_aired %></td>
+        <td><%= show.first_aired.try(:strftime, "%B %e, %Y") %></td>
+        <td><%= show.last_aired.try(:strftime, "%B %e, %Y") %></td>
         <td><%= show.number_of_seasons %></td>
         <td><%= show.number_of_episodes %></td>
         <td><%= show.network_1 %></td>
