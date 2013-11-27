@@ -1,5 +1,5 @@
 TvratrV2::Application.routes.draw do
-  root :to => "shows#index"
+  root :to => "shows#serialized"
   resources :shows do
     collection do
       get :serialized

@@ -1,17 +1,152 @@
-<%= form_for(@show) do |f| %>
-  <% if @show.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@show.errors.count, "error") %> prohibited this show from being saved:</h2>
-
-      <ul>
-      <% @show.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @show, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :wikipedia_page_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :wikipedia_page_id, :class => 'text_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :show_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :show_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :first_aired, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :first_aired, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :last_aired, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :last_aired, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :show_active, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :show_active, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :number_of_episodes, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :number_of_episodes, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :number_of_seasons, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :number_of_seasons, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :genre_1, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :genre_1, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :genre_2, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :genre_2, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :genre_3, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :genre_3, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :genre_4, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :genre_4, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :genre_5, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :genre_5, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :format_1, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :format_1, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :format_2, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :format_2, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :format_3, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :format_3, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :format_4, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :format_4, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :format_5, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :format_5, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :country_1, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :country_1, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :country_2, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :country_2, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :country_3, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :country_3, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :network_1, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :network_1, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :network_2, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :network_2, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :language, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :language, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :serialized, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :serialized, :class => 'text_field' %>
+    </div>
+  </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                shows_path, :class => 'btn' %>
   </div>
 <% end %>
