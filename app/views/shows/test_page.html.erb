@@ -1,4 +1,4 @@
-<% wikipediaapiquery = @wikipediaapiquery.where(:wikipedia_page_id => 26032118).first %>
+<% wikipediaapiquery = @wikipediaapiquery.where(:wikipedia_page_id => 27176868).first %>
 <p><% string = wikipediaapiquery.infobox %></p>
 <% string2 = string.gsub(/\\n/i," ") %>
 <%= string2 %>
@@ -10,3 +10,5 @@
 <p><%= string5 %></p>
 <% string6 = string5.scan(/\w+\'?\-?\s?\\?\w+?\'?\-?\s?\\?\w+?\'?/m) %>
 <p><%= string6 %></p>
+<%= image_tag "go_down.png" %>
+<p><%= Show.first.modified_show_name %></p>

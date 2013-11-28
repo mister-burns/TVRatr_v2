@@ -10,16 +10,20 @@ class Show < ActiveRecord::Base
     end
   end
 
-  def modifed_first_aired
+  def modified_first_aired
     first_aired.try(:strftime, "%B %e, %Y")
   end
 
-  def modifed_show_name
+  def modified_show_name
     show_name.gsub(/\(tv series\)|\(tv progra(m|me)\)/i, "")
   end
 
-  def genre_and_format_list
-    "#{genre_1}, #{genre_2}"
+  def self.search(search)
+    if search
+      where('show_name LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
   end
 
 end

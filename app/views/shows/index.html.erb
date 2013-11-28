@@ -2,6 +2,8 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
+
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -22,17 +24,17 @@
   <tbody>
   <% @shows.each do |show| %>
       <tr>
-        <td><%= show.show_name %></td>
+        <td><%= show.modified_show_name %></td>
         <td><%= show.wikipedia_page_id %></td>
-        <td><%= show.genre_1 %></td>
-        <td><%= show.format_1 %></td>
+        <td><%= show.genre_1.try(:titleize) %></td>
+        <td><%= show.format_1.try(:titleize)  %></td>
         <td><%= show.serialized %></td>
-        <td><%= show.first_aired.try(:strftime, "%B %e, %Y") %></td>
-        <td><%= show.last_aired.try(:strftime, "%B %e, %Y") %></td>
+        <td><%= show.modified_first_aired %></td>
+        <td><%= show.modifed_last_aired %></td>
         <td><%= show.number_of_seasons %></td>
         <td><%= show.number_of_episodes %></td>
         <td><%= show.network_1 %></td>
-        <td><%= show.country_1 %></td>
+        <td><%= show.country_1.try(:titleize) %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_show_path(show), :class => 'btn btn-mini' %>
@@ -46,6 +48,7 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @shows %>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_show_path,

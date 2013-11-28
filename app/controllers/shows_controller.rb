@@ -5,19 +5,19 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.json
   def index
-    @shows = Show.order(sort_column + " " + sort_direction).limit(100)
+    @shows = Show.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
   end
 
   def serialized
-    @shows = Show.where(:serialized => true).order(sort_column + " " + sort_direction)
+    @shows = Show.where(:serialized => true).search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
   end
 
   def drama
-    @shows = Show.where('genre_1 like ?', '%drama%').order(sort_column + " " + sort_direction)
+    @shows = Show.where('genre_1 like ?', '%drama%').search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
   end
 
   def children
-    @shows = Show.where('genre_1 like ?', '%children%').order(sort_column + " " + sort_direction)
+    @shows = Show.where('genre_1 like ?', '%children%').search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
   end
 
   def test_page
