@@ -53,6 +53,9 @@
   <dt><strong><%= model_class.human_attribute_name(:serialized) %>:</strong></dt>
   <dd><%= @show.serialized %></dd>
 </dl>
+<% hash = JSON.parse(WikipediaApiQuery.where(:wikipedia_page_id => @show.wikipedia_page_id).first.infobox) %>
+<p><%= hash["query"]["pages"]["#{@show.wikipedia_page_id}"]["revisions"].first["*"] %></p>
+
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

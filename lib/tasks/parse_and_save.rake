@@ -113,13 +113,16 @@ task :parse_and_save_last_aired_data => :environment do
     string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
     string2 = /(last_aired\s*=\s*+)(.+?(?=\s\|))/m.match(string) #look for patterns in the data to start at first_aired and end after the date
     #take the date out of string above, substitute "/" for "|" because you cannot parse the date below without doing this
-    string3 = /((\d+)\|?(\d+)\|?(\d+)|present)/m.match(string2.to_s).to_s.gsub("|","/")
+    string3 = /((\d+)\|?(\d+)\|?(\d+)|present)/mi.match(string2.to_s).to_s.gsub("|","/")
 
     #if statement to first look for dates in the "YYYY" format and add text of "/01/01" so they become Date.parse friendly
     if ( string3 =~ /^\d{4}\z/m )
       @string4 = string3.to_s.concat("/01/01")
-    elsif ( string3 =~ /present/m )
-      @string4 = DateTime.now.to_s
+    elsif ( string3 =~ /present/mi )
+      show = Show.where(:wikipedia_page_id => page).first
+      show.last_aired_present = "present"
+      show.save
+      @string4 = Date.today
     else
       @string4 = string3 #set variable to original parsed result if it is not in "YYYY" format
     end
@@ -183,6 +186,29 @@ task :parse_and_save_season_data => :environment do
   end
 end
 
+#This task parses the num_series infobox value. Num_series is sometimes used instead of num_seasons,
+#especially for UK shows.
+task :parse_and_save_series_data => :environment do
+  wikipediaapiquery = WikipediaApiQuery.all
+  wikipediaapiquery.each do |wikipediaapiquery|
+    page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
+    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+    series_match = /(?:num_series\s*=\s*)([0-9]+)/m.match(string) #look for patterns in the data to start at num_series and end at the last date digit of the number
+
+    #run an if statement to weed out nil data, so I can call the match grouping in the else statement
+    if series_match.nil?
+      @series_value = nil
+    else
+      @series_value = series_match[1] #set series value to second group of the match data
+    end
+
+    #Call the show model object where the wikipedia ID matches the page number of the JSON we just parsed.
+    show = Show.where(:wikipedia_page_id => page).first
+    show.number_of_series = @series_value
+    show.save
+  end
+end
+
 
 task :parse_and_save_country_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
@@ -222,19 +248,22 @@ task :parse_and_save_network_data => :environment do
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
     string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #look for patterns in the data to start at country and parse the different answers
     #Wikipedia entries use either 'network' or 'channel' to describe what I want as network info, so i search for both:
-    string2 = /(?:\bnetwork|channel\b\s*=s*)(?:\[\[)?(.+?)(?:\]\])?(?=\s\|)/m.match(string)
+    string2 = string.gsub(/\\n/mi," ").gsub(/{{Plainlist \|/mi,"")
+    string3 = /(?:(network|channel)\s*=s*)(?:\[\[)?(.+?)(?:\]\])?(?=\s\|)/im.match(string2)
 
-    if string2.nil?
+    if string3.nil?
       @network_1 = nil
       @network_2 = nil
     else
-      string3 = string2.to_s.gsub(/<\/?[^>]*>/, ",") #remove HTML tags from code, replace with "|" so different network or channel names remain separated
-      #remove the word network or channel and use gsub to replace or remove freqently recurring terms or abbreviations.
-      string4 = string3.gsub(/network|channel/i,"").gsub(/unbulleted list|plainlist/i,"").gsub(/(tv channel)/i,"").gsub(/American Broadcasting Company/i,"ABC").gsub(/Fox Broadcasting Company/i,"FOX").gsub(/Columbia Broadcasting System/i,"CBS").gsub(/National Broadcasting Company/i,"NBC").gsub(/Public Broadcasting Service/i,"PBS").gsub(/[0-9]{4}/,"")
-      #use regex to pick the network or channel name from the cleaned text
-      string5 = string4.scan(/\w+[\']?[\-]?\s*[\\]?\w+[\']?[\-]?\s?\w+[\']?[\-]?/m)
-      @network_1 = string5[0]
-      @network_2 = string5[1]
+      string4 = string3.to_s.gsub(/<\/?[^>]*>/, ",")
+      string5 = string4.split("=")
+      string6 = string5[1]
+      string7 = string6.gsub(/unbulleted list|plainlist/im,"").gsub(/[0-9]{4}/,"").gsub(/American Broadcasting Company/im,"ABC").gsub(/Fox Broadcasting Company/im,"FOX").gsub(/Columbia Broadcasting System/im,"CBS").gsub(/National Broadcasting Company/im,"NBC").gsub(/Public Broadcasting Service/im,"PBS")
+      string8 = string7.scan(/\w+[^\|\[\]\{\}](?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?/m)
+      #alt string7.scan(/\w+[^\|\[\]\{\}](?:\w+[^\|\[\]\{\}])?(?:\w+[^\|\[\]\{\}])?/m)
+      #alt string7.scan(/\w+['&\\.(\)\\\-\s]*(?:\w+['&\(\)\.\\\-\s]*)?(?:\w+['&\\.(\)\\\-\s]*)?/m)
+      @network_1 = string8[0]
+      @network_2 = string8[1]
     end
 
     #Call the show model object where the wikipedia ID matches the network names that were just parsed.
@@ -242,8 +271,9 @@ task :parse_and_save_network_data => :environment do
     show.network_1 = @network_1
     show.network_2 = @network_2
     show.save
+    end
   end
-end
+
 
 
 #This task queries from the "Serial_drama_television_series" category list and then saves a boolean

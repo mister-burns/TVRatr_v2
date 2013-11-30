@@ -14,27 +14,30 @@
     <th>Serialized</th>
     <th><%= sortable "first_aired", "First Aired" %></th>
     <th><%= sortable "last_aired", "Last Aired" %></th>
-    <th><%= sortable "number_of_seasons", "Number of Seasons" %></th>
+    <th><%= sortable "modified_number_of_seasons", "Number of Seasons" %></th>
     <th><%= sortable "number_of_episodes", "Number of Episodes" %></th>
     <th><%= sortable "network_1", "Network" %></th>
     <th><%= sortable "country_1", "Country" %></th>
+    <th>Show Info</th>
     <th><%=t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
   <tbody>
   <% @shows.each do |show| %>
       <tr>
-        <td><%= show.modified_show_name %></td>
+        <td><%= link_to show.modified_show_name, "http://en.wikipedia.org/wiki/#{show.show_name}" %></td>
         <td><%= show.wikipedia_page_id %></td>
         <td><%= show.genre_1.try(:titleize) %></td>
         <td><%= show.format_1.try(:titleize)  %></td>
         <td><%= show.serialized %></td>
         <td><%= show.modified_first_aired %></td>
-        <td><%= show.modifed_last_aired %></td>
-        <td><%= show.number_of_seasons %></td>
+        <td><%= show.modified_last_aired %></td>
+        <td><%= show.modified_number_of_seasons %></td>
         <td><%= show.number_of_episodes %></td>
         <td><%= show.network_1 %></td>
         <td><%= show.country_1.try(:titleize) %></td>
+        <td><%= link_to t('.show', :default => t("helpers.links.show")),
+                        show_path(show), :class => 'btn btn-mini' %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_show_path(show), :class => 'btn btn-mini' %>

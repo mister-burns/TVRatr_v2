@@ -1,14 +1,13 @@
-<% wikipediaapiquery = @wikipediaapiquery.where(:wikipedia_page_id => 27176868).first %>
-<p><% string = wikipediaapiquery.infobox %></p>
-<% string2 = string.gsub(/\\n/i," ") %>
-<%= string2 %>
-<% string3 = /\bgenre\b\s*=(?:\[\[)?(.+?)(?:\]\])?(?=\s\|)/m.match(string2) %>
-<p><%= string3 %></p>
-<% string4 = string3.to_s.gsub(/<\/?[^>]*>/, "") %>
-<p><%= string4 %></p>
-<% string5 = string4.gsub("genre","").gsub(/unbulleted list|plainlist/i,"") %>
-<p><%= string5 %></p>
-<% string6 = string5.scan(/\w+\'?\-?\s?\\?\w+?\'?\-?\s?\\?\w+?\'?/m) %>
-<p><%= string6 %></p>
-<%= image_tag "go_down.png" %>
-<p><%= Show.first.modified_show_name %></p>
+<% page = 34896829 %>
+<% wikipediaapiquery = @wikipediaapiquery.where(:wikipedia_page_id => page).first %>
+<% hash = JSON.parse(wikipediaapiquery.infobox) %>
+<% hash2 = hash["query"]["pages"]["#{page}"]["revisions"].first["*"] %>
+<p>1 <%= string = hash2.gsub(/\\n/mi," ").gsub(/{{Plainlist \|/mi,"") %></p>
+<p>2 <%= string2 = /(network|channel)\s*=s*(?:\[\[)?(.+?)(?:\]\])?(?=\s\|)/im.match(string) %></p>
+<p>3 <%= string3 = string2.to_s.gsub(/<\/?[^>]*>/, ",") %></p>
+<p>4 <%= string4 = string3.split("=") %></p>
+<p>5 <%= string5 = string4[1] %></p>
+<p>6 <%= string6 = string5.gsub(/unbulleted list|plainlist/i,"").gsub(/American Broadcasting Company/i,"ABC").gsub(/Fox Broadcasting Company/i,"FOX").gsub(/Columbia Broadcasting System/i,"CBS").gsub(/National Broadcasting Company/i,"NBC").gsub(/Public Broadcasting Service/i,"PBS").gsub(/[0-9]{4}/,"") %></p>
+<p>7 <%= string7 = string6.scan(/\w+[^\|\[\]\{\}](?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?/m) %></p>
+<p>8 <%= string7[0] %></p>
+<p>9 <%= string7[1] %></p>

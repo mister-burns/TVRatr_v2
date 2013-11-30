@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131125063934) do
+ActiveRecord::Schema.define(version: 20131129221528) do
 
   create_table "genres", force: true do |t|
     t.string   "genre"
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 20131125063934) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "serialized"
+    t.integer  "number_of_series"
+    t.string   "last_aired_present"
   end
 
   create_table "wikipedia_api_queries", force: true do |t|

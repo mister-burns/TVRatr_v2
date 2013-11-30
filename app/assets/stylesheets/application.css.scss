@@ -20,9 +20,10 @@
 }
 
 .table_table-striped th .asc {
-    background: url("ago_up.png");
+    background: asset_url('ago_up.png');
 }
 
 .table_table-striped th .desc {
-    background: url('go_up.gif');
+    background: asset_url('/app/assets/images/go_up.png');
+
 }

@@ -2,9 +2,11 @@ class Show < ActiveRecord::Base
   validates :wikipedia_page_id, uniqueness: true, presence: true
 
 
-  def modifed_last_aired
-    if last_aired == Date.today
+  def modified_last_aired
+    if last_aired_present == "present"
       "present"
+    elsif last_aired.try(:strftime, "%m%d") == "0101"
+      last_aired.try(:strftime, "%Y")
     else
       last_aired.try(:strftime, "%B %e, %Y")
     end
@@ -24,6 +26,14 @@ class Show < ActiveRecord::Base
     else
       scoped
     end
+  end
+
+  def modified_number_of_seasons
+     if number_of_seasons.nil?
+       number_of_series
+     else
+       number_of_seasons
+     end
   end
 
 end
