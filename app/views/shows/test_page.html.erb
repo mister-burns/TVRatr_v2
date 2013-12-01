@@ -1,13 +1,15 @@
-<% page = 34896829 %>
+<% page = 18624945 %>
 <% wikipediaapiquery = @wikipediaapiquery.where(:wikipedia_page_id => page).first %>
 <% hash = JSON.parse(wikipediaapiquery.infobox) %>
 <% hash2 = hash["query"]["pages"]["#{page}"]["revisions"].first["*"] %>
-<p>1 <%= string = hash2.gsub(/\\n/mi," ").gsub(/{{Plainlist \|/mi,"") %></p>
-<p>2 <%= string2 = /(network|channel)\s*=s*(?:\[\[)?(.+?)(?:\]\])?(?=\s\|)/im.match(string) %></p>
-<p>3 <%= string3 = string2.to_s.gsub(/<\/?[^>]*>/, ",") %></p>
-<p>4 <%= string4 = string3.split("=") %></p>
+<p>1 <%= string = hash2.gsub(/\\n/mi," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, " ") %></p>
+<p>21 <%= string2 = /genre\s*=.*?(?=\s\|)/mi.match(string).to_s %>
+<p>4 <%= string4 = string2.split("=") %></p>
 <p>5 <%= string5 = string4[1] %></p>
-<p>6 <%= string6 = string5.gsub(/unbulleted list|plainlist/i,"").gsub(/American Broadcasting Company/i,"ABC").gsub(/Fox Broadcasting Company/i,"FOX").gsub(/Columbia Broadcasting System/i,"CBS").gsub(/National Broadcasting Company/i,"NBC").gsub(/Public Broadcasting Service/i,"PBS").gsub(/[0-9]{4}/,"") %></p>
-<p>7 <%= string7 = string6.scan(/\w+[^\|\[\]\{\}](?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?/m) %></p>
-<p>8 <%= string7[0] %></p>
-<p>9 <%= string7[1] %></p>
+<p>6 <%#= string6 = string5.gsub(/American Broadcasting Company/i,"ABC").gsub(/Fox Broadcasting Company/i,"FOX").gsub(/Columbia Broadcasting System/i,"CBS").gsub(/National Broadcasting Company/i,"NBC").gsub(/Public Broadcasting Service/i,"PBS").gsub(/[0-9]{4}/,"") %></p>
+<p>7 <%= string6 = string5.scan(/\w+[^\|\[\]\{\}](?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?/m) %></p>
+<p>8 <%= string6[0] %></p>
+<p>9 <%= string6[1] %></p>
+<p>9 <%= string6[2] %></p>
+<p>9 <%= string6[3] %></p>
+<p>9 <%= string6[4] %></p>

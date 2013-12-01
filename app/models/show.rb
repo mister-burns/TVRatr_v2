@@ -36,4 +36,12 @@ class Show < ActiveRecord::Base
      end
   end
 
+  def modified_network_1
+    if network_1.nil?
+      nil
+    else
+      network_1.gsub(/\(tv channel\)|\(tv network\)|\(U\.?S\.? TV (channel|network)\)|\(United States\)/i, "")
+    end
+  end
+
 end
