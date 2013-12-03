@@ -271,6 +271,45 @@ task :parse_and_save_country_data => :environment do
   end
 end
 
+task :parse_and_save_network_data_v2 => :environment do
+  wikipediaapiquery = WikipediaApiQuery.all
+  wikipediaapiquery.each do |wikipediaapiquery|
+    page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
+    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+    #line below: remove "\n" tags and several Wikipedia phrases from string. If not removed, these items cause errors in later parsing steps.
+    string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\||\{\{Plainlist\}\}/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|")
+    string3 = /(network|channel)\s*=.*?(?=\s\|)/mi.match(string2) #search for genre string
+
+    # this code checks in genre string is nil, in which case end variables must first get set to nil.
+    if string3.nil?
+      @genre1 = nil
+      @genre2 = nil
+    else
+      # the first 3 lines here help further parse the code and isolate each genre. Each show can have multiple genres.
+      string4 = string3.to_s.split("=") #splits genre line at the equals sign.
+      string5 = string4[1] #split from above creates an array. This code accessses the second part of the array, after the equals sign.
+      if string5.nil?
+        @genre1 = nil
+        @genre2 = nil
+      else
+        # this code parses out the individual words that make up the genres.
+        string6 = string5.gsub(/[0-9]{4}/,"").gsub(/American Broadcasting Company/im,"ABC").gsub(/Fox Broadcasting Company/im,"FOX").gsub(/Columbia Broadcasting System/im,"CBS").gsub(/National Broadcasting Company/im,"NBC").gsub(/Public Broadcasting Service/im,"PBS")
+        string7 = string6.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
+        # each genre match is accessed as an array and assigned a variable.
+        @network1 = string7[0]
+        @network2 = string7[1]
+      end
+    end
+
+    #find the appropriate entry in the Show model and save the genre variables:
+    show = Show.where(:wikipedia_page_id => page).first
+    show.network_1 = @network1
+    show.network_2 = @network2
+    show.save
+  end
+end
+
+
 task :parse_and_save_network_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   wikipediaapiquery.each do |wikipediaapiquery|
@@ -310,7 +349,7 @@ task :parse_and_save_language_data => :environment do
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
     string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
-    string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, " ") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
+    string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
     string3 = /language\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
 
     # this code checks in format string is nil, in which case end variables must first get set to nil.
@@ -324,9 +363,8 @@ task :parse_and_save_language_data => :environment do
         if string5.nil?
           @language = nil
         else
-          string6 = string5.gsub(/language/i,"")
-          string7 = string6.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
-          @language = string7[0]
+          string6 = string5.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
+          @language = string6[0]
         end
     end
 

@@ -9,11 +9,11 @@ class ShowsController < ApplicationController
   end
 
   def serialized
-    @shows = Show.where(:serialized => true).search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
+    @shows = Show.serialized_search.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
   end
 
   def drama
-    @shows = Show.where('genre_1 like ?', '%drama%').search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
+    @shows = Show.genre_search.serialized_search.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
   end
 
   def children
@@ -23,6 +23,9 @@ class ShowsController < ApplicationController
   def test_page
     @wikipediaapiquery = WikipediaApiQuery.all
   end
+
+
+
 
   # GET /shows/1
   # GET /shows/1.json

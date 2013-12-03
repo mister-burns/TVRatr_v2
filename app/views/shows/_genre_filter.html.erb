@@ -1,0 +1,10 @@
+
+<%= form_tag shows_path, method: 'get' do %>
+    <p><%= check_box_tag 'genre[]', "drama" %></p>
+    <p>    <%= label_tag "Drama" %></p>
+    <p><%= check_box_tag 'genre[]', "action" %></p>
+    <p>    <%= label_tag "Action" %></p>
+    <p><%= check_box_tag 'genre[]', "comedy" %></p>
+    <p>    <%= label_tag "Comedy" %></p>
+    <p><%= submit_tag 'Submit' %></p>
+<% end %>

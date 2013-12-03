@@ -36,7 +36,12 @@
       <h2>Filters Go Here</h2>
     This is where I am going to put all my various filters for show attributes like rating, genre, year, network,
     availability, etc.<br><br>
+      <% if params[:commit] !=nil %>
+          <%= show_params %>
+      <% end %>
       <%= render 'search_box' %>
+      <%= render 'genre_filter' %>
+
     </div>
     <div class ="span9"><%= yield %></div>
   </div>

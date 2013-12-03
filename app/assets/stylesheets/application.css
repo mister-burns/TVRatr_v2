@@ -12,18 +12,3 @@
  *= require_tree .
  */
 
-.table_table-striped th .current {
-    padding-right: 12px;
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-color: red;
-}
-
-.table_table-striped th .asc {
-    background: asset_url('ago_up.png');
-}
-
-.table_table-striped th .desc {
-    background: asset_url('/app/assets/images/go_up.png');
-
-}
