@@ -1,9 +1,33 @@
 <!--This search tag is from rails cast 240-->
+<form class="form-inline" role="form">
 <%= form_tag shows_path, :method => 'get' do %>
     <%= hidden_field_tag :direction, params[:direction] %>
     <%= hidden_field_tag :sort, params[:sort] %>
     <p>
-      <%= text_field_tag :search, params[:search], size: 20 %>
-      <%= submit_tag "Search Show Names", :name => nil %>
+      <%= text_field_tag :search, params[:search], size: 20 %><br>
+      <button type="submit" class="btn btn-default btn-sm" name="nil">Search Show Names</button>
     </p>
+
+    <h4>Category Filter</h4>
+    <%= check_box_tag 'genre[]', "drama", params[:genre] && params[:genre].include?("drama") %>
+    <%= label_tag 'genre[]', "Drama", :class => "checkbox inline" %><br>
+    <%= check_box_tag 'genre[]', "action", params[:genre] && params[:genre].include?("action")  %>
+    <%= label_tag 'genre[]', "Action", :class => "checkbox inline" %><br>
+    <%= check_box_tag 'genre[]', "comedy", params[:genre] && params[:genre].include?("comedy")  %>
+    <%= label_tag 'genre[]', "Comedy", :class => "checkbox inline" %><br>
+    <button type="submit" class="btn btn-default">Filter by Categories</button><br><br>
+
+      <%= label_tag :min_seasons, "Minimum Number of Seasons", :class => "checkbox inline" %>
+      <%= number_field_tag :min_seasons, params[:min_seasons], :in => 1...100 %><br>
+      <%= label_tag :max_seasons, "Maximum Number of Seasons", :class => "checkbox inline" %>
+      <%= number_field_tag :max_seasons, params[:max_seasons], :in => 1...100 %><br><br>
+    <button type="submit" class="btn btn-default">Filter by Season Count</button><br><br>
+
+      <%= label_tag :min_episodes, "Minimum Number of Episodes", :class => "checkbox inline" %>
+      <%= number_field_tag :min_episodes, params[:min_episodes], :in => 1...100 %><br>
+      <%= label_tag :max_episodes, "Maximum Number of Episodes", :class => "checkbox inline" %>
+      <%= number_field_tag :max_episodes, params[:max_episodes], :in => 1...100 %><br><br>
+      <button type="submit" class="btn btn-default">Filter by Episode Count</button><br><br>
+
 <% end %>
+</form>

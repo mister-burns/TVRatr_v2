@@ -1,0 +1,7 @@
+<%= search_form_for @search do |f| %>
+    <div class="field">
+      <%= f.label :name_cont, "Name Contains" %>
+      <%= f.text_field :name_cont %>
+    </div>
+    <div class="actions"><%= f.submit "Search Show Names" %></div>div
+<% end %>

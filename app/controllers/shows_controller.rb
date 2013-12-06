@@ -5,7 +5,8 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.json
   def index
-    @shows = Show.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
+    #@test = params[:genre].first
+    @shows = Show.search(params[:search]).min_seasons_filter(params[:min_seasons]).max_seasons_filter(params[:max_seasons]).min_episodes_filter(params[:min_episodes]).max_episodes_filter(params[:max_episodes]).genre_filter(params[:genre]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
   end
 
   def serialized
@@ -13,7 +14,7 @@ class ShowsController < ApplicationController
   end
 
   def drama
-    @shows = Show.genre_search.serialized_search.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
+    @shows = Show.genre_1.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
   end
 
   def children
@@ -23,9 +24,6 @@ class ShowsController < ApplicationController
   def test_page
     @wikipediaapiquery = WikipediaApiQuery.all
   end
-
-
-
 
   # GET /shows/1
   # GET /shows/1.json

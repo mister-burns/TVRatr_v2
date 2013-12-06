@@ -9,6 +9,9 @@ gem 'sqlite3'
 # Using the twitter-bootstrap app for styling
 gem 'twitter-bootstrap-rails'
 
+# Gems for searching
+gem 'ransack'
+
 #added at suggestion of Railscast 240
 gem 'will_paginate'
 
