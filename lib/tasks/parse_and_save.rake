@@ -1,3 +1,20 @@
+
+# This task combines all parse rake tasks and runs them together.
+task :parse_all => [:parse_and_save_genre_data,
+                    :parse_and_save_format_data,
+                    :parse_and_save_first_aired_data,
+                    :parse_and_save_last_aired_data,
+                    :parse_and_save_episode_count_data,
+                    :parse_and_save_season_count_data,
+                    :parse_and_save_series_count_data,
+                    :parse_and_save_country_data,
+                    :parse_and_save_network_data,
+                    :parse_and_save_language_data
+                    ] do
+  puts "Everything has been parsed!"
+end
+
+
 task :parse_and_save_genre_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   wikipediaapiquery.each do |wikipediaapiquery|
@@ -271,7 +288,7 @@ task :parse_and_save_country_data => :environment do
   end
 end
 
-task :parse_and_save_network_data_v2 => :environment do
+task :parse_and_save_network_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
@@ -310,40 +327,6 @@ task :parse_and_save_network_data_v2 => :environment do
 end
 
 
-task :parse_and_save_network_data => :environment do
-  wikipediaapiquery = WikipediaApiQuery.all
-  wikipediaapiquery.each do |wikipediaapiquery|
-    page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
-    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #look for patterns in the data to start at country and parse the different answers
-    #Wikipedia entries use either 'network' or 'channel' to describe what I want as network info, so i search for both:
-    string2 = string.gsub(/\\n/mi," ").gsub(/\{\{Plainlist \|/mi,"").gsub(/\{\{ubl\|/mi,"") #This line removes line breaks ("\n") and "{{Plainlist |" which is something wikipedia put in.
-    string3 = /(?:(network|channel)\s*=s*)(?:\[\[)?(.+?)(?:\]\])?(?=\s\|)/im.match(string2) # this line matches the key and value for network or channel.
-
-    if string3.nil? #use this line to check if network/channel has a value or not. If not, variables are set to nil
-      @network_1 = nil
-      @network_2 = nil
-    else
-      string4 = string3.to_s.gsub(/<\/?[^>]*>/, "|") #This line removes HTML tags.
-      string5 = string4.split("=") # splits string at "=" into an array. I want the part after the "=".
-      string6 = string5[1] #captures the 2nd part of the array from the split string above (remember, arrays start at [0])
-      string7 = string6.gsub(/unbulleted list|plainlist/im,"").gsub(/[0-9]{4}/,"").gsub(/American Broadcasting Company/im,"ABC").gsub(/Fox Broadcasting Company/im,"FOX").gsub(/Columbia Broadcasting System/im,"CBS").gsub(/National Broadcasting Company/im,"NBC").gsub(/Public Broadcasting Service/im,"PBS")
-      #regex in line below captures each word group up until one of the symbols in the []s the pattern is repeated with a optional (?) tag
-      #to caputure multi-word network/channel name group.
-      string8 = string7.scan(/\w+[^\|\[\]\{\}](?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?/m)
-      #this is an alternate regex code for the line above that worked, but not as well: \w+['&\\.(\)\\\-\s]*(?:\w+['&\(\)\.\\\-\s]*)?(?:\w+['&\\.(\)\\\-\s]*)?/m
-      @network_1 = string8[0] #first match group from regex above.
-      @network_2 = string8[1] #second match group from regex above.
-    end
-
-    #Call the show model object where the wikipedia ID matches the network names that were just parsed.
-    show = Show.where(:wikipedia_page_id => page).first
-    show.network_1 = @network_1
-    show.network_2 = @network_2
-    show.save
-    end
-  end
-
-
 task :parse_and_save_language_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   wikipediaapiquery.each do |wikipediaapiquery|
@@ -373,9 +356,4 @@ task :parse_and_save_language_data => :environment do
     show.language = @language
     show.save
   end
-end
-
-
-task :dog => [:hello, :parse_and_save_genre_data] do
-  puts "You are stinky"
 end
