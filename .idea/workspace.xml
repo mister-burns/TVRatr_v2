@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50138401-41a6-45d8-9758-d7e9f0a8eca4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/shows/_ransack_filter.html.erb" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/shows/drama.html.erb" afterPath="$PROJECT_DIR$/app/views/shows/drama_display.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shows/_genre_filter.html.erb" afterPath="$PROJECT_DIR$/app/views/shows/_genre_filter.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shared/_navigation.html.erb" afterPath="$PROJECT_DIR$/app/views/shared/_navigation.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shows/_search_box.html.erb" afterPath="$PROJECT_DIR$/app/views/shows/_search_box.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/helpers/application_helper.rb" afterPath="$PROJECT_DIR$/app/helpers/application_helper.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shows/index.html.erb" afterPath="$PROJECT_DIR$/app/views/shows/index.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shows/serialized.html.erb" afterPath="$PROJECT_DIR$/app/views/shows/serialized.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/show.rb" afterPath="$PROJECT_DIR$/app/models/show.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/shows_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/shows_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tvratr_v2.iml" afterPath="$PROJECT_DIR$/.idea/tvratr_v2.iml" />
@@ -28,7 +27,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/tvratr_v2@copy_page_id_and_name_from_wikipediaapiquery_to_show__tvratr_v2.coverage" NAME="copy_page_id_and_name_from_wikipediaapiquery_to_show: tvratr_v2 Coverage Results" MODIFIED="1385963682107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_series_data__tvratr_v2.coverage" NAME="parse_and_save_series_data: tvratr_v2 Coverage Results" MODIFIED="1385748015655" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
-    <SUITE FILE_PATH="coverage/tvratr_v2@Development__tvratr_v2.coverage" NAME="Development: tvratr_v2 Coverage Results" MODIFIED="1386278125105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
+    <SUITE FILE_PATH="coverage/tvratr_v2@Development__tvratr_v2.coverage" NAME="Development: tvratr_v2 Coverage Results" MODIFIED="1386564368695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@category_query_2010s_American_television_series__tvratr_v2.coverage" NAME="category_query_2010s_American_television_series: tvratr_v2 Coverage Results" MODIFIED="1385878865249" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_genre_data__tvratr_v2.coverage" NAME="parse_and_save_genre_data: tvratr_v2 Coverage Results" MODIFIED="1385877982526" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_network_data__tvratr_v2.coverage" NAME="parse_and_save_network_data: tvratr_v2 Coverage Results" MODIFIED="1385828825352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
@@ -36,7 +35,7 @@
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_network_data_v2__tvratr_v2.coverage" NAME="parse_and_save_network_data_v2: tvratr_v2 Coverage Results" MODIFIED="1385964457915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@db_migrate__tvratr_v2.coverage" NAME="db:migrate: tvratr_v2 Coverage Results" MODIFIED="1385763341858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_format_data_v2__tvratr_v2.coverage" NAME="parse_and_save_format_data_v2: tvratr_v2 Coverage Results" MODIFIED="1385871693617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
-    <SUITE FILE_PATH="coverage/tvratr_v2@Rails_console__tvratr_v2.coverage" NAME="Rails console: tvratr_v2 Coverage Results" MODIFIED="1386222138358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
+    <SUITE FILE_PATH="coverage/tvratr_v2@Rails_console__tvratr_v2.coverage" NAME="Rails console: tvratr_v2 Coverage Results" MODIFIED="1386564541319" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_language_data__tvratr_v2.coverage" NAME="parse_and_save_language_data: tvratr_v2 Coverage Results" MODIFIED="1385963806579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_format_data__tvratr_v2.coverage" NAME="parse_and_save_format_data: tvratr_v2 Coverage Results" MODIFIED="1385878149769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_country_data_v2__tvratr_v2.coverage" NAME="parse_and_save_country_data_v2: tvratr_v2 Coverage Results" MODIFIED="1385877144493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
@@ -59,24 +58,15 @@
         <entry file="file://$PROJECT_DIR$/app/views/shows/children.html.erb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="60" column="42" selection-start="2581" selection-end="2581" vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="990">
-              <folding>
-                <marker date="1386051045000" expanded="true" signature="51:147" placeholder="..." />
-                <marker date="1386051045000" expanded="true" signature="224:2422" placeholder="..." />
-                <marker date="1386051045000" expanded="true" signature="234:995" placeholder="..." />
-                <marker date="1386051045000" expanded="true" signature="241:984" placeholder="..." />
-                <marker date="1386051045000" expanded="true" signature="1005:2413" placeholder="..." />
-                <marker date="1386051045000" expanded="true" signature="1046:2390" placeholder="..." />
-                <marker date="1386051045000" expanded="true" signature="1724:1858" placeholder="..." />
-                <marker date="1386051045000" expanded="true" signature="1871:2378" placeholder="..." />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_search_box.html.erb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="_search_box.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/shows/_search_box.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="69" selection-start="1948" selection-end="1948" vertical-scroll-proportion="-10.125" vertical-offset="192" max-vertical-offset="570">
+            <state line="5" column="39" selection-start="241" selection-end="241" vertical-scroll-proportion="0.23809524" vertical-offset="0" max-vertical-offset="945">
               <folding />
             </state>
           </provider>
@@ -85,7 +75,7 @@
       <file leaf-file-name="application.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="33" selection-start="1295" selection-end="1295" vertical-scroll-proportion="-24.375" vertical-offset="0" max-vertical-offset="855">
+            <state line="39" column="33" selection-start="1295" selection-end="1295" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="855">
               <folding />
             </state>
           </provider>
@@ -94,7 +84,7 @@
       <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="20" selection-start="189" selection-end="189" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
+            <state line="5" column="39" selection-start="156" selection-end="156" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="1080">
               <folding />
             </state>
           </provider>
@@ -103,7 +93,7 @@
       <file leaf-file-name="shows_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/shows_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="201" selection-start="595" selection-end="595" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="1635">
+            <state line="11" column="195" selection-start="487" selection-end="487" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1920">
               <folding />
             </state>
           </provider>
@@ -118,28 +108,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_genre_filter.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/shows/_genre_filter.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="90">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="serialized.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/shows/serialized.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="42" selection-start="2581" selection-end="2581" vertical-scroll-proportion="0.0" vertical-offset="373" max-vertical-offset="990">
+            <state line="33" column="8" selection-start="1314" selection-end="1345" vertical-scroll-proportion="-11.958333" vertical-offset="208" max-vertical-offset="990">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="drama.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/shows/drama.html.erb">
+      <file leaf-file-name="drama_display.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/shows/drama_display.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="87" selection-start="426" selection-end="426" vertical-scroll-proportion="-1.875" vertical-offset="150" max-vertical-offset="1035">
+            <state line="13" column="49" selection-start="426" selection-end="426" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="1035">
               <folding />
             </state>
           </provider>
@@ -148,7 +129,7 @@
       <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/shows/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="52" selection-start="258" selection-end="258" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="1020">
+            <state line="6" column="38" selection-start="227" selection-end="227" vertical-scroll-proportion="-0.625" vertical-offset="75" max-vertical-offset="1005">
               <folding />
             </state>
           </provider>
@@ -163,10 +144,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="show.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/show.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="52" selection-start="1185" selection-end="1185" vertical-scroll-proportion="0.52034885" vertical-offset="376" max-vertical-offset="1725">
+            <state line="64" column="160" selection-start="3709" selection-end="3709" vertical-scroll-proportion="0.0" vertical-offset="531" max-vertical-offset="3870">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="schema.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/schema.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="1155">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parse_and_save.rake" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/tasks/parse_and_save.rake">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="294" column="35" selection-start="14272" selection-end="14272" vertical-scroll-proportion="0.0" vertical-offset="4262" max-vertical-offset="5790">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/shows/show.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="56" column="83" selection-start="3084" selection-end="3156" vertical-scroll-proportion="0.0" vertical-offset="812" max-vertical-offset="1140">
               <folding />
             </state>
           </provider>
@@ -193,7 +201,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/shared/_navigation.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/bootstrap_and_overrides.css.less" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css.scss" />
         <option value="$PROJECT_DIR$/app/views/shows/show.html.erb" />
@@ -204,18 +211,19 @@
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/custom.css.scss" />
         <option value="$PROJECT_DIR$/app/views/shows/drama.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/shows/serialized.html.erb" />
         <option value="$PROJECT_DIR$/app/views/shows/children.html.erb" />
-        <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/views/shows/_genre_filter.html.erb" />
         <option value="$PROJECT_DIR$/app/helpers/application_helper.rb" />
+        <option value="$PROJECT_DIR$/app/views/shows/serialized.html.erb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/views/shared/_navigation.html.erb" />
         <option value="$PROJECT_DIR$/app/views/shows/index.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/shows/_search_box.html.erb" />
+        <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/controllers/shows_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/show.rb" />
+        <option value="$PROJECT_DIR$/app/views/shows/_search_box.html.erb" />
       </list>
     </option>
   </component>
@@ -227,7 +235,7 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="16" />
+    <option name="x" value="9" />
     <option name="y" value="22" />
     <option name="width" value="1349" />
     <option name="height" value="669" />
@@ -277,7 +285,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="RailsProjectView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -352,20 +360,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -395,6 +389,10 @@
               <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shared" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -413,10 +411,6 @@
               <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layouts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -429,132 +423,12 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="helpers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="stylesheets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tvratr_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="RailsProjectView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -579,7 +453,7 @@
       <recent name="$PROJECT_DIR$/app/views" />
     </key>
   </component>
-  <component name="RunManager" selected="Rails.Development: tvratr_v2">
+  <component name="RunManager" selected="IRB console.Rails console: tvratr_v2">
     <configuration default="false" name="Rails console: tvratr_v2" type="IrbRunConfigurationType" factoryName="IRB console" temporary="true">
       <module name="tvratr_v2" />
       <IRB_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -878,11 +752,11 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Rake.parse_and_save_network_data_v2: tvratr_v2" />
-        <item index="1" class="java.lang.String" itemvalue="Rake.copy_page_id_and_name_from_wikipediaapiquery_to_show: tvratr_v2" />
-        <item index="2" class="java.lang.String" itemvalue="Rake.infobox_query_from_wikipedia_page_id: tvratr_v2" />
-        <item index="3" class="java.lang.String" itemvalue="Rake.parse_and_save_language_data: tvratr_v2" />
-        <item index="4" class="java.lang.String" itemvalue="IRB console.Rails console: tvratr_v2" />
+        <item index="0" class="java.lang.String" itemvalue="IRB console.Rails console: tvratr_v2" />
+        <item index="1" class="java.lang.String" itemvalue="Rake.parse_and_save_network_data_v2: tvratr_v2" />
+        <item index="2" class="java.lang.String" itemvalue="Rake.copy_page_id_and_name_from_wikipediaapiquery_to_show: tvratr_v2" />
+        <item index="3" class="java.lang.String" itemvalue="Rake.infobox_query_from_wikipedia_page_id: tvratr_v2" />
+        <item index="4" class="java.lang.String" itemvalue="Rake.parse_and_save_language_data: tvratr_v2" />
       </list>
     </recent_temporary>
   </component>
@@ -918,7 +792,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="16" y="22" width="1349" height="669" extended-state="0" />
+    <frame x="9" y="22" width="1349" height="669" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32715008" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -930,16 +804,16 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32921174" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33693972" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32766616" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32766616" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32766616" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39966273" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39966273" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -961,13 +835,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/helpers/application_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="73" selection-start="402" selection-end="402" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="300">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/shows/serialized.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="55" column="0" selection-start="2156" selection-end="2156" vertical-scroll-proportion="0.0" vertical-offset="499" max-vertical-offset="915">
@@ -1016,20 +883,11 @@
     <entry file="file://$PROJECT_DIR$/app/views/shows/children.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="52" column="0" selection-start="2126" selection-end="2126" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="870">
-          <folding>
-            <marker date="1386051045000" expanded="true" signature="51:147" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="224:2422" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="234:995" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="241:984" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="1005:2413" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="1046:2390" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="1724:1858" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="1871:2378" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shows/drama.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/shows/drama_display.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="52" column="0" selection-start="2126" selection-end="2126" vertical-scroll-proportion="0.0" vertical-offset="780" max-vertical-offset="870">
           <folding />
@@ -1149,18 +1007,6 @@
         <state line="7" column="31" selection-start="173" selection-end="173" vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="285" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/schema.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tasks/parse_and_save.rake">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="294" column="35" selection-start="14272" selection-end="14272" vertical-scroll-proportion="0.0" vertical-offset="4427" max-vertical-offset="5790" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/helpers/shows_helper.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="356" />
@@ -1168,9 +1014,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/application.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="28" selection-start="532" selection-end="532" vertical-scroll-proportion="0.5898876" vertical-offset="0" max-vertical-offset="495">
-          <folding />
-        </state>
+        <state line="14" column="28" selection-start="532" selection-end="532" vertical-scroll-proportion="0.5898876" vertical-offset="0" max-vertical-offset="495" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css">
@@ -1183,18 +1027,6 @@
         <state line="7" column="35" selection-start="177" selection-end="177" vertical-scroll-proportion="0.21428572" vertical-offset="39" max-vertical-offset="585" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shows/serialized.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="42" selection-start="2581" selection-end="2581" vertical-scroll-proportion="0.0" vertical-offset="373" max-vertical-offset="990">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shows/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="83" selection-start="3084" selection-end="3156" vertical-scroll-proportion="0.49698794" vertical-offset="675" max-vertical-offset="1140" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bin/rake">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="358" />
@@ -1203,22 +1035,6 @@
     <entry file="file://$PROJECT_DIR$/app/views/shows/children.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="60" column="42" selection-start="2581" selection-end="2581" vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="990">
-          <folding>
-            <marker date="1386051045000" expanded="true" signature="51:147" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="224:2422" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="234:995" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="241:984" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="1005:2413" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="1046:2390" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="1724:1858" placeholder="..." />
-            <marker date="1386051045000" expanded="true" signature="1871:2378" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="18" selection-start="291" selection-end="291" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="915">
           <folding />
         </state>
       </provider>
@@ -1235,14 +1051,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="33" selection-start="1295" selection-end="1295" vertical-scroll-proportion="-24.375" vertical-offset="0" max-vertical-offset="855">
+        <state line="39" column="33" selection-start="1295" selection-end="1295" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="855">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shows/drama.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/shows/_genre_filter.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="87" selection-start="426" selection-end="426" vertical-scroll-proportion="-1.875" vertical-offset="150" max-vertical-offset="1035">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="90" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="39" selection-start="156" selection-end="156" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/shared/_navigation.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="50" selection-start="158" selection-end="158" vertical-scroll-proportion="0.09146342" vertical-offset="0" max-vertical-offset="328" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/shows/drama_display.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="49" selection-start="426" selection-end="426" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="1035">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/tasks/parse_and_save.rake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="294" column="35" selection-start="14272" selection-end="14272" vertical-scroll-proportion="0.0" vertical-offset="4262" max-vertical-offset="5790">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/shows/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="83" selection-start="3084" selection-end="3156" vertical-scroll-proportion="0.0" vertical-offset="812" max-vertical-offset="1140">
           <folding />
         </state>
       </provider>
@@ -1254,44 +1101,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+    <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="20" selection-start="189" selection-end="189" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
+        <state line="10" column="0" selection-start="256" selection-end="256" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="870">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shows/_genre_filter.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/shows/serialized.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="90">
+        <state line="33" column="8" selection-start="1314" selection-end="1345" vertical-scroll-proportion="-11.958333" vertical-offset="208" max-vertical-offset="990">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/shows/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="52" selection-start="258" selection-end="258" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="1020">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shows/_search_box.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="69" selection-start="1948" selection-end="1948" vertical-scroll-proportion="-10.125" vertical-offset="192" max-vertical-offset="570">
+        <state line="6" column="38" selection-start="227" selection-end="227" vertical-scroll-proportion="-0.625" vertical-offset="75" max-vertical-offset="1005">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/shows_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="201" selection-start="595" selection-end="595" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="1635">
+        <state line="11" column="195" selection-start="487" selection-end="487" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1920">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/schema.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="1155">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/show.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="52" selection-start="1185" selection-end="1185" vertical-scroll-proportion="0.52034885" vertical-offset="376" max-vertical-offset="1725">
+        <state line="64" column="160" selection-start="3709" selection-end="3709" vertical-scroll-proportion="0.0" vertical-offset="531" max-vertical-offset="3870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/shows/_search_box.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="39" selection-start="241" selection-end="241" vertical-scroll-proportion="0.23809524" vertical-offset="0" max-vertical-offset="945">
           <folding />
         </state>
       </provider>

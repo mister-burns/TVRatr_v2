@@ -3,7 +3,7 @@ TvratrV2::Application.routes.draw do
   resources :shows do
     collection do
       get :serialized
-      get :drama
+      get :drama_display
       get :children
       get :test_page
     end

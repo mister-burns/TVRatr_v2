@@ -3,19 +3,36 @@
 <%= form_tag shows_path, :method => 'get' do %>
     <%= hidden_field_tag :direction, params[:direction] %>
     <%= hidden_field_tag :sort, params[:sort] %>
-    <p>
-      <%= text_field_tag :search, params[:search], size: 20 %><br>
+
+      <h4>Show Name Search</h4>
+      <%= text_field_tag :show_name_search, params[:show_name_search] %><br>
       <button type="submit" class="btn btn-default btn-sm" name="nil">Search Show Names</button>
-    </p>
+
+      <h4>Search by Network</h4>
+      <%= text_field_tag :network_search, params[:network_search] %><br>
+        <button type="submit" class="btn btn-default btn-sm" name="nil">Search Networks</button>
+
 
     <h4>Category Filter</h4>
-    <%= check_box_tag 'genre[]', "drama", params[:genre] && params[:genre].include?("drama") %>
-    <%= label_tag 'genre[]', "Drama", :class => "checkbox inline" %><br>
-    <%= check_box_tag 'genre[]', "action", params[:genre] && params[:genre].include?("action")  %>
-    <%= label_tag 'genre[]', "Action", :class => "checkbox inline" %><br>
-    <%= check_box_tag 'genre[]', "comedy", params[:genre] && params[:genre].include?("comedy")  %>
-    <%= label_tag 'genre[]', "Comedy", :class => "checkbox inline" %><br>
+    <%= check_box_tag :drama, "drama", params[:drama] %>
+    <%= label_tag :drama, "Drama", :class => "checkbox inline" %><br>
+    <%= check_box_tag :horror, "horror", params[:horror]  %>
+    <%= label_tag :horror, "Horror", :class => "checkbox inline" %><br>
+    <%= check_box_tag :comedy, "comedy", params[:comedy] && params[:comedy].include?("comedy")  %>
+    <%= label_tag :comedy, "Comedy", :class => "checkbox inline" %><br>
+
+    <%#= check_box_tag 'genres[]', "mystery"  %>
+    <%#= label_tag 'genres[]', "Mystery", :class => "checkbox inline" %>
+    <%#= check_box_tag 'genres[]', "teen"  %>
+    <%#= label_tag 'genres[]', "Teen", :class => "checkbox inline" %>
+
     <button type="submit" class="btn btn-default">Filter by Categories</button><br><br>
+
+      <h4>Language Filter</h4>
+      <%= check_box_tag :language, "english", params[:language]  %>
+      <%= label_tag :language, "English Only", :class => "checkbox inline" %><br>
+
+      <button type="submit" class="btn btn-default">Filter by Language</button><br><br>
 
       <%= label_tag :min_seasons, "Minimum Number of Seasons", :class => "checkbox inline" %>
       <%= number_field_tag :min_seasons, params[:min_seasons], :in => 1...100 %><br>
@@ -28,6 +45,14 @@
       <%= label_tag :max_episodes, "Maximum Number of Episodes", :class => "checkbox inline" %>
       <%= number_field_tag :max_episodes, params[:max_episodes], :in => 1...100 %><br><br>
       <button type="submit" class="btn btn-default">Filter by Episode Count</button><br><br>
+
+      <!--<h4>Start Date Search:</h4>-->
+      <%#= label_tag :start_date_first, "From:" %><br>
+      <%#= date_select :start_date_first, params[:start_date_first], :discard_day => true, :order => [:month, :year], :start_year => 1950, :end_year => Time.now.year + 1, :include_blank => true %><br><br>
+      <%#= label_tag :start_date_last, "To:" %><br>
+      <%#= date_select :start_date_last, params[:start_date_last], :discard_day => true, :order => [:month, :year], :start_year => 1950, :end_year => Time.now.year + 1, :include_blank => true %><br><br>
+      <!--<button type="submit" class="btn btn-default">Search by Start Date</button><br><br>-->
+
 
 <% end %>
 </form>

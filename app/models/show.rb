@@ -6,12 +6,71 @@ class Show < ActiveRecord::Base
   scope :genre_1, -> { where("genre_1 LIKE ?", "%drama%") }
 
   # @param [Object] search
-  def self.search(search)
-    if search
-      where('show_name LIKE ?', "%#{search}%")
+  def self.show_name_search(show_name_search)
+    if show_name_search.present?
+      where('show_name LIKE ?', "%#{show_name_search}%")
     else
       Show.all
     end
+  end
+
+  def self.network_search(network_search)
+    if network_search.present?
+      where('network_1 LIKE ? OR network_2 LIKE ?', "%#{network_search}%", "%#{network_search}%")
+    else
+      Show.all
+    end
+  end
+
+  #def self.combo_filter(comedy, drama)
+  #  t = arel_table
+  #  @string = ""
+  #
+  #  if drama.present?
+  #    @string = t[:genre_1].matches("%#{drama}").or(t[:genre_2].matches("%#{drama}")).or(t[:genre_3].matches("%#{drama}")).or(t[:genre_4].matches("%#{drama}")).or(t[:genre_5].matches("%#{drama}")).or(t[:format_1].matches("%#{drama}")).or(t[:format_2].matches("%#{drama}")).or(t[:format_3].matches("%#{drama}")).or(t[:format_4].matches("%#{drama}")).or(t[:format_5].matches("%#{drama}"))
+  #  else
+  #    @string = ""
+  #  end
+  #
+  #  if comedy.present? && @string != ""
+  #    @chain = @string + "." + .or(t[:genre_1].matches("%#{comedy}")).or(t[:genre_2].matches("%#{comedy}")).or(t[:genre_3].matches("%#{comedy}")).or(t[:genre_4].matches("%#{comedy}")).or(t[:genre_5].matches("%#{comedy}")).or(t[:format_1].matches("%#{comedy}")).or(t[:format_2].matches("%#{comedy}")).or(t[:format_3].matches("%#{comedy}")).or(t[:format_4].matches("%#{comedy}")).or(t[:format_5].matches("%#{comedy}"))
+  #  elsif comedy.present? && @string == ""
+  #    @string = t[:genre_1].matches("%#{comedy}").or(t[:genre_2].matches("%#{comedy}")).or(t[:genre_3].matches("%#{comedy}")).or(t[:genre_4].matches("%#{comedy}")).or(t[:genre_5].matches("%#{comedy}")).or(t[:format_1].matches("%#{comedy}")).or(t[:format_2].matches("%#{comedy}")).or(t[:format_3].matches("%#{comedy}")).or(t[:format_4].matches("%#{comedy}")).or(t[:format_5].matches("%#{comedy}"))
+  #  else
+  #    Show.all
+  #  end
+  #end
+
+  def self.drama_filter(drama)
+    t = arel_table
+    if drama.present?
+      where(t[:genre_1].matches("%#{drama}%").or(t[:genre_2].matches("%#{drama}%")).or(t[:genre_3].matches("%#{drama}%")).or(t[:genre_4].matches("%#{drama}%")).or(t[:genre_5].matches("%#{drama}%")).or(t[:format_1].matches("%#{drama}%")).or(t[:format_2].matches("%#{drama}%")).or(t[:format_3].matches("%#{drama}")).or(t[:format_4].matches("%#{drama}%")).or(t[:format_5].matches("%#{drama}%")) )
+    else
+      Show.all
+    end
+  end
+
+  def self.comedy_filter(comedy)
+    t = arel_table
+    if comedy.present?
+      where(t[:genre_1].matches("%#{comedy}%").or(t[:genre_2].matches("%#{comedy}%")).or(t[:genre_3].matches("%#{comedy}%")).or(t[:genre_4].matches("%#{comedy}%")).or(t[:genre_5].matches("%#{comedy}%")).or(t[:format_1].matches("%#{comedy}%")).or(t[:format_2].matches("%#{comedy}%")).or(t[:format_3].matches("%#{comedy}%")).or(t[:format_4].matches("%#{comedy}%")).or(t[:format_5].matches("%#{comedy}%")) )
+    else
+      Show.all
+    end
+  end
+
+  def self.language_filter(language)
+    t = arel_table
+    if language.present?
+      where(t[:language].matches("%english%").or(t[:country_1].matches("%united%")).or(t[:country_1].matches("%canada%")).or(t[:country_1].matches("%austrailia%")).or(t[:country_1].matches("%england%")).or(t[:country_1].matches("%uk%")).or(t[:country_1].matches("%ireland%")).or(t[:country_1].matches("%new zealand%")) )
+    else
+      Show.all
+    end
+  end
+
+
+  def self.start_date_range(start_date_first, start_date_last)
+    where("first_aired between (?) and (?)", DateTime.now - 2.years, DateTime.now)
   end
 
   def self.min_seasons_filter(min_seasons)
@@ -49,19 +108,103 @@ class Show < ActiveRecord::Base
 
 
   # @param [Object] genre
-  def self.genre_filter(genre)
-    if genre
-       #genre.first do |genre|
-         where("genre_1 LIKE ? OR genre_2 LIKE ? OR genre_3 LIKE ? OR genre_4 LIKE ? OR genre_5 LIKE ? OR format_1 LIKE ? OR format_2 LIKE ? OR format_3 LIKE ? OR format_4 LIKE ? OR format_5 LIKE ?", "%#{genre}%", "%#{genre}%", "%#{genre}%", "%#{genre}%", "%#{genre}%", "%#{genre}%", "%#{genre}%", "%#{genre}%", "%#{genre}%", "%#{genre}%")
-       #end
+  def self.genre_filter(horror, drama)
+    if horror || drama
+         where("genre_1 LIKE ?", "%#{drama}%")
     else
       Show.all
     end
   end
 
-  def genre_names
-     genre_1.to_s + " " + genre_2.to_s + " " + genre_3.to_s + " " + genre_4.to_s + " " + genre_5.to_s + " " + format_1.to_s + " " + format_2.to_s + " " + format_3.to_s + " " + format_4.to_s + " " + format_5.to_s
+  def chained_genre_names
+
+    if genre_1.present?
+      @chain = genre_1.to_s
+    else
+      @chain = ""
+    end
+
+    if genre_2.present? && @chain != ""
+      @chain = @chain + ", " + genre_2.to_s
+    elsif genre_2.present? && @chain == ""
+      @chain = genre_2.to_s
+    else
+      @chain
+    end
+
+    if genre_3.present? && @chain != ""
+      @chain = @chain + ", " + genre_3.to_s
+    elsif genre_3.present? && @chain == ""
+      @chain = genre_3.to_s
+    else
+      @chain
+    end
+
+    if genre_4.present? && @chain != ""
+      @chain = @chain + ", " + genre_4.to_s
+    elsif genre_4.present? && @chain == ""
+      @chain = genre_4.to_s
+    else
+      @chain
+    end
+
+    if genre_5.present? && @chain != ""
+      @chain = @chain + ", " + genre_5.to_s
+    elsif genre_5.present? && @chain == ""
+      @chain = genre_5.to_s
+    else
+      @chain
+    end
+
+    if format_1.present? && @chain != ""
+      @chain = @chain + ", " + format_1.to_s
+    elsif format_1.present? && @chain == ""
+      @chain = format_1.to_s
+    else
+      @chain
+    end
+
+    if format_2.present? && @chain != ""
+      @chain = @chain + ", " + format_2.to_s
+    elsif format_2.present? && @chain == ""
+      @chain = format_2.to_s
+    else
+      @chain
+    end
+
+    if format_3.present? && @chain != ""
+      @chain = @chain + ", " + format_3.to_s
+    elsif format_3.present? && @chain == ""
+      @chain = format_3.to_s
+    else
+      @chain
+    end
+
+    if format_4.present? && @chain != ""
+      @chain = @chain + ", " + format_4.to_s
+    elsif format_4.present? && @chain == ""
+      @chain = format_4.to_s
+    else
+      @chain
+    end
+
+    if format_5.present? && @chain != ""
+      @chain = @chain + ", " + format_5.to_s
+    elsif format_5.present? && @chain == ""
+      @chain = format_5.to_s
+    else
+      @chain
+    end
   end
+
+  def self.chained_genre_filter(drama)
+    if drama
+      where(chained_genre_names: "%#{drama}%")
+    else
+      Show.all
+    end
+  end
+
 
   def modified_last_aired
     if last_aired_present == "present"

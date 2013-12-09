@@ -278,14 +278,12 @@
     <orderEntry type="library" scope="PROVIDED" name="mime-types (v1.25, RVM: ruby-2.0.0-p247) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v4.7.5, RVM: ruby-2.0.0-p247) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multi_json (v1.8.2, RVM: ruby-2.0.0-p247) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="polyamorous (v0.6.4, RVM: ruby-2.0.0-p247) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="polyglot (v0.3.3, RVM: ruby-2.0.0-p247) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v1.5.2, RVM: ruby-2.0.0-p247) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-test (v0.6.2, RVM: ruby-2.0.0-p247) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails (v4.0.0, RVM: ruby-2.0.0-p247) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="railties (v4.0.0, RVM: ruby-2.0.0-p247) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v10.1.0, RVM: ruby-2.0.0-p247) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="ransack (v1.1.0, RVM: ruby-2.0.0-p247) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rdoc (v3.12.2, RVM: ruby-2.0.0-p247) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ref (v1.0.5, RVM: ruby-2.0.0-p247) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass (v3.2.12, RVM: ruby-2.0.0-p247) [gem]" level="application" />
