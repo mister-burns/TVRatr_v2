@@ -3,7 +3,11 @@ class Show < ActiveRecord::Base
 
   scope :genre_search, -> { where("genre_1 LIKE ? OR genre_2 LIKE ? OR genre_3 LIKE ? OR genre_4 LIKE ? OR genre_5 LIKE ? OR format_1 LIKE ? OR format_2 LIKE ? OR format_3 LIKE ? OR format_4 LIKE ? OR format_5 LIKE ?", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%") }
   scope :serialized_search, -> { where(:serialized => true) }
-  scope :genre_1, -> { where("genre_1 LIKE ?", "%drama%") }
+
+  # Use this scope to filter out bad data from wikipedia. Some shows (ex. sons of anarchy) have individual seasons listed as
+  # full shows. This is obviously incorrect and not what my users want to see. This scope weeds out those entries.
+  scope :individual_season_filter, -> { where(:number_of_seasons => nil) }
+  #&& where("show_name LIKE ?", "%season%")
 
   # @param [Object] search
   def self.show_name_search(show_name_search)
@@ -22,7 +26,7 @@ class Show < ActiveRecord::Base
     end
   end
 
-  #def self.combo_filter(comedy, drama)
+  #def self.combo_filter(serialized, drama)
   #  t = arel_table
   #  @string = ""
   #
@@ -32,10 +36,10 @@ class Show < ActiveRecord::Base
   #    @string = ""
   #  end
   #
-  #  if comedy.present? && @string != ""
-  #    @chain = @string + "." + .or(t[:genre_1].matches("%#{comedy}")).or(t[:genre_2].matches("%#{comedy}")).or(t[:genre_3].matches("%#{comedy}")).or(t[:genre_4].matches("%#{comedy}")).or(t[:genre_5].matches("%#{comedy}")).or(t[:format_1].matches("%#{comedy}")).or(t[:format_2].matches("%#{comedy}")).or(t[:format_3].matches("%#{comedy}")).or(t[:format_4].matches("%#{comedy}")).or(t[:format_5].matches("%#{comedy}"))
-  #  elsif comedy.present? && @string == ""
-  #    @string = t[:genre_1].matches("%#{comedy}").or(t[:genre_2].matches("%#{comedy}")).or(t[:genre_3].matches("%#{comedy}")).or(t[:genre_4].matches("%#{comedy}")).or(t[:genre_5].matches("%#{comedy}")).or(t[:format_1].matches("%#{comedy}")).or(t[:format_2].matches("%#{comedy}")).or(t[:format_3].matches("%#{comedy}")).or(t[:format_4].matches("%#{comedy}")).or(t[:format_5].matches("%#{comedy}"))
+  #  if serialized.present? && @string != ""
+  #    @chain = @string + "." + .or(t[:genre_1].matches("%#{serialized}")).or(t[:genre_2].matches("%#{serialized}")).or(t[:genre_3].matches("%#{serialized}")).or(t[:genre_4].matches("%#{serialized}")).or(t[:genre_5].matches("%#{serialized}")).or(t[:format_1].matches("%#{serialized}")).or(t[:format_2].matches("%#{serialized}")).or(t[:format_3].matches("%#{serialized}")).or(t[:format_4].matches("%#{serialized}")).or(t[:format_5].matches("%#{serialized}"))
+  #  elsif serialized.present? && @string == ""
+  #    @string = t[:genre_1].matches("%#{serialized}").or(t[:genre_2].matches("%#{serialized}")).or(t[:genre_3].matches("%#{serialized}")).or(t[:genre_4].matches("%#{serialized}")).or(t[:genre_5].matches("%#{serialized}")).or(t[:format_1].matches("%#{serialized}")).or(t[:format_2].matches("%#{serialized}")).or(t[:format_3].matches("%#{serialized}")).or(t[:format_4].matches("%#{serialized}")).or(t[:format_5].matches("%#{serialized}"))
   #  else
   #    Show.all
   #  end
@@ -62,7 +66,44 @@ class Show < ActiveRecord::Base
   def self.language_filter(language)
     t = arel_table
     if language.present?
-      where(t[:language].matches("%english%").or(t[:country_1].matches("%united%")).or(t[:country_1].matches("%canada%")).or(t[:country_1].matches("%austrailia%")).or(t[:country_1].matches("%england%")).or(t[:country_1].matches("%uk%")).or(t[:country_1].matches("%ireland%")).or(t[:country_1].matches("%new zealand%")) )
+      where(t[:language].matches("%english%").or(t[:country_1].matches("%united%")).or(t[:country_1].matches("%austrailia%")).or(t[:country_1].matches("%england%")).or(t[:country_1].matches("%uk%")).or(t[:country_1].matches("%ireland%")).or(t[:country_1].matches("%new zealand%")) )
+    else
+      Show.all
+    end
+  end
+
+  def self.serialized_only_filter(serialized_only)
+    t = arel_table
+    if serialized_only.present?
+      #where("genre_1 LIKE ? OR genre_2 LIKE ? OR genre_3 LIKE ? OR genre_4 LIKE ? OR genre_5 LIKE ? OR format_1 LIKE ? OR format_2 LIKE ? OR format_3 LIKE ? OR format_4 LIKE ? OR format_5 LIKE ?", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%")
+      where(t[:genre_1].matches("%serial%").or(t[:genre_2].matches("%serial%")).or(t[:genre_3].matches("%serial%")).or(t[:genre_4].matches("%serial%")).or(t[:genre_5].matches("%serial%")).or(t[:format_1].matches("%serial%")).or(t[:format_2].matches("%serial%")).or(t[:format_3].matches("%serial%")).or(t[:format_4].matches("%serial%")).or(t[:format_5].matches("%serial%")).or(t[:serialized].eq(true)) )
+    else
+      Show.all
+    end
+  end
+
+  def self.united_states_filter(united_states)
+    t = arel_table
+    if united_states.present?
+      where(t[:country_1].matches("%united states%").or(t[:country_1].matches("US")).or(t[:country_1].matches("%america%")).or(t[:country_2].matches("%united states%")).or(t[:country_2].matches("US")).or(t[:country_2].matches("%america%")) )
+    else
+      Show.all
+    end
+  end
+
+  def self.united_kingdom_filter(united_kingdom)
+    t = arel_table
+    if united_kingdom.present?
+      where(t[:country_1].matches("%united kingdom%").or(t[:country_1].matches("UK")).or(t[:country_1].matches("%england%")).or(t[:country_1].matches("%wales%")).or(t[:country_1].matches("%scotland%")).or(t[:country_2].matches("%united kingdom%")).or(t[:country_2].matches("%wales%")).or(t[:country_2].matches("UK")).or(t[:country_2].matches("%england%")).or(t[:country_2].matches("%scotland%")) )
+    else
+      Show.all
+    end
+  end
+
+  def self.commonwealth_filter(commonwealth)
+    t = arel_table
+    if commonwealth.present?
+      where(t[:country_1].matches("%australia%").or(t[:country_1].matches("%canada")).or(t[:country_1].matches("%ireland%")).or(t[:country_1].matches("%new zealand%")) )
     else
       Show.all
     end

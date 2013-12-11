@@ -9,7 +9,21 @@ class ShowsController < ApplicationController
     @test = params[:comedy]
     drama = params[:drama]
 
-    @shows = Show.show_name_search(params[:show_name_search]).network_search(params[:network_search]).comedy_filter(params[:comedy]).drama_filter(params[:drama]).language_filter(params[:language]).min_seasons_filter(params[:min_seasons]).max_seasons_filter(params[:max_seasons]).min_episodes_filter(params[:min_episodes]).max_episodes_filter(params[:max_episodes]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
+    @shows = Show.show_name_search(params[:show_name_search])
+             .network_search(params[:network_search])
+             .comedy_filter(params[:comedy])
+             .drama_filter(params[:drama])
+             .language_filter(params[:language])
+             .serialized_only_filter(params[:serialized_only])
+             .united_states_filter(params[:united_states])
+             .united_kingdom_filter(params[:united_kingdom])
+             .commonwealth_filter(params[:commonwealth])
+             .min_seasons_filter(params[:min_seasons])
+             .max_seasons_filter(params[:max_seasons])
+             .min_episodes_filter(params[:min_episodes])
+             .max_episodes_filter(params[:max_episodes])
+             .order(sort_column + " " + sort_direction)
+             .paginate(:per_page => 50, :page => params[:page])
 
     #@shows = Show.search(params[:search]).genre_filter(horror, drama).min_seasons_filter(params[:min_seasons]).max_seasons_filter(params[:max_seasons]).min_episodes_filter(params[:min_episodes]).max_episodes_filter(params[:max_episodes]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
 
@@ -23,13 +37,9 @@ class ShowsController < ApplicationController
     # where(t[:genre_1].matches("%#{drama}").or(t[:genre_1].matches("%#{params[:comedy]}")).or(t[:genre_1].matches("%#{params[:horror]}")))
   end
 
-  def combined_filter
-
-  end
-
 
   def serialized
-    @shows = Show.show_name_search(params[:show_name_search]).serialized_search.order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
+    @shows = Show.show_name_search(params[:show_name_search]).individual_season_filter.order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
   end
 
   def drama_display
