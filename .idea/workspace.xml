@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50138401-41a6-45d8-9758-d7e9f0a8eca4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tvratr_v2.iml" afterPath="$PROJECT_DIR$/.idea/tvratr_v2.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tvratr_v2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -160,7 +157,7 @@
       <file leaf-file-name="Gemfile" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Gemfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="0" selection-start="1071" selection-end="1071" vertical-scroll-proportion="0.40298507" vertical-offset="465" max-vertical-offset="945">
+            <state line="5" column="90" selection-start="207" selection-end="207" vertical-scroll-proportion="0.2238806" vertical-offset="0" max-vertical-offset="975">
               <folding />
             </state>
           </provider>
@@ -1142,7 +1139,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="0" selection-start="1071" selection-end="1071" vertical-scroll-proportion="0.40298507" vertical-offset="465" max-vertical-offset="945">
+        <state line="5" column="90" selection-start="207" selection-end="207" vertical-scroll-proportion="0.2238806" vertical-offset="0" max-vertical-offset="975">
           <folding />
         </state>
       </provider>
