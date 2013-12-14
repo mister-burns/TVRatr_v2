@@ -13,7 +13,6 @@
     <th><%= sortable "show_name", "Show Name" %></th>
     <th>Wikipedia Page ID</th>
     <th>Genre(s)</th>
-    <th>Serialized</th>
     <th><%= sortable "first_aired", "First Aired" %></th>
     <th><%= sortable "last_aired", "Last Aired" %></th>
     <th><%= sortable "modified_number_of_seasons", "Number of Seasons" %></th>
@@ -31,11 +30,10 @@
         <td><%= link_to show.modified_show_name, "http://en.wikipedia.org/wiki/#{show.show_name}" %></td>
         <td><%= show.wikipedia_page_id %></td>
         <td><%= show.chained_genre_names.try(:titleize) %></td>
-        <td><%= show.serialized %></td>
         <td><%= show.modified_first_aired %></td>
         <td><%= show.modified_last_aired %></td>
         <td><%= show.modified_number_of_seasons %></td>
-        <td><%= show.number_of_episodes %></td>
+        <td><%= number_with_delimiter(show.number_of_episodes) %></td>
         <td><%= show.modified_network_1 %></td>
         <td><%= show.modified_language.try(:titleize) %></td>
         <td><%= show.country_1.try(:titleize) %></td>

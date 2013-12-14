@@ -20,11 +20,12 @@
     <%= label_tag :horror, "Horror", :class => "checkbox inline" %><br>
     <%= check_box_tag :comedy, "comedy", params[:comedy] && params[:comedy].include?("comedy")  %>
     <%= label_tag :comedy, "Comedy", :class => "checkbox inline" %><br>
+    <button type="submit" class="btn btn-default">Filter by Categories</button><br><br>
 
      <h4>Serialized Filter</h4>
      <%= check_box_tag :serialized_only, "serial", params[:serialized_only]  %>
      <%= label_tag :serialized_only, "Serialized Only", :class => "checkbox inline" %><br>
-
+      <button type="submit" class="btn btn-default">Serialized Only</button><br><br>
 
     <%#= check_box_tag 'genres[]', "mystery"  %>
     <%#= label_tag 'genres[]', "Mystery", :class => "checkbox inline" %>

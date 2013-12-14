@@ -25,7 +25,7 @@ task :parse_and_save_genre_data => :environment do
                           \(radio and television\)|\(genre\)|\(format\)|\(fiction\)|1080i|1080p|480i|480p|hdtv|sdtv|standard-definition television|
                           standard definition television|high-definition television|high definition television|720p|url|ubl|atsc|cite web|
                           stereophonic sound|576i|stereo|\(sdtv\)|ntsc|pal|16\:9|4\:3|sd|hd/mi,"").gsub(/<\/?[^>]*>/, "|").gsub(/serial(\s|)\(radio and television\)/mi, "Serial") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
-    string3 = /genre\s*=.*?(?=\s\|)/mi.match(string2) #search for genre string
+    string3 = /\bgenre\s*=.*?(?=\s\|)/mi.match(string2) #search for genre string
 
     # this code checks in genre string is nil, in which case end variables must first get set to nil.
     if string3.nil?
@@ -195,18 +195,28 @@ task :parse_and_save_episode_count_data => :environment do
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
     string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
-    episode_match = /(?:num_episodes\s*=\s*)([0-9,]+)/m.match(string) #look for patterns in the data to start at num_episodes and end at the last date digit of the number
+    string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
+    string3 = /\bnum_episodes\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
 
-    #run an if statement to weed out nil data, so I can call the match grouping in the else statement
-    if episode_match.nil?
-      @episode_value = nil
+    # this code checks in format string is nil, in which case end variables must first get set to nil.
+    if string3.nil?
+      @num_episodes = nil
+
     else
-      @episode_value = episode_match[1] #set season value to second group of the match data
+      # the first 3 lines here help further parse the code and isolate each format. Each show can have multiple formats.
+      string4 = string3.to_s.split("=") #takes out format and a few other words.
+      string5 = string4[1] #regex used to isolate each format name.
+      if string5.nil?
+        @num_episodes = nil
+      else
+        string6 = string5.gsub(/\,/, "")
+        @num_episodes = string6
+      end
     end
 
-    #Call the show model object where the wikipedia ID matches the page number of the JSON we just parsed.
+    #find the appropriate entry in the Show model and save the first aired date:
     show = Show.where(:wikipedia_page_id => page).first
-    show.number_of_episodes = @episode_value
+    show.number_of_episodes = @num_episodes
     show.save
   end
 end
@@ -217,21 +227,64 @@ task :parse_and_save_season_count_data => :environment do
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
     string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
-    season_match = /(?:num_seasons\s*=\s*)([0-9]+)/m.match(string) #look for patterns in the data to start at num_seasons and end at the last date digit of the number
+    string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
+    string3 = /\bnum_seasons\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
 
-    #run an if statement to weed out nil data, so I can call the match grouping in the else statement
-    if season_match.nil?
-      @season_value = nil
+    # this code checks in format string is nil, in which case end variables must first get set to nil.
+    if string3.nil?
+      @num_seasons = nil
+
     else
-      @season_value = season_match[1] #set season value to second group of the match data
+      # the first 3 lines here help further parse the code and isolate each format. Each show can have multiple formats.
+      string4 = string3.to_s.split("=") #takes out format and a few other words.
+      string5 = string4[1] #regex used to isolate each format name.
+      if string5.nil?
+        @num_seasons = nil
+      else
+        string6 = string5.gsub(/\,/, "")
+        @num_seasons = string6
+      end
     end
 
-    #Call the show model object where the wikipedia ID matches the page number of the JSON we just parsed.
+    #find the appropriate entry in the Show model and save the first aired date:
     show = Show.where(:wikipedia_page_id => page).first
-    show.number_of_seasons = @season_value
+    show.number_of_seasons = @num_seasons
     show.save
   end
 end
+
+
+task :parse_and_save_series_count_data_v2 => :environment do
+  wikipediaapiquery = WikipediaApiQuery.all
+  wikipediaapiquery.each do |wikipediaapiquery|
+    page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
+    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+    string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
+    string3 = /\bnum_series\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
+
+    # this code checks in format string is nil, in which case end variables must first get set to nil.
+    if string3.nil?
+      @num_series = nil
+
+    else
+      # the first 3 lines here help further parse the code and isolate each format. Each show can have multiple formats.
+      string4 = string3.to_s.split("=") #takes out format and a few other words.
+      string5 = string4[1] #regex used to isolate each format name.
+      if string5.nil?
+        @num_series = nil
+      else
+        string6 = string5.gsub(/\,/, "")
+        @num_series = string6
+      end
+    end
+
+    #find the appropriate entry in the Show model and save the first aired date:
+    show = Show.where(:wikipedia_page_id => page).first
+    show.number_of_series = @num_series
+    show.save
+  end
+end
+
 
 #This task parses the num_series infobox value. Num_series is sometimes used instead of num_seasons,
 #especially for UK shows.
@@ -263,7 +316,7 @@ task :parse_and_save_country_data => :environment do
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
     string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
     string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
-    string3 = /country\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
+    string3 = /\bcountry\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
 
     # this code checks in format string is nil, in which case end variables must first get set to nil.
     if string3.nil?
@@ -304,7 +357,7 @@ task :parse_and_save_network_data => :environment do
     string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
     #line below: remove "\n" tags and several Wikipedia phrases from string. If not removed, these items cause errors in later parsing steps.
     string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\||\{\{Plainlist\}\}/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|")
-    string3 = /(network|channel)\s*=.*?(?=\s\|)/mi.match(string2) #search for genre string
+    string3 = /\b(network|channel)\s*=.*?(?=\s\|)/mi.match(string2) #search for genre string
 
     # this code checks in genre string is nil, in which case end variables must first get set to nil.
     if string3.nil?
@@ -319,7 +372,7 @@ task :parse_and_save_network_data => :environment do
         @genre2 = nil
       else
         # this code parses out the individual words that make up the genres.
-        string6 = string5.gsub(/[0-9]{4}/,"").gsub(/American Broadcasting Company/im,"ABC").gsub(/Fox Broadcasting Company/im,"FOX").gsub(/Columbia Broadcasting System/im,"CBS").gsub(/National Broadcasting Company/im,"NBC").gsub(/Public Broadcasting Service/im,"PBS")
+        string6 = string5.gsub(/[0-9]{4}/,"").gsub(/American Broadcasting Company/im,"ABC").gsub(/Fox Broadcasting Company/im,"FOX").gsub(/Columbia Broadcasting System/im,"CBS").gsub(/National Broadcasting Company/im,"NBC").gsub(/Public Broadcasting Service/im,"PBS").gsub(/home box office/im,"HBO")
         string7 = string6.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
         # each genre match is accessed as an array and assigned a variable.
         @network1 = string7[0]
@@ -342,7 +395,7 @@ task :parse_and_save_language_data => :environment do
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
     string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
     string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
-    string3 = /language\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
+    string3 = /\blanguage\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
 
     # this code checks in format string is nil, in which case end variables must first get set to nil.
     if string3.nil?
@@ -366,3 +419,5 @@ task :parse_and_save_language_data => :environment do
     show.save
   end
 end
+
+

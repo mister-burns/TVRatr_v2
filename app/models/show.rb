@@ -6,8 +6,9 @@ class Show < ActiveRecord::Base
 
   # Use this scope to filter out bad data from wikipedia. Some shows (ex. sons of anarchy) have individual seasons listed as
   # full shows. This is obviously incorrect and not what my users want to see. This scope weeds out those entries.
-  scope :individual_season_filter, -> { where(:number_of_seasons => nil) }
-  #&& where("show_name LIKE ?", "%season%")
+  scope :individual_season_filter, -> { where("show_name NOT LIKE ?", "%(season%") }
+
+
 
   # @param [Object] search
   def self.show_name_search(show_name_search)
