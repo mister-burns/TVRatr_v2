@@ -1,15 +1,8 @@
-<% page = 38826253 %>
-<% wikipediaapiquery = @wikipediaapiquery.where(:wikipedia_page_id => page).first %>
-<% hash = JSON.parse(wikipediaapiquery.infobox) %>
-<% hash2 = hash["query"]["pages"]["#{page}"]["revisions"].first["*"] %>
-<p>1 <%= string = hash2.gsub(/\\n/mi," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, " ") %></p>
-<p>21 <%= string2 = /genre\s*=.*?(?=\s\|)/mi.match(string).to_s %>
-<p>4 <%= string4 = string2.split("=") %></p>
-<p>5 <%= string5 = string4[1] %></p>
-<p>6 <%#= string6 = string5.gsub(/American Broadcasting Company/i,"ABC").gsub(/Fox Broadcasting Company/i,"FOX").gsub(/Columbia Broadcasting System/i,"CBS").gsub(/National Broadcasting Company/i,"NBC").gsub(/Public Broadcasting Service/i,"PBS").gsub(/[0-9]{4}/,"") %></p>
-<p>7 <%#= string6 = string5.scan(/\w+[^\|\[\]\{\}](?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?(?:\w*[^\|\[\]\{\}])?/m) %></p>
-<p>8 <%#= string6[0] %></p>
-<p>9 <%#= string6[1] %></p>
-<p>9 <%#= string6[2] %></p>
-<p>9 <%#= string6[3] %></p>
-<p>9 <%#= string6[4] %></p>
+
+
+
+
+<% @string = t[:genre_1].matches("%#{drama}%").or(t[:genre_2].matches("%#{drama}%")).or(t[:genre_3].matches("%#{drama}%")).or(t[:genre_4].matches("%#{drama}%")).or(t[:genre_5].matches("%#{drama}%")).or(t[:format_1].matches("%#{drama}%")).or(t[:format_2].matches("%#{drama}%")).or(t[:format_3].matches("%#{drama}%")).or(t[:format_4].matches("%#{drama}%")).or(t[:format_5].matches("%#{drama}%")) %>
+<%= @string %>
+
+

@@ -40,7 +40,7 @@ class ShowsController < ApplicationController
 
 
   def serialized
-    @shows = Show.show_name_search(params[:show_name_search]).individual_season_filter_v2.order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
+    @shows = Show.show_name_search(params[:show_name_search]).combo_filter(params[:drama], params[:comedy]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
   end
 
   def drama_display

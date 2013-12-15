@@ -2,12 +2,10 @@ class Show < ActiveRecord::Base
   validates :wikipedia_page_id, uniqueness: true, presence: true
 
   scope :genre_search, -> { where("genre_1 LIKE ? OR genre_2 LIKE ? OR genre_3 LIKE ? OR genre_4 LIKE ? OR genre_5 LIKE ? OR format_1 LIKE ? OR format_2 LIKE ? OR format_3 LIKE ? OR format_4 LIKE ? OR format_5 LIKE ?", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%") }
-  scope :serialized_search, -> { where(:serialized => true) }
 
   # Use this scope to filter out bad data from wikipedia. Some shows (ex. sons of anarchy) have individual seasons listed as
   # full shows. This is obviously incorrect and not what my users want to see. This scope weeds out those entries.
   scope :individual_season_filter, -> { where("show_name NOT LIKE ?", "%(season%") }
-
 
 
   # @param [Object] search
@@ -27,29 +25,53 @@ class Show < ActiveRecord::Base
     end
   end
 
-  #def self.combo_filter(serialized, drama)
-  #  t = arel_table
-  #  @string = ""
-  #
-  #  if drama.present?
-  #    @string = t[:genre_1].matches("%#{drama}").or(t[:genre_2].matches("%#{drama}")).or(t[:genre_3].matches("%#{drama}")).or(t[:genre_4].matches("%#{drama}")).or(t[:genre_5].matches("%#{drama}")).or(t[:format_1].matches("%#{drama}")).or(t[:format_2].matches("%#{drama}")).or(t[:format_3].matches("%#{drama}")).or(t[:format_4].matches("%#{drama}")).or(t[:format_5].matches("%#{drama}"))
-  #  else
-  #    @string = ""
-  #  end
-  #
-  #  if serialized.present? && @string != ""
-  #    @chain = @string + "." + .or(t[:genre_1].matches("%#{serialized}")).or(t[:genre_2].matches("%#{serialized}")).or(t[:genre_3].matches("%#{serialized}")).or(t[:genre_4].matches("%#{serialized}")).or(t[:genre_5].matches("%#{serialized}")).or(t[:format_1].matches("%#{serialized}")).or(t[:format_2].matches("%#{serialized}")).or(t[:format_3].matches("%#{serialized}")).or(t[:format_4].matches("%#{serialized}")).or(t[:format_5].matches("%#{serialized}"))
-  #  elsif serialized.present? && @string == ""
-  #    @string = t[:genre_1].matches("%#{serialized}").or(t[:genre_2].matches("%#{serialized}")).or(t[:genre_3].matches("%#{serialized}")).or(t[:genre_4].matches("%#{serialized}")).or(t[:genre_5].matches("%#{serialized}")).or(t[:format_1].matches("%#{serialized}")).or(t[:format_2].matches("%#{serialized}")).or(t[:format_3].matches("%#{serialized}")).or(t[:format_4].matches("%#{serialized}")).or(t[:format_5].matches("%#{serialized}"))
-  #  else
-  #    Show.all
-  #  end
-  #end
+  def self.combo_filter(drama, comedy)
+    t = arel_table
+    @string = ""
+
+    if drama.present?
+      @drama = drama
+    else
+      @drama = "%%"
+    end
+
+    if comedy.present?
+      @comedy = comedy
+    else
+      @comedy = "%%"
+    end
+
+    if drama.present? || comedy.present?
+      #@string = t[:genre_1].matches('%drama%').or(t[:genre_2].matches('%drama%')).or(t[:genre_3].matches('%drama%')).or(t[:genre_4].matches('%drama%')).or(t[:genre_5].matches('%drama%')).or(t[:format_1].matches('%drama%')).or(t[:format_2].matches('%drama%')).or(t[:format_3].matches('%drama%')).or(t[:format_4].matches('%drama%')).or(t[:format_5].matches('%drama%'))
+      #@string = t[:genre_1].matches("%#{drama}%").or(t[:genre_2].matches("%#{drama}%")).or(t[:genre_3].matches("%#{drama}%")).or(t[:genre_4].matches("%#{drama}%")).or(t[:genre_5].matches("%#{drama}%")).or(t[:format_1].matches("%#{drama}%")).or(t[:format_2].matches("%#{drama}%")).or(t[:format_3].matches("%#{drama}%")).or(t[:format_4].matches("%#{drama}%")).or(t[:format_5].matches("%#{drama}%"))
+      where('genre_1 LIKE ? OR genre_1 LIKE ?', "%#{@drama}%", "%#{@comedy}%")
+      #where(t[:genre_1].matches("%#{@drama}%").or(t[:genre_1].matches("%#{@comedy}%")) )
+    else
+      Show.all
+    end
+
+    #arel_table[:description].matches("%#{summary_description}%") unless !summary_description.nil?  .or
+
+    #if comedy.present? && @string != ""
+    #  @comedy = ".or(" + t[:genre_1].matches("%#{comedy}%")).or(t[:genre_2].matches("%#{comedy}%")).or(t[:genre_3].matches("%#{comedy}%")).or(t[:genre_4].matches("%#{comedy}%")).or(t[:genre_5].matches("%#{comedy}%")).or(t[:format_1].matches("%#{comedy}%")).or(t[:format_2].matches("%#{comedy}%")).or(t[:format_3].matches("%#{comedy}%")).or(t[:format_4].matches("%#{comedy}%")).or(t[:format_5].matches("%#{comedy}%"))
+    #  @string = @string + @comedy
+    #elsif comedy.present? && @string == ""
+    #  @string = t[:genre_1].matches("%#{comedy}%")).or(t[:genre_2].matches("%#{comedy}%")).or(t[:genre_3].matches("%#{comedy}%")).or(t[:genre_4].matches("%#{comedy}%")).or(t[:genre_5].matches("%#{comedy}%")).or(t[:format_1].matches("%#{comedy}%")).or(t[:format_2].matches("%#{comedy}%")).or(t[:format_3].matches("%#{comedy}%")).or(t[:format_4].matches("%#{comedy}%")).or(t[:format_5].matches("%#{comedy}%"))
+    #else
+    #  @string = ""
+    #end
+
+    #if drama.present? || comedy.present?
+    #  where(t[:genre_1].matches('%drama%').or(t[:genre_2].matches('%drama%')).or(t[:genre_3].matches('%drama%')).or(t[:genre_4].matches('%drama%')).or(t[:genre_5].matches('%drama%')).or(t[:format_1].matches('%drama%')).or(t[:format_2].matches('%drama%')).or(t[:format_3].matches('%drama%')).or(t[:format_4].matches('%drama%')).or(t[:format_5].matches('%drama%')))
+    #else
+    #  Show.all
+    #end
+  end
 
   def self.drama_filter(drama)
     t = arel_table
     if drama.present?
-      where(t[:genre_1].matches("%#{drama}%").or(t[:genre_2].matches("%#{drama}%")).or(t[:genre_3].matches("%#{drama}%")).or(t[:genre_4].matches("%#{drama}%")).or(t[:genre_5].matches("%#{drama}%")).or(t[:format_1].matches("%#{drama}%")).or(t[:format_2].matches("%#{drama}%")).or(t[:format_3].matches("%#{drama}")).or(t[:format_4].matches("%#{drama}%")).or(t[:format_5].matches("%#{drama}%")) )
+      where(t[:genre_1].matches('%drama%').or(t[:genre_2].matches('%drama%')).or(t[:genre_3].matches('%drama%')).or(t[:genre_4].matches('%drama%')).or(t[:genre_5].matches('%drama%')).or(t[:format_1].matches('%drama%')).or(t[:format_2].matches('%drama%')).or(t[:format_3].matches('%drama%')).or(t[:format_4].matches('%drama%')).or(t[:format_5].matches('%drama%')))
     else
       Show.all
     end
@@ -236,14 +258,6 @@ class Show < ActiveRecord::Base
       @chain = format_5.to_s
     else
       @chain
-    end
-  end
-
-  def self.chained_genre_filter(drama)
-    if drama
-      where(chained_genre_names: "%#{drama}%")
-    else
-      Show.all
     end
   end
 
