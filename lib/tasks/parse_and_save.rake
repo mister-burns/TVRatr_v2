@@ -153,6 +153,56 @@ task :parse_and_save_first_aired_data => :environment do
 end
 
 
+task :parse_and_save_first_aired_data_v2 => :environment do
+  wikipediaapiquery = WikipediaApiQuery.where(:wikipedia_page_id => 40852070)
+  wikipediaapiquery.each do |wikipediaapiquery|
+    page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
+    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+    string2 = string.gsub(/\\n/i," ").gsub(/df=\s?(y|yes)/,"") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
+    # .gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/,"|").gsub(/df=(y|yes)/,"")
+    string3 = /\bfirst_aired\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
+
+    # this code checks in format string is nil, in which case end variables must first get set to nil.
+    if string3.nil?
+      @first_aired = nil
+
+      else
+      # the first 3 lines here help further parse the code and isolate each format. Each show can have multiple formats.
+      string4 = string3.to_s.split(/=\s?/) #splits the string at the equals sign followed by an optional space.
+      string5 = string4[1] # picks the second part of the split array, the part after the equals..
+      if string5.nil?
+        @first_aired = nil
+        else
+        string6 = string5.gsub(/df|es/mi,"").gsub(/\{\{(start date|dts)\|/mi,"").gsub(/\}\}/mi,"").gsub(/\|MM\|DD\|/mi,"").gsub(/<!--|--!?>/mi,"").gsub("|","/")
+        @first_aired = string6
+      end
+    end
+
+    #if statement to first look for dates in the "YYYY" format and add text of "/01/01" so they become Date.parse friendly
+    if @first_aired =~ /^\s?\d{4}\z/m
+      @first_aired_date_friendly = @first_aired.concat("/01/01")
+      else
+      @first_aired_date_friendly = @first_aired #set variable to original parsed result if it is not in "YYYY" format and thus already convetable to a date.
+    end
+    puts @raw_input
+
+    #This test was necessary to prevent the Date.parse function from throwing an error when
+    #the @string4 variable was nil. The "rescue" part sets @first_aired_match to nil if @string4 is nil.
+    begin
+      @first_aired_datetime = Date.parse(@first_aired_date_friendly)
+      rescue
+      @first_aired_datetime = nil
+    end
+
+    #find the appropriate entry in the Show model and save the first aired date:
+    show = Show.where(:wikipedia_page_id => page).first
+    show.first_aired_string = @first_aired_text
+    show.first_aired = @first_aired_datetime
+    show.save
+  end
+end
+
+
 task :parse_and_save_last_aired_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   wikipediaapiquery.each do |wikipediaapiquery|
@@ -209,7 +259,7 @@ task :parse_and_save_episode_count_data => :environment do
       if string5.nil?
         @num_episodes = nil
       else
-        string6 = string5.gsub(/\,/, "")
+        string6 = string5.gsub(/\,/, "") # This line removes a comma when episode count is great than 1000.
         @num_episodes = string6
       end
     end

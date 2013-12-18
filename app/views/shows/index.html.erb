@@ -14,6 +14,7 @@
     <th>Wikipedia Page ID</th>
     <th>Genre(s)</th>
     <th><%= sortable "first_aired", "First Aired" %></th>
+    <th>First Aired String</th>
     <th><%= sortable "last_aired", "Last Aired" %></th>
     <th><%= sortable "modified_number_of_seasons", "Number of Seasons" %></th>
     <th><%= sortable "number_of_episodes", "Number of Episodes" %></th>
@@ -31,6 +32,7 @@
         <td><%= show.wikipedia_page_id %></td>
         <td><%= show.chained_genre_names.try(:titleize) %></td>
         <td><%= show.modified_first_aired %></td>
+        <td><%= show.first_aired_string %></td>
         <td><%= show.modified_last_aired %></td>
         <td><%= show.modified_number_of_seasons %></td>
         <td><%= number_with_delimiter(show.number_of_episodes) %></td>
