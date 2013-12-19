@@ -9,6 +9,10 @@ group :development do
   gem 'sqlite3'
 end
 
+# Used for web scraping
+gem 'mechanize'
+gem 'nokogiri'
+
 # Using the twitter-bootstrap app for styling
 gem 'twitter-bootstrap-rails'
 
