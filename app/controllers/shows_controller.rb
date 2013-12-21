@@ -11,6 +11,7 @@ class ShowsController < ApplicationController
 
     @shows = Show.show_name_search(params[:show_name_search])
              .individual_season_filter
+             .remove_wikipedia_categories
              .network_search(params[:network_search])
              .comedy_filter(params[:comedy])
              .drama_filter(params[:drama])

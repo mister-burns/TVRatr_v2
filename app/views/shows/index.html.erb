@@ -4,8 +4,10 @@
 </div>
 
 <p>Show Count: <%= @shows.count %></p>
+<!--
 <p>Controller Test: <%= @test.present? %>
 <p>Controller Test: <%= @test2 %>
+-->
 
 <table class="table table-striped">
   <thead>
@@ -13,6 +15,8 @@
     <th><%= sortable "show_name", "Show Name" %></th>
     <th>Wikipedia Page ID</th>
     <th>Genre(s)</th>
+    <th><%= sortable "imdb_rating", "IMDB Rating" %></th>
+    <th><%= sortable "tv_dot_com_rating", "TV.com Rating" %></th>
     <th><%= sortable "first_aired", "First Aired" %></th>
     <th>First Aired String</th>
     <th><%= sortable "last_aired", "Last Aired" %></th>
@@ -31,6 +35,8 @@
         <td><%= link_to show.modified_show_name, "http://en.wikipedia.org/wiki/#{show.show_name}" %></td>
         <td><%= show.wikipedia_page_id %></td>
         <td><%= show.chained_genre_names.try(:titleize) %></td>
+        <td><%= show.imdb_rating %></td>
+        <td><%= show.tv_dot_com_rating %></td>
         <td><%= show.modified_first_aired %></td>
         <td><%= show.first_aired_string %></td>
         <td><%= show.modified_last_aired %></td>
