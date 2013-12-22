@@ -16,6 +16,7 @@
     <th>Wikipedia Page ID</th>
     <th>Genre(s)</th>
     <th><%= sortable "imdb_rating", "IMDB Rating" %></th>
+    <th><%= sortable "imdb_rating_count", "Number of IMDB Ratings" %></th>
     <th><%= sortable "tv_dot_com_rating", "TV.com Rating" %></th>
     <th><%= sortable "first_aired", "First Aired" %></th>
     <th>First Aired String</th>
@@ -36,6 +37,7 @@
         <td><%= show.wikipedia_page_id %></td>
         <td><%= show.chained_genre_names.try(:titleize) %></td>
         <td><%= show.imdb_rating %></td>
+        <td><%= number_with_delimiter(show.imdb_rating_count) %></td>
         <td><%= show.tv_dot_com_rating %></td>
         <td><%= show.modified_first_aired %></td>
         <td><%= show.first_aired_string %></td>

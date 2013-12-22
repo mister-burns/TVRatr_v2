@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50138401-41a6-45d8-9758-d7e9f0a8eca4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.rakeTasks" afterPath="$PROJECT_DIR$/.idea/.rakeTasks" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shows/index.html.erb" afterPath="$PROJECT_DIR$/app/views/shows/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/parse_and_save.rake" afterPath="$PROJECT_DIR$/lib/tasks/parse_and_save.rake" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/ratings.rake" afterPath="$PROJECT_DIR$/lib/tasks/ratings.rake" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/show.rb" afterPath="$PROJECT_DIR$/app/models/show.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/shows_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/shows_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tvratr_v2.iml" afterPath="$PROJECT_DIR$/.idea/tvratr_v2.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tvratr_v2.iws" />
@@ -24,7 +19,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_series_data__tvratr_v2.coverage" NAME="parse_and_save_series_data: tvratr_v2 Coverage Results" MODIFIED="1385748015655" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_season_count_data_v2__tvratr_v2.coverage" NAME="parse_and_save_season_count_data_v2: tvratr_v2 Coverage Results" MODIFIED="1386984943215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
-    <SUITE FILE_PATH="coverage/tvratr_v2@Development__tvratr_v2.coverage" NAME="Development: tvratr_v2 Coverage Results" MODIFIED="1387599557461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
+    <SUITE FILE_PATH="coverage/tvratr_v2@Development__tvratr_v2.coverage" NAME="Development: tvratr_v2 Coverage Results" MODIFIED="1387660803706" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_episode_count_data_v3__tvratr_v2.coverage" NAME="parse_and_save_episode_count_data_v3: tvratr_v2 Coverage Results" MODIFIED="1386982400422" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_country_data__tvratr_v2.coverage" NAME="parse_and_save_country_data: tvratr_v2 Coverage Results" MODIFIED="1386981505279" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_network_data_v2__tvratr_v2.coverage" NAME="parse_and_save_network_data_v2: tvratr_v2 Coverage Results" MODIFIED="1385964457915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
@@ -33,7 +28,7 @@
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_format_data__tvratr_v2.coverage" NAME="parse_and_save_format_data: tvratr_v2 Coverage Results" MODIFIED="1386980986275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@category_query_British_childrens_television_programmes__tvratr_v2.coverage" NAME="category_query_British_childrens_television_programmes: tvratr_v2 Coverage Results" MODIFIED="1386625830652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@delete_first_aired_strings__tvratr_v2.coverage" NAME="delete_first_aired_strings: tvratr_v2 Coverage Results" MODIFIED="1387519038598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
-    <SUITE FILE_PATH="coverage/tvratr_v2@get_tv_dot_com_ratings__tvratr_v2.coverage" NAME="get_tv_dot_com_ratings: tvratr_v2 Coverage Results" MODIFIED="1387608116438" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
+    <SUITE FILE_PATH="coverage/tvratr_v2@get_tv_dot_com_ratings__tvratr_v2.coverage" NAME="get_tv_dot_com_ratings: tvratr_v2 Coverage Results" MODIFIED="1387660375161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@copy_page_id_and_name_from_wikipediaapiquery_to_show__tvratr_v2.coverage" NAME="copy_page_id_and_name_from_wikipediaapiquery_to_show: tvratr_v2 Coverage Results" MODIFIED="1386625924297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_series_count_data_v2__tvratr_v2.coverage" NAME="parse_and_save_series_count_data_v2: tvratr_v2 Coverage Results" MODIFIED="1386985485467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@category_query_2010s_American_television_series__tvratr_v2.coverage" NAME="category_query_2010s_American_television_series: tvratr_v2 Coverage Results" MODIFIED="1385878865249" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
@@ -43,11 +38,11 @@
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_first_aired_data_v2__tvratr_v2.coverage" NAME="parse_and_save_first_aired_data_v2: tvratr_v2 Coverage Results" MODIFIED="1387520429171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@infobox_query_from_wikipedia_page_id__tvratr_v2.coverage" NAME="infobox_query_from_wikipedia_page_id: tvratr_v2 Coverage Results" MODIFIED="1386626774528" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@category_query_American_childrens_television_series__tvratr_v2.coverage" NAME="category_query_American_childrens_television_series: tvratr_v2 Coverage Results" MODIFIED="1386625774372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
-    <SUITE FILE_PATH="coverage/tvratr_v2@db_migrate__tvratr_v2.coverage" NAME="db:migrate: tvratr_v2 Coverage Results" MODIFIED="1387604260215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
+    <SUITE FILE_PATH="coverage/tvratr_v2@db_migrate__tvratr_v2.coverage" NAME="db:migrate: tvratr_v2 Coverage Results" MODIFIED="1387662659674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_format_data_v2__tvratr_v2.coverage" NAME="parse_and_save_format_data_v2: tvratr_v2 Coverage Results" MODIFIED="1386791978936" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
-    <SUITE FILE_PATH="coverage/tvratr_v2@Rails_console__tvratr_v2.coverage" NAME="Rails console: tvratr_v2 Coverage Results" MODIFIED="1387604417227" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
+    <SUITE FILE_PATH="coverage/tvratr_v2@Rails_console__tvratr_v2.coverage" NAME="Rails console: tvratr_v2 Coverage Results" MODIFIED="1387688239956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_country_data_v2__tvratr_v2.coverage" NAME="parse_and_save_country_data_v2: tvratr_v2 Coverage Results" MODIFIED="1385877144493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
-    <SUITE FILE_PATH="coverage/tvratr_v2@get_imdb_ratings_group__tvratr_v2.coverage" NAME="get_imdb_ratings_group: tvratr_v2 Coverage Results" MODIFIED="1387606805972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
+    <SUITE FILE_PATH="coverage/tvratr_v2@get_imdb_ratings_group__tvratr_v2.coverage" NAME="get_imdb_ratings_group: tvratr_v2 Coverage Results" MODIFIED="1387666086034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_genre_data_v2__tvratr_v2.coverage" NAME="parse_and_save_genre_data_v2: tvratr_v2 Coverage Results" MODIFIED="1385871250401" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_last_aired_data__tvratr_v2.coverage" NAME="parse_and_save_last_aired_data: tvratr_v2 Coverage Results" MODIFIED="1385773305428" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
   </component>
@@ -66,7 +61,7 @@
       <file leaf-file-name="children.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/shows/children.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="42" selection-start="2581" selection-end="2581" vertical-scroll-proportion="-0.0" vertical-offset="900" max-vertical-offset="990">
+            <state line="60" column="42" selection-start="2581" selection-end="2581" vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="990">
               <folding />
             </state>
           </provider>
@@ -138,7 +133,7 @@
       <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/shows/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="27" selection-start="1474" selection-end="1474" vertical-scroll-proportion="-8.125" vertical-offset="375" max-vertical-offset="1095">
+            <state line="41" column="76" selection-start="1688" selection-end="1688" vertical-scroll-proportion="-6.25" vertical-offset="465" max-vertical-offset="1125">
               <folding />
             </state>
           </provider>
@@ -174,7 +169,7 @@
       <file leaf-file-name="ratings.rake" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/tasks/ratings.rake">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="3" selection-start="770" selection-end="770" vertical-scroll-proportion="-1.263587" vertical-offset="885" max-vertical-offset="1305">
+            <state line="48" column="78" selection-start="1769" selection-end="1769" vertical-scroll-proportion="0.67391306" vertical-offset="472" max-vertical-offset="1800">
               <folding />
             </state>
           </provider>
@@ -183,7 +178,7 @@
       <file leaf-file-name="schema.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db/schema.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="64" selection-start="1398" selection-end="1398" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="1215">
+            <state line="37" column="64" selection-start="1398" selection-end="1398" vertical-scroll-proportion="0.0" vertical-offset="837" max-vertical-offset="1260">
               <folding />
             </state>
           </provider>
@@ -192,7 +187,7 @@
       <file leaf-file-name="query_and_save.rake" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/tasks/query_and_save.rake">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="91" selection-start="708" selection-end="708" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10860">
+            <state line="12" column="91" selection-start="708" selection-end="708" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="10860">
               <folding />
             </state>
           </provider>
@@ -201,7 +196,7 @@
       <file leaf-file-name="parse_and_save.rake" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/tasks/parse_and_save.rake">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="171" column="42" selection-start="8714" selection-end="8714" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7425">
+            <state line="171" column="42" selection-start="8714" selection-end="8714" vertical-scroll-proportion="0.0" vertical-offset="2565" max-vertical-offset="7425">
               <folding />
             </state>
           </provider>
@@ -261,8 +256,8 @@
         <option value="$PROJECT_DIR$/app/controllers/shows_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/show.rb" />
         <option value="$PROJECT_DIR$/db/schema.rb" />
-        <option value="$PROJECT_DIR$/app/views/shows/index.html.erb" />
         <option value="$PROJECT_DIR$/lib/tasks/ratings.rake" />
+        <option value="$PROJECT_DIR$/app/views/shows/index.html.erb" />
       </list>
     </option>
   </component>
@@ -275,7 +270,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="14" />
-    <option name="y" value="22" />
+    <option name="y" value="23" />
     <option name="width" value="1349" />
     <option name="height" value="669" />
   </component>
@@ -324,8 +319,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="RailsProjectView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -392,6 +385,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="RailsProjectView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -417,7 +412,7 @@
       <recent name="$PROJECT_DIR$/app/views" />
     </key>
   </component>
-  <component name="RunManager" selected="Rake.get_tv_dot_com_ratings: tvratr_v2">
+  <component name="RunManager" selected="Rake.get_imdb_ratings_group: tvratr_v2">
     <configuration default="false" name="Rails console: tvratr_v2" type="IrbRunConfigurationType" factoryName="IRB console" temporary="true">
       <module name="tvratr_v2" />
       <IRB_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -718,10 +713,10 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Rake.get_tv_dot_com_ratings: tvratr_v2" />
+        <item index="0" class="java.lang.String" itemvalue="IRB console.Rails console: tvratr_v2" />
         <item index="1" class="java.lang.String" itemvalue="Rake.get_imdb_ratings_group: tvratr_v2" />
-        <item index="2" class="java.lang.String" itemvalue="IRB console.Rails console: tvratr_v2" />
-        <item index="3" class="java.lang.String" itemvalue="Rake.db:migrate: tvratr_v2" />
+        <item index="2" class="java.lang.String" itemvalue="Rake.db:migrate: tvratr_v2" />
+        <item index="3" class="java.lang.String" itemvalue="Rake.get_tv_dot_com_ratings: tvratr_v2" />
         <item index="4" class="java.lang.String" itemvalue="Rake.get_imdb_ratings: tvratr_v2" />
       </list>
     </recent_temporary>
@@ -758,10 +753,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="14" y="22" width="1349" height="669" extended-state="0" />
-    <editor active="false" />
+    <frame x="14" y="23" width="1349" height="669" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32766616" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32715008" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921174" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -771,12 +765,13 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29211748" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29211748" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32766616" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32766616" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39966273" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -801,13 +796,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/shows/drama_display.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="0" selection-start="2126" selection-end="2126" vertical-scroll-proportion="0.0" vertical-offset="780" max-vertical-offset="870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/shows/serialized.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="52" column="0" selection-start="2126" selection-end="2126" vertical-scroll-proportion="0.0" vertical-offset="780" max-vertical-offset="870">
@@ -1049,9 +1037,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/database.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20131221053724_add_tv_dot_com_rating_to_show.rb">
@@ -1064,20 +1050,6 @@
     <entry file="file://$PROJECT_DIR$/db/migrate/20131221000746_add_imdb_rating_to_show.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="12" selection-start="64" selection-end="64" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/schema.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="64" selection-start="1398" selection-end="1398" vertical-scroll-proportion="0.0" vertical-offset="462" max-vertical-offset="1200">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shows/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="27" selection-start="1474" selection-end="1474" vertical-scroll-proportion="-8.125" vertical-offset="375" max-vertical-offset="1095">
           <folding />
         </state>
       </provider>
@@ -1096,6 +1068,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20131221215039_add_rating_counts_to_show.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="12" selection-start="66" selection-end="66" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/schema.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="64" selection-start="1398" selection-end="1398" vertical-scroll-proportion="0.0" vertical-offset="837" max-vertical-offset="1260">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/show.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="46" selection-start="716" selection-end="716" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4740">
@@ -1103,9 +1089,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/shows/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="76" selection-start="1688" selection-end="1688" vertical-scroll-proportion="-6.25" vertical-offset="465" max-vertical-offset="1125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/tasks/ratings.rake">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="3" selection-start="770" selection-end="770" vertical-scroll-proportion="-1.263587" vertical-offset="885" max-vertical-offset="1305">
+        <state line="48" column="78" selection-start="1769" selection-end="1769" vertical-scroll-proportion="0.67391306" vertical-offset="472" max-vertical-offset="1800">
           <folding />
         </state>
       </provider>
