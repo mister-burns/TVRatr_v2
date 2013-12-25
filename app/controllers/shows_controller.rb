@@ -5,9 +5,7 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.json
   def index
-    horror = params[:horror]
     @test = params[:comedy]
-    drama = params[:drama]
 
     @shows = Show.show_name_search(params[:show_name_search])
              .individual_season_filter
@@ -26,17 +24,6 @@ class ShowsController < ApplicationController
              .max_episodes_filter(params[:max_episodes])
              .order(sort_column + " " + sort_direction)
              .paginate(:per_page => 50, :page => params[:page])
-
-    #@shows = Show.search(params[:search]).genre_filter(horror, drama).min_seasons_filter(params[:min_seasons]).max_seasons_filter(params[:max_seasons]).min_episodes_filter(params[:min_episodes]).max_episodes_filter(params[:max_episodes]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
-
-    # where('genre_1 LIKE ? OR genre_1 LIKE ? OR genre_1 LIKE ?', "%#{drama}%", "%#{comedy}%", "%#{horror}%")
-    # where(first_aired: 50.years.ago..Date.today)
-    # where(last_aired: 50.years.ago..Date.today)
-
-    # Arel example:
-    # t = Show.arel_table
-    #Show.where(t[:genre_1].matches('%drama').or(t[:genre_1].matches('%comedy')).or(t[:genre_2].matches('%horror')) )
-    # where(t[:genre_1].matches("%#{drama}").or(t[:genre_1].matches("%#{params[:comedy]}")).or(t[:genre_1].matches("%#{params[:horror]}")))
   end
 
 

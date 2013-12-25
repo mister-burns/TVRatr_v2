@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131221215039) do
+ActiveRecord::Schema.define(version: 20131224000318) do
 
   create_table "genres", force: true do |t|
     t.string   "genre"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 20131221215039) do
     t.integer  "imdb_rating_count"
     t.integer  "tv_dot_com_rating_count"
     t.integer  "metacritic_rating_count"
+    t.string   "imdb_link"
+    t.string   "tv_dot_com_link"
   end
 
   create_table "wikipedia_api_queries", force: true do |t|

@@ -1,3 +1,17 @@
+# This task combines all parse rake tasks and runs them together.
+task :query_active_categories => [:category_query_english_language_television_programming,
+                                  :category_query_serial_drama_television_series,
+                                  :category_query_british_drama_television_series,
+                                  :category_query_2010s_American_television_series,
+                                  :category_query_2010s_British_television_series,
+                                  :category_query_American_childrens_television_series,
+                                  :category_query_British_childrens_television_programmes,
+                                  :query_serial_drama_list_and_mark_show_as_serialized
+] do
+  puts "Everything has been queried!"
+end
+
+
 #This task queries from the "English-language_television_programming" category list.
 task :category_query_english_language_television_programming => :environment do
 
