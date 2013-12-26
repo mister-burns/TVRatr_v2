@@ -90,12 +90,15 @@ end
 task :get_metacritic_ratings => :environment do
   require 'mechanize'
 
-  url = "http://www.metacritic.com"
-  show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1).where('tv_dot_com_rating IS NULL')
+  url = "http://www.metacritic.com/"
+  #url = "http://www.metacritic.com/search/tv/"
+  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('metacritic_rating IS NULL')
   show.each do |show|
 
     string = show.show_name
     name = string.gsub(/\(.*?\)/i,"").strip
+    #name2 = name.gsub(/\s/,"+")
+    #url2 = url + name2 + "/search"
 
     puts name
     agent = Mechanize.new
@@ -103,13 +106,19 @@ task :get_metacritic_ratings => :environment do
     search_form = agent.page.form_with(:action => "/search")
     search_form.search_term = name
     search_form.submit
-    if agent.page.link_with(:text => name).present?
-      agent.page.link_with(:text => name).click
-      if agent.page.at(".score").present?
-        value = agent.page.at(".score").text.strip
-        puts value
-        show.tv_dot_com_rating = value
-        show.save
+    if agent.page.link_with(:text => /TV Shows/).present?
+      agent.page.link_with(:text => /TV Shows/).click
+      if agent.page.link_with(:text => /#{name}/i).present?
+        agent.page.link_with(:text => /#{name}/i).click
+        if agent.page.at("span[itemprop=ratingValue]").present?
+          value = agent.page.at("span[itemprop=ratingValue]").text.strip
+          page_link = agent.page.uri.to_s
+          puts value
+          puts page_link
+          show.metacritic_rating = value
+          show.metacritic_link = page_link
+          show.save
+        end
       end
     end
     #sleep(1)
