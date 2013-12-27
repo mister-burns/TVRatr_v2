@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50138401-41a6-45d8-9758-d7e9f0a8eca4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.rakeTasks" afterPath="$PROJECT_DIR$/.idea/.rakeTasks" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/infobox_query.rake" afterPath="$PROJECT_DIR$/lib/tasks/infobox_query.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/master_list.rake" afterPath="$PROJECT_DIR$/lib/tasks/master_list.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/parse_and_save.rake" afterPath="$PROJECT_DIR$/lib/tasks/parse_and_save.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/query_and_save.rake" afterPath="$PROJECT_DIR$/lib/tasks/query_and_save.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/ratings.rake" afterPath="$PROJECT_DIR$/lib/tasks/ratings.rake" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
     </list>
     <ignored path="tvratr_v2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,16 +69,16 @@
       <file leaf-file-name="_search_box.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/shows/_search_box.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="84" selection-start="3008" selection-end="3008" vertical-scroll-proportion="-7.5" vertical-offset="615" max-vertical-offset="1155">
+            <state line="4" column="6" selection-start="198" selection-end="198" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="1155">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.html.erb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="application.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="22" selection-start="1107" selection-end="1107" vertical-scroll-proportion="0.0" vertical-offset="490" max-vertical-offset="825">
+            <state line="38" column="47" selection-start="1144" selection-end="1144" vertical-scroll-proportion="0.35598704" vertical-offset="460" max-vertical-offset="825">
               <folding />
             </state>
           </provider>
@@ -164,7 +159,7 @@
       <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/shows/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="117" selection-start="1751" selection-end="1751" vertical-scroll-proportion="0.0" vertical-offset="375" max-vertical-offset="1185">
+            <state line="40" column="117" selection-start="1751" selection-end="1751" vertical-scroll-proportion="-25.0" vertical-offset="0" max-vertical-offset="1185">
               <folding />
             </state>
           </provider>
@@ -188,10 +183,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parse_and_save.rake" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="parse_and_save.rake" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/tasks/parse_and_save.rake">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="215" column="4" selection-start="10636" selection-end="10636" vertical-scroll-proportion="-3.1875" vertical-offset="4245" max-vertical-offset="7665">
+            <state line="215" column="4" selection-start="10636" selection-end="10636" vertical-scroll-proportion="0.0" vertical-offset="5775" max-vertical-offset="7665">
               <folding />
             </state>
           </provider>
@@ -256,7 +251,6 @@
         <option value="$PROJECT_DIR$/app/helpers/application_helper.rb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/views/shared/_navigation.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/views/shows/serialized.html.erb" />
         <option value="$PROJECT_DIR$/app/views/shows/test_page.html.erb" />
         <option value="$PROJECT_DIR$/app/views/shows/show.html.erb" />
@@ -273,6 +267,7 @@
         <option value="$PROJECT_DIR$/lib/tasks/master_list.rake" />
         <option value="$PROJECT_DIR$/lib/tasks/query_and_save.rake" />
         <option value="$PROJECT_DIR$/lib/tasks/parse_and_save.rake" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
       </list>
     </option>
   </component>
@@ -1064,13 +1059,6 @@
         <state line="2" column="50" selection-start="158" selection-end="158" vertical-scroll-proportion="0.09146342" vertical-offset="0" max-vertical-offset="328" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="22" selection-start="1107" selection-end="1107" vertical-scroll-proportion="0.0" vertical-offset="490" max-vertical-offset="825">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20131124005030_create_shows.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555" />
@@ -1173,13 +1161,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shows/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="117" selection-start="1751" selection-end="1751" vertical-scroll-proportion="0.0" vertical-offset="375" max-vertical-offset="1185">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/show.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="40" selection-start="72" selection-end="72" vertical-scroll-proportion="0.0" vertical-offset="375" max-vertical-offset="4755">
@@ -1190,13 +1171,6 @@
     <entry file="file://$PROJECT_DIR$/db/migrate/20131125005900_add_serialized_to_show.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="19" selection-start="19" selection-end="19" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shows/_search_box.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="84" selection-start="3008" selection-end="3008" vertical-scroll-proportion="-7.5" vertical-offset="615" max-vertical-offset="1155">
           <folding />
         </state>
       </provider>
@@ -1273,7 +1247,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/tasks/parse_and_save.rake">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="215" column="4" selection-start="10636" selection-end="10636" vertical-scroll-proportion="-3.1875" vertical-offset="4245" max-vertical-offset="7665">
+        <state line="215" column="4" selection-start="10636" selection-end="10636" vertical-scroll-proportion="0.0" vertical-offset="5775" max-vertical-offset="7665">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/shows/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="117" selection-start="1751" selection-end="1751" vertical-scroll-proportion="-25.0" vertical-offset="0" max-vertical-offset="1185">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/shows/_search_box.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="6" selection-start="198" selection-end="198" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="1155">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="47" selection-start="1144" selection-end="1144" vertical-scroll-proportion="0.35598704" vertical-offset="460" max-vertical-offset="825">
           <folding />
         </state>
       </provider>
