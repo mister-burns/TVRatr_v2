@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3477753406">
+  <component name="DataSourceManagerImpl" format="xml" hash="3499667723">
     <data-source source="LOCAL" name="Rails tvratr_v2: development" uuid="762a04ba-5ea4-4247-a3f0-087b6f88e568">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
@@ -13,6 +13,12 @@
           <url>file://$USER_HOME$/Library/Preferences/RubyMine50/jdbc-drivers/sqlite-jdbc-3.7.2.jar</url>
         </library>
       </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails tvratr_v2: production" uuid="f9f40483-dbff-428f-ace1-ee20c7c6ebe4">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:db/production.sqlite3</jdbc-url>
+      <libraries />
     </data-source>
   </component>
 </project>

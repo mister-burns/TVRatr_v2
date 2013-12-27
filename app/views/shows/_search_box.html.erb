@@ -32,8 +32,6 @@
     <%#= check_box_tag 'genres[]', "teen"  %>
     <%#= label_tag 'genres[]', "Teen", :class => "checkbox inline" %>
 
-    <button type="submit" class="btn btn-default">Filter by Categories</button><br><br>
-
       <h4>Language Filter</h4>
       <%= check_box_tag :language, "english", params[:language]  %>
       <%= label_tag :language, "English Only", :class => "checkbox inline" %><br>
@@ -46,20 +44,20 @@
       <%= check_box_tag :united_kingdom, "united_kingdom", params[:united_kingdom]  %>
       <%= label_tag :united_kingdom, "United Kingdom", :class => "checkbox inline" %><br>
       <%= check_box_tag :commonwealth, "commonwealth", params[:commonwealth] %>
-      <%= label_tag :commonwealth, "Other English Speaking Countries", :class => "checkbox inline" %><br>
+      <%= label_tag :commonwealth, "Other English Speaking Countries", :class => "checkbox inline" %>
 
       <button type="submit" class="btn btn-default">Filter by Country</button><br><br>
 
       <%= label_tag :min_seasons, "Minimum Number of Seasons", :class => "checkbox inline" %>
       <%= number_field_tag :min_seasons, params[:min_seasons], :in => 1...100 %><br>
       <%= label_tag :max_seasons, "Maximum Number of Seasons", :class => "checkbox inline" %>
-      <%= number_field_tag :max_seasons, params[:max_seasons], :in => 1...100 %><br><br>
+      <%= number_field_tag :max_seasons, params[:max_seasons], :in => 1...100 %><br>
     <button type="submit" class="btn btn-default">Filter by Season Count</button><br><br>
 
       <%= label_tag :min_episodes, "Minimum Number of Episodes", :class => "checkbox inline" %>
       <%= number_field_tag :min_episodes, params[:min_episodes], :in => 1...100 %><br>
       <%= label_tag :max_episodes, "Maximum Number of Episodes", :class => "checkbox inline" %>
-      <%= number_field_tag :max_episodes, params[:max_episodes], :in => 1...100 %><br><br>
+      <%= number_field_tag :max_episodes, params[:max_episodes], :in => 1...100 %><br>
       <button type="submit" class="btn btn-default">Filter by Episode Count</button><br><br>
 
       <!--<h4>Start Date Search:</h4>-->
