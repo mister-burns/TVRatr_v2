@@ -32,11 +32,45 @@ class ShowsController < ApplicationController
   end
 
   def drama_display
-    @shows = Show.show_name_search(params[:show_name_search]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
+    @shows = Show.show_name_search(params[:show_name_search])
+             .where("genre_1 LIKE ? OR genre_2 LIKE ? OR genre_3 LIKE ? OR genre_4 LIKE ? OR genre_5 LIKE ? OR format_1 LIKE ? OR format_2 LIKE ? OR format_3 LIKE ? OR format_4 LIKE ? OR format_5 LIKE ?", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%")
+             .individual_season_filter
+             .remove_wikipedia_categories
+             .network_search(params[:network_search])
+             .comedy_filter(params[:comedy])
+             .drama_filter(params[:drama])
+             .language_filter(params[:language])
+             .serialized_only_filter(params[:serialized_only])
+             .united_states_filter(params[:united_states])
+             .united_kingdom_filter(params[:united_kingdom])
+             .commonwealth_filter(params[:commonwealth])
+             .min_seasons_filter(params[:min_seasons])
+             .max_seasons_filter(params[:max_seasons])
+             .min_episodes_filter(params[:min_episodes])
+             .max_episodes_filter(params[:max_episodes])
+             .order(sort_column + " " + sort_direction)
+             .paginate(:per_page => 50, :page => params[:page])
   end
 
   def children
-    @shows = Show.where('genre_1 like ?', '%children%').show_name_search(params[:show_name_search]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
+    @shows = Show.show_name_search(params[:show_name_search])
+    .where("genre_1 LIKE ? OR genre_2 LIKE ? OR genre_3 LIKE ? OR genre_4 LIKE ? OR genre_5 LIKE ? OR format_1 LIKE ? OR format_2 LIKE ? OR format_3 LIKE ? OR format_4 LIKE ? OR format_5 LIKE ?", "%children%", "%children%", "%children%", "%children%", "%children%", "%children%", "%children%", "%children%", "%children%", "%children%")
+    .individual_season_filter
+    .remove_wikipedia_categories
+    .network_search(params[:network_search])
+    .comedy_filter(params[:comedy])
+    .drama_filter(params[:drama])
+    .language_filter(params[:language])
+    .serialized_only_filter(params[:serialized_only])
+    .united_states_filter(params[:united_states])
+    .united_kingdom_filter(params[:united_kingdom])
+    .commonwealth_filter(params[:commonwealth])
+    .min_seasons_filter(params[:min_seasons])
+    .max_seasons_filter(params[:max_seasons])
+    .min_episodes_filter(params[:min_episodes])
+    .max_episodes_filter(params[:max_episodes])
+    .order(sort_column + " " + sort_direction)
+    .paginate(:per_page => 50, :page => params[:page])
   end
 
   def test_page

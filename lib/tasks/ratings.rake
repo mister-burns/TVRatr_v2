@@ -92,7 +92,7 @@ task :get_metacritic_ratings => :environment do
 
   url = "http://www.metacritic.com/"
   #url = "http://www.metacritic.com/search/tv/"
-  show = Show.individual_season_filter.remove_wikipedia_categories
+  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true)
   #show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('metacritic_rating IS NULL')
   #show = Show.where(:wikipedia_page_id => 30820849)
   show.each do |show|

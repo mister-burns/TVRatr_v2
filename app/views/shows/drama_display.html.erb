@@ -3,17 +3,25 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 
- <p>Show Count: <%= @shows.count %></p>
+<p>Show Count: <%= @shows.count %></p>
+<!--
+<p>Controller Test: <%= @test.present? %>
+<p>Controller Test: <%= @test2 %>
+-->
 
 <table class="table table-striped">
   <thead>
   <tr>
     <th><%= sortable "show_name", "Show Name" %></th>
     <th>Wikipedia Page ID</th>
-    <th><%= sortable "genre_1", "Genre" %></th>
-    <th><%= sortable "format_1", "Format" %></th>
-    <th>Serialized</th>
+    <th>Genre(s)</th>
+    <th><%= sortable "imdb_rating", "IMDB Rating" %></th>
+    <th><%= sortable "imdb_rating_count", "Number of IMDB Ratings" %></th>
+    <th><%= sortable "tv_dot_com_rating", "TV.com Rating" %></th>
+    <th><%= sortable "tv_dot_com_rating_count", "Number of TV.com Ratings" %></th>
+    <th><%= sortable "metacritic_rating", "Metacritic Rating" %></th>
     <th><%= sortable "first_aired", "First Aired" %></th>
+    <th>First Aired String</th>
     <th><%= sortable "last_aired", "Last Aired" %></th>
     <th><%= sortable "modified_number_of_seasons", "Number of Seasons" %></th>
     <th><%= sortable "number_of_episodes", "Number of Episodes" %></th>
@@ -29,13 +37,17 @@
       <tr>
         <td><%= link_to show.modified_show_name, "http://en.wikipedia.org/wiki/#{show.show_name}" %></td>
         <td><%= show.wikipedia_page_id %></td>
-        <td><%= show.genre_1.try(:titleize) %></td>
-        <td><%= show.format_1.try(:titleize) %></td>
-        <td><%= show.serialized %></td>
+        <td><%= show.chained_genre_names.try(:titleize) %></td>
+        <td><%= if show.imdb_link.present? then link_to show.imdb_rating, show.imdb_link else show.imdb_rating end %></td>
+        <td><%= number_with_delimiter(show.imdb_rating_count) %></td>
+        <td><%= if show.tv_dot_com_link.present? then link_to show.tv_dot_com_rating, show.tv_dot_com_link else show.tv_dot_com_rating end %></td>
+        <td><%= number_with_delimiter(show.tv_dot_com_rating_count) %></td>
+        <td><%= if show.metacritic_link.present? then link_to show.metacritic_rating, show.metacritic_link else show.metacritic_rating end %></td>
         <td><%= show.modified_first_aired %></td>
+        <td><%= show.first_aired_string %></td>
         <td><%= show.modified_last_aired %></td>
         <td><%= show.modified_number_of_seasons %></td>
-        <td><%= show.number_of_episodes %></td>
+        <td><%= number_with_delimiter(show.number_of_episodes) %></td>
         <td><%= show.modified_network_1 %></td>
         <td><%= show.modified_language.try(:titleize) %></td>
         <td><%= show.country_1.try(:titleize) %></td>

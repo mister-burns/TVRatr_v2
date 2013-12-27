@@ -186,7 +186,7 @@ task :parse_and_save_first_aired_data_v2 => :environment do
         @first_aired = nil
         else
         @first_aired = string5.gsub(/df|es/mi,"").gsub(/\{\{(start date|dts)\|/mi,"").gsub(/\}\}/mi,"").gsub(/\|MM\|DD\|/mi,"").gsub(/<!--|--!?>/mi,"").gsub("|","/").strip
-        @string = string5.gsub(/df|es/mi,"").gsub(/\{\{(start date|dts)\|/mi,"").gsub(/\}\}/mi,"").gsub(/\|MM\|DD\|/mi,"").gsub(/<!--|--!?>/mi,"").gsub("|","/").strip
+        @string = string5.gsub(/df|es/mi,"").gsub(/\{\{(start date|dts)\|/mi,"").gsub(/\}\}/mi,"").gsub(/\|MM\|DD\|/mi,"").gsub(/<!--|--!?>/mi,"").gsub("|","/").strip.truncate(200)
         end
     end
 
