@@ -170,8 +170,8 @@ task :parse_and_save_first_aired_data_v2 => :environment do
     string2 = string.gsub(/\\n/i," ").gsub(/df=\s?(y|yes)/,"") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
     string3 = /\bfirst_aired\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
 
-    puts string2
-    puts string3
+    #puts string2
+    #puts string3
 
     # this code checks in format string is nil, in which case end variables must first get set to nil.
     if string3.nil?
@@ -180,7 +180,7 @@ task :parse_and_save_first_aired_data_v2 => :environment do
       else
       # the first 3 lines here help further parse the code and isolate each format. Each show can have multiple formats.
       string4 = string3.to_s.split(/=\s?/) #splits the string at the equals sign followed by an optional space.
-      puts string4
+      #puts string4
       string5 = string4[1] # picks the second part of the split array, the part after the equals..
       if string5.nil?
         @first_aired = nil
@@ -190,14 +190,14 @@ task :parse_and_save_first_aired_data_v2 => :environment do
         end
     end
 
-    puts @first_aired
+    #puts @first_aired
 
     #if statement to first look for dates in the "YYYY" format and add text of "/01/01" so they become Date.parse friendly
     if @first_aired =~ /^\d{4}\z/mi
       @first_aired.concat("/01/01")
     end
 
-    puts @first_aired
+    #puts @first_aired
 
     #This test was necessary to prevent the Date.parse function from throwing an error when
     #the @string4 variable was nil. The "rescue" part sets @first_aired_match to nil if @string4 is nil.
@@ -208,14 +208,14 @@ task :parse_and_save_first_aired_data_v2 => :environment do
     end
 
     puts "hello"
-    puts @first_aired_datetime
-    puts @string
+    #puts @first_aired_datetime
+    #puts @string
 
     #find the appropriate entry in the Show model and save the first aired date:
     show = Show.where(:wikipedia_page_id => page).first
     puts show.show_name
     show.first_aired_string = @string
-    puts show.first_aired_string
+    #puts show.first_aired_string
     show.first_aired = @first_aired_datetime
     show.save
   end

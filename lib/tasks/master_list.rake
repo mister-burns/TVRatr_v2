@@ -9,5 +9,12 @@ task :master_rake => [:query_active_categories,
                       :copy_page_id_and_name_from_wikipediaapiquery_to_show,
                       :parse_all
 ] do
-  puts "Everything has been raked!"
+  puts "Wikipedia rakes complete!"
+end
+
+task :master_ratings_rake => [:get_imdb_ratings,
+                              :get_tv_dot_com_ratings,
+                              :get_metacritic_ratings
+] do
+  puts "Ratings rakes complete!"
 end

@@ -23,8 +23,10 @@ task :infobox_query_from_wikipedia_page_id => :environment do
         #save data to table
         wikipediaapiquery.infobox = data
         wikipediaapiquery.save
+        puts wikipediaapiquery.show_name
       end
-      puts wikipediaapiquery.infobox
+      #puts wikipediaapiquery.infobox
     end
   end
+  puts "All Infoboxes have been queried"
 end

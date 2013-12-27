@@ -1,4 +1,4 @@
-task :get_imdb_ratings_group => :environment do
+task :get_imdb_ratings => :environment do
   require 'mechanize'
 
   url = "http://www.imdb.com"
