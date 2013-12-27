@@ -212,12 +212,17 @@ task :parse_and_save_first_aired_data_v2 => :environment do
     #puts @string
 
     #find the appropriate entry in the Show model and save the first aired date:
-    show = Show.where(:wikipedia_page_id => page).first
-    puts show.show_name
-    show.first_aired_string = @string
-    #puts show.first_aired_string
-    show.first_aired = @first_aired_datetime
-    show.save
+    begin
+      show = Show.where(:wikipedia_page_id => page).first
+      puts show.show_name
+      show.first_aired_string = @string
+      #puts show.first_aired_string
+      show.first_aired = @first_aired_datetime
+      show.save
+    rescue
+      show.first_aired = nil
+      show.save
+    end
   end
 end
 

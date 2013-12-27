@@ -2,7 +2,7 @@ task :get_imdb_ratings => :environment do
   require 'mechanize'
 
   url = "http://www.imdb.com"
-  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true)
+  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('imdb_rating IS NULL')
   #show = Show.where(:wikipedia_page_id => 36860986)
   #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1)
   #show = Show.individual_season_filter.remove_wikipedia_categories.where( 'number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1 ).where('imdb_rating IS NULL')
@@ -92,8 +92,8 @@ task :get_metacritic_ratings => :environment do
 
   url = "http://www.metacritic.com/"
   #url = "http://www.metacritic.com/search/tv/"
-  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true)
-  #show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('metacritic_rating IS NULL')
+  #show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true)
+  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('metacritic_rating IS NULL')
   #show = Show.where(:wikipedia_page_id => 30820849)
   show.each do |show|
 
