@@ -92,11 +92,13 @@ task :get_metacritic_ratings => :environment do
 
   url = "http://www.metacritic.com/"
   #url = "http://www.metacritic.com/search/tv/"
-  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('metacritic_rating IS NULL')
+  show = Show.individual_season_filter.remove_wikipedia_categories
+  #show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('metacritic_rating IS NULL')
+  #show = Show.where(:wikipedia_page_id => 30820849)
   show.each do |show|
 
     string = show.show_name
-    name = string.gsub(/\(.*?\)/i,"").strip
+    name = string.gsub(/\(.*?\)/i,"").gsub(/%|\//,"").strip
     #name2 = name.gsub(/\s/,"+")
     #url2 = url + name2 + "/search"
 
@@ -108,6 +110,7 @@ task :get_metacritic_ratings => :environment do
     search_form.submit
     if agent.page.link_with(:text => /TV Shows/).present?
       agent.page.link_with(:text => /TV Shows/).click
+      puts "Found TV Show Filter Link"
       if agent.page.link_with(:text => /#{name}/i).present?
         agent.page.link_with(:text => /#{name}/i).click
         if agent.page.at("span[itemprop=ratingValue]").present?
@@ -118,6 +121,15 @@ task :get_metacritic_ratings => :environment do
           show.metacritic_rating = value
           show.metacritic_link = page_link
           show.save
+          else
+          if agent.page.at('.summary').present?
+            if agent.page.at('.summary').at('.desc').present?
+              value = agent.page.at('.summary').at('.desc').text.strip
+              show.metacritic_rating = value
+              show.save
+              puts value
+            end
+          end
         end
       end
     end
