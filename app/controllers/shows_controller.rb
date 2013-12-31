@@ -11,6 +11,14 @@ class ShowsController < ApplicationController
              .individual_season_filter
              .remove_wikipedia_categories
              .network_search(params[:network_search])
+             .min_imdb_rating(params[:min_imdb_rating])
+             .max_imdb_rating(params[:max_imdb_rating])
+             .min_metacritic_rating(params[:min_metacritic_rating])
+             .max_metacritic_rating(params[:max_metacritic_rating])   
+             .min_tv_dot_com_rating(params[:min_tv_dot_com_rating])
+             .max_tv_dot_com_rating(params[:max_tv_dot_com_rating])
+             .imdb_min_rating_count(params[:imdb_min_rating_count])
+             .tv_dot_com_min_rating_count(params[:tv_dot_com_min_rating_count])
              .comedy_filter(params[:comedy])
              .drama_filter(params[:drama])
              .language_filter(params[:language])
@@ -26,6 +34,8 @@ class ShowsController < ApplicationController
              .paginate(:per_page => 50, :page => params[:page])
   end
 
+  #.min_imdb_rating(params[:min_imdb_rating])
+  #.max_imdb_rating(params[:max_imdb_rating])
 
   def serialized
     @shows = Show.show_name_search(params[:show_name_search]).combo_filter(params[:drama], params[:comedy]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])

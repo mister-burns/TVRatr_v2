@@ -1,6 +1,6 @@
 class Show < ActiveRecord::Base
   validates :wikipedia_page_id, uniqueness: true, presence: true
-  serialize :metacritic_rating
+  #serialize :metacritic_rating
 
   scope :genre_search, -> { where("genre_1 LIKE ? OR genre_2 LIKE ? OR genre_3 LIKE ? OR genre_4 LIKE ? OR genre_5 LIKE ? OR format_1 LIKE ? OR format_2 LIKE ? OR format_3 LIKE ? OR format_4 LIKE ? OR format_5 LIKE ?", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%") }
 
@@ -9,6 +9,27 @@ class Show < ActiveRecord::Base
   scope :individual_season_filter, -> { where("show_name NOT LIKE ?", "%(season%") }
   scope :remove_wikipedia_categories, -> { where("show_name NOT LIKE ?", "%category:%") }
   scope :english_only, -> { where(t[:language].matches("%english%").or(t[:country_1].matches("%united%")).or(t[:country_1].matches("%austrailia%")).or(t[:country_1].matches("%england%")).or(t[:country_1].matches("%uk%")).or(t[:country_1].matches("%ireland%")).or(t[:country_1].matches("%new zealand%")) ) }
+
+  # This method is used to average all the season ratings from metacritic into a single show rating
+  def metacritic_average
+    if metacritic_rating.is_a?(Array) # first test if the object is an array
+      metacritic_rating.inject{ |sum, el| sum + el }.to_f / metacritic_rating.size # average out values of array using inject method
+    else
+      metacritic_rating # reverts to regular (single) rating if not an array
+    end
+  end
+
+  def multiply
+    imdb_rating * imdb_rating_count
+  end
+
+  def self.metacritic_average_v2
+    if metacritic_rating.is_a?(Array) # first test if the object is an array
+      metacritic_rating.inject{ |sum, el| sum + el }.to_f / metacritic_rating.size # average out values of array using inject method
+    else
+      metacritic_rating # reverts to regular (single) rating if not an array
+    end
+  end
 
 
   # @param [Object] search
@@ -23,6 +44,70 @@ class Show < ActiveRecord::Base
   def self.network_search(network_search)
     if network_search.present?
       where('network_1 LIKE ? OR network_2 LIKE ?', "%#{network_search}%", "%#{network_search}%")
+    else
+      Show.all
+    end
+  end
+
+  def self.min_imdb_rating(min_imdb_rating)
+    if min_imdb_rating.present?
+      where('imdb_rating >= ?', min_imdb_rating)
+    else
+      Show.all
+    end
+  end
+
+  def self.max_imdb_rating(max_imdb_rating)
+    if max_imdb_rating.present?
+      where('imdb_rating <= ?', max_imdb_rating)
+    else
+      Show.all
+    end
+  end
+
+  def self.min_metacritic_rating(min_metacritic_rating)
+    if min_metacritic_rating.present?
+      where('metacritic_rating >= ?', min_metacritic_rating)
+    else
+      Show.all
+    end
+  end
+
+  def self.max_metacritic_rating(max_metacritic_rating)
+    if max_metacritic_rating.present?
+      where('metacritic_rating <= ?', max_metacritic_rating)
+    else
+      Show.all
+    end
+  end
+
+  def self.min_tv_dot_com_rating(min_tv_dot_com_rating)
+    if min_tv_dot_com_rating.present?
+      where('tv_dot_com_rating >= ?', min_tv_dot_com_rating)
+    else
+      Show.all
+    end
+  end
+
+  def self.max_tv_dot_com_rating(max_tv_dot_com_rating)
+    if max_tv_dot_com_rating.present?
+      where('tv_dot_com_rating <= ?', max_tv_dot_com_rating)
+    else
+      Show.all
+    end
+  end
+
+  def self.imdb_min_rating_count(imdb_min_rating_count)
+    if imdb_min_rating_count.present?
+      where('imdb_rating_count >= ?', imdb_min_rating_count)
+    else
+      Show.all
+    end
+  end
+
+  def self.tv_dot_com_min_rating_count(tv_dot_com_min_rating_count)
+    if tv_dot_com_min_rating_count.present?
+      where('tv_dot_com_rating_count >= ?', tv_dot_com_min_rating_count)
     else
       Show.all
     end

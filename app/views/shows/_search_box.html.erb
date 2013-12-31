@@ -4,14 +4,9 @@
     <%= hidden_field_tag :direction, params[:direction] %>
     <%= hidden_field_tag :sort, params[:sort] %>
 
-      <h4>Show Name Search</h4>
-      <%= text_field_tag :show_name_search, params[:show_name_search] %><br>
-      <button type="submit" class="btn btn-default btn-sm" name="nil">Search Show Names</button>
-
-      <h4>Search by Network</h4>
-      <%= text_field_tag :network_search, params[:network_search] %><br>
-        <button type="submit" class="btn btn-default btn-sm" name="nil">Search Networks</button>
-
+     <h4>Show Name Search</h4>
+     <%= text_field_tag :show_name_search, params[:show_name_search] %><br>
+     <button type="submit" class="btn btn-default btn-sm" name="nil">Search Show Names</button>
 
     <h4>Category Filter</h4>
     <%= check_box_tag :drama, "drama", params[:drama] %>
@@ -26,6 +21,37 @@
      <%= check_box_tag :serialized_only, "serial", params[:serialized_only]  %>
      <%= label_tag :serialized_only, "Serialized Only", :class => "checkbox inline" %><br>
       <button type="submit" class="btn btn-default">Serialized Only</button><br><br>
+
+      <h4>IMDB Rating Filter</h4>
+      <%= label_tag :min_imdb_rating, "Minimum", :class => "checkbox inline" %>
+      <%= number_field_tag :min_imdb_rating, params[:min_imdb_rating], :in => 1...10 %><br>
+      <%= label_tag :max_imdb_rating, "Maximum", :class => "checkbox inline" %>
+      <%= number_field_tag :max_imdb_rating, params[:max_imdb_rating], :in => 1...10 %><br>
+      <button type="submit" class="btn btn-default">Filter by IMDB Rating</button><br>
+
+      <h4>Metacritic Rating Filter</h4>
+      <%= label_tag :min_metacritic_rating, "Minimum", :class => "checkbox inline" %>
+      <%= number_field_tag :min_metacritic_rating, params[:min_metacritic_rating], :in => 1...10 %><br>
+      <%= label_tag :max_metacritic_rating, "Maximum", :class => "checkbox inline" %>
+      <%= number_field_tag :max_metacritic_rating, params[:max_metacritic_rating], :in => 1...10 %><br>
+      <button type="submit" class="btn btn-default">Filter by Metacritic Rating</button><br>
+      
+      <h4>TV.com Rating Filter</h4>
+      <%= label_tag :min_tv_dot_com_rating, "Minimum", :class => "checkbox inline" %>
+      <%= number_field_tag :min_tv_dot_com_rating, params[:min_tv_dot_com_rating], :in => 1...10 %><br>
+      <%= label_tag :max_tv_dot_com_rating, "Maximum", :class => "checkbox inline" %>
+      <%= number_field_tag :max_tv_dot_com_rating, params[:max_tv_dot_com_rating], :in => 1...10 %><br>
+      <button type="submit" class="btn btn-default">Filter by TV.com Rating</button><br>
+
+      <h4>Number of Ratings Filter</h4>
+      <%= label_tag :imdb_min_rating_count, "IMDB - Minimum", :class => "checkbox inline" %>
+      <%= number_field_tag :imdb_min_rating_count, params[:imdb_min_rating_count], :in => 1...10 %><br>
+      <%= label_tag :tv_dot_com_min_rating_count, "TV.com - Minimum", :class => "checkbox inline" %>
+      <%= number_field_tag :tv_dot_com_min_rating_count, params[:tv_dot_com_min_rating_count], :in => 1...10 %><br>
+      <button type="submit" class="btn btn-default">Filter by Number of Ratings</button><br>
+
+
+
 
     <%#= check_box_tag 'genres[]', "mystery"  %>
     <%#= label_tag 'genres[]', "Mystery", :class => "checkbox inline" %>
@@ -47,6 +73,10 @@
       <%= label_tag :commonwealth, "Other English Speaking Countries", :class => "checkbox inline" %>
 
       <button type="submit" class="btn btn-default">Filter by Country</button><br><br>
+
+      <h4>Search by Network</h4>
+      <%= text_field_tag :network_search, params[:network_search] %><br>
+      <button type="submit" class="btn btn-default btn-sm" name="nil">Search Networks</button>
 
       <%= label_tag :min_seasons, "Minimum Number of Seasons", :class => "checkbox inline" %>
       <%= number_field_tag :min_seasons, params[:min_seasons], :in => 1...100 %><br>
