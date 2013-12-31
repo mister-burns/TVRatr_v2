@@ -1,6 +1,6 @@
 class Show < ActiveRecord::Base
   validates :wikipedia_page_id, uniqueness: true, presence: true
-  #serialize :metacritic_rating
+  serialize :metacritic_rating
 
   scope :genre_search, -> { where("genre_1 LIKE ? OR genre_2 LIKE ? OR genre_3 LIKE ? OR genre_4 LIKE ? OR genre_5 LIKE ? OR format_1 LIKE ? OR format_2 LIKE ? OR format_3 LIKE ? OR format_4 LIKE ? OR format_5 LIKE ?", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%") }
 
@@ -9,6 +9,7 @@ class Show < ActiveRecord::Base
   scope :individual_season_filter, -> { where("show_name NOT LIKE ?", "%(season%") }
   scope :remove_wikipedia_categories, -> { where("show_name NOT LIKE ?", "%category:%") }
   scope :english_only, -> { where(t[:language].matches("%english%").or(t[:country_1].matches("%united%")).or(t[:country_1].matches("%austrailia%")).or(t[:country_1].matches("%england%")).or(t[:country_1].matches("%uk%")).or(t[:country_1].matches("%ireland%")).or(t[:country_1].matches("%new zealand%")) ) }
+  scope :metacritic, lambda { |min_metacritic_rating| where("metacritic_average >= ?", min_metacritic_rating) }
 
   # This method is used to average all the season ratings from metacritic into a single show rating
   def metacritic_average
@@ -20,7 +21,7 @@ class Show < ActiveRecord::Base
   end
 
   def multiply
-    imdb_rating * imdb_rating_count
+    imdb_rating / tv_dot_com_rating_count
   end
 
   def self.metacritic_average_v2
@@ -53,7 +54,7 @@ class Show < ActiveRecord::Base
     if min_imdb_rating.present?
       where('imdb_rating >= ?', min_imdb_rating)
     else
-      Show.all
+      all
     end
   end
 
