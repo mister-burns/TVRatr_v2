@@ -19,7 +19,7 @@
     <th><%= sortable "imdb_rating_count", "Number of IMDB Ratings" %></th>
     <th><%= sortable "tv_dot_com_rating", "TV.com Rating" %></th>
     <th><%= sortable "tv_dot_com_rating_count", "Number of TV.com Ratings" %></th>
-    <th><%= sortable "metacritic_average", "Metacritic Rating" %></th>
+    <th><%= sortable "metacritic_average_rating", "Metacritic Rating (All Seasons Average)" %></th>
     <th><%= sortable "first_aired", "First Aired" %></th>
     <!--<th>First Aired String</th>-->
     <th><%= sortable "last_aired", "Last Aired" %></th>
@@ -42,7 +42,7 @@
         <td><%= number_with_delimiter(show.imdb_rating_count) %></td>
         <td><%= if show.tv_dot_com_link.present? then link_to show.tv_dot_com_rating, show.tv_dot_com_link else show.tv_dot_com_rating end %></td>
         <td><%= number_with_delimiter(show.tv_dot_com_rating_count) %></td>
-        <td><%= if show.metacritic_link.present? then link_to show.metacritic_average, show.metacritic_link else show.metacritic_average end %></td>
+        <td><%= if show.metacritic_link.present? && show.metacritic_average_rating.present? then link_to number_with_precision(show.metacritic_average_rating, :precision => 0), show.metacritic_link else show.metacritic_average_rating end %></td>
         <td><%= show.modified_first_aired %></td>
         <!--<td><%#= show.first_aired_string %></td>-->
         <td><%= show.modified_last_aired %></td>

@@ -30,10 +30,10 @@
       <button type="submit" class="btn btn-default">Filter by IMDB Rating</button><br>
 
       <h4>Metacritic Rating Filter</h4>
-      <%= label_tag :min_metacritic_rating, "Minimum", :class => "checkbox inline" %>
-      <%= number_field_tag :min_metacritic_rating, params[:min_metacritic_rating], :in => 1...10 %><br>
-      <%= label_tag :max_metacritic_rating, "Maximum", :class => "checkbox inline" %>
-      <%= number_field_tag :max_metacritic_rating, params[:max_metacritic_rating], :in => 1...10 %><br>
+      <%= label_tag :min_metacritic_average_rating, "Minimum", :class => "checkbox inline" %>
+      <%= number_field_tag :min_metacritic_average_rating, params[:min_metacritic_average_rating], :in => 1...100 %><br>
+      <%= label_tag :max_metacritic_average_rating, "Maximum", :class => "checkbox inline" %>
+      <%= number_field_tag :max_metacritic_average_rating, params[:max_metacritic_average_rating], :in => 1...100 %><br>
       <button type="submit" class="btn btn-default">Filter by Metacritic Rating</button><br>
       
       <h4>TV.com Rating Filter</h4>
