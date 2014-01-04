@@ -20,6 +20,15 @@ class Show < ActiveRecord::Base
     end
   end
 
+  def self.actor_search(actor_name)
+    if actor_name.present?
+      where('imdb_actors LIKE ?', "%#{show_name_search}%")
+      ['Cat', 'Dog', 'Bird'].include? 'Dog'
+    else
+      Show.all
+    end
+  end
+
   def self.network_search(network_search)
     if network_search.present?
       where('network_1 LIKE ? OR network_2 LIKE ?', "%#{network_search}%", "%#{network_search}%")
