@@ -10,9 +10,8 @@ class Show < ActiveRecord::Base
   scope :individual_season_filter, -> { where("show_name NOT LIKE ?", "%(season%") }
   scope :remove_wikipedia_categories, -> { where("show_name NOT LIKE ?", "%category:%") }
   scope :english_only, -> { where(t[:language].matches("%english%").or(t[:country_1].matches("%united%")).or(t[:country_1].matches("%austrailia%")).or(t[:country_1].matches("%england%")).or(t[:country_1].matches("%uk%")).or(t[:country_1].matches("%ireland%")).or(t[:country_1].matches("%new zealand%")) ) }
-  scope :metacritic, lambda { |min_metacritic_rating| where("metacritic_average >= ?", min_metacritic_rating) }
 
-  # @param [Object] search
+
   def self.show_name_search(show_name_search)
     if show_name_search.present?
       where('show_name LIKE ?', "%#{show_name_search}%")
@@ -28,6 +27,24 @@ class Show < ActiveRecord::Base
       Show.all
     end
   end
+
+  def self.amazon_instant_filter(amazon_instant)
+    if amazon_instant.present?
+      where('amazon_instant_availability IS NOT NULL')
+    else
+      Show.all
+    end
+  end
+
+  def self.amazon_own_filter(amazon_own)
+    if amazon_own.present?
+      where('amazon_own_availability IS NOT NULL')
+    else
+      Show.all
+    end
+  end
+
+
 
   def self.min_imdb_rating(min_imdb_rating)
     if min_imdb_rating.present?
@@ -198,11 +215,6 @@ class Show < ActiveRecord::Base
     else
       Show.all
     end
-  end
-
-
-  def self.start_date_range(start_date_first, start_date_last)
-    where("first_aired between (?) and (?)", DateTime.now - 2.years, DateTime.now)
   end
 
   def self.min_seasons_filter(min_seasons)

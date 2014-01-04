@@ -44,6 +44,31 @@ task :get_imdb_ratings => :environment do
         puts @array
         show.save
       end
+
+      # This code checks for amazon instant availability and own availability and then saves links in model.
+      if agent.page.search('div.watch-bar a').present? # looks for watch-bar div links, which contain watch now link and show instant video availability
+        agent.page.search('div.watch-bar a').each do |test|
+          if test.css('h3').text.match(/watch now/i)
+            relative_link = test[:href].to_s
+            absolute_link = url + "#{relative_link}"
+            agent.get(absolute_link)
+            page_link = agent.page.uri.to_s
+            puts page_link
+            show.amazon_instant_availability = page_link
+            show.save
+          elsif test.css('h3').text.match(/own it/i) && test.css('p').text.match(/amazon\.com/i)
+            puts "own match"
+            relative_link = test[:href]
+            absolute_link = url + "#{relative_link}"
+            agent.get(absolute_link)
+            page_link = agent.page.uri.to_s
+            puts page_link
+            show.amazon_own_availability = page_link
+            show.save
+          end
+        end
+      end
+
     end
   end
 end
