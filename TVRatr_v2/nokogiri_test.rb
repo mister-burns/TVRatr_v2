@@ -5,7 +5,7 @@ require 'mechanize'
 
 url = "http://www.imdb.com"
 
-  name = "Breaking Bad"
+  name = "M*A*S*H"
   puts name
   agent = Mechanize.new
   agent.get(url)
@@ -16,6 +16,7 @@ url = "http://www.imdb.com"
   search_form.submit
 
   agent.page.link_with(:text => /#{name}/i).click
+  puts agent.page
   rating = agent.page.at(".titlePageSprite.star-box-giga-star").text.strip
   rating_count = agent.page.at("span[itemprop=ratingCount]").text.strip.gsub(/,/,"").to_i
   page_link = agent.page.uri.to_s

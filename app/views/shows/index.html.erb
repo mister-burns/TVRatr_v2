@@ -21,6 +21,7 @@
     <th><%= sortable "tv_dot_com_rating_count", "Number of TV.com Ratings" %></th>
     <th><%= sortable "metacritic_average_rating", "Metacritic Rating (All Seasons Average)" %></th>
     <th>Amazon Availability</th>
+    <th>iTunes Availability</th>
     <th><%= sortable "first_aired", "First Aired" %></th>
     <!--<th>First Aired String</th>-->
     <th><%= sortable "last_aired", "Last Aired" %></th>
@@ -45,6 +46,7 @@
         <td><%= number_with_delimiter(show.tv_dot_com_rating_count) %></td>
         <td><%= if show.metacritic_link.present? && show.metacritic_average_rating.present? then link_to number_with_precision(show.metacritic_average_rating, :precision => 0)+"/100", show.metacritic_link else show.metacritic_average_rating end %></td>
         <td><%= if show.amazon_instant_availability.present? then link_to "Watch", show.amazon_instant_availability end %> <%= if show.amazon_own_availability.present? then link_to "Own", show.amazon_own_availability end %></td>
+        <td><%= if show.itunes_link.present? then link_to "Yes", show.itunes_link end %></td>
         <td><%= show.modified_first_aired %></td>
         <!--<td><%#= show.first_aired_string %></td>-->
         <td><%= show.modified_last_aired %></td>

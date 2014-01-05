@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140103213326) do
+ActiveRecord::Schema.define(version: 20140105004232) do
 
   create_table "genres", force: true do |t|
     t.string   "genre"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20140103213326) do
     t.text     "imdb_actors"
     t.text     "amazon_instant_availability"
     t.text     "amazon_own_availability"
+    t.text     "itunes_link"
   end
 
   create_table "wikipedia_api_queries", force: true do |t|

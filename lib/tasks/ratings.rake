@@ -2,28 +2,29 @@ task :get_imdb_ratings => :environment do
   require 'mechanize'
 
   url = "http://www.imdb.com"
-  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true)
-  #show = Show.where(:wikipedia_page_id => 37490729)
+  show = Show.individual_season_filter.remove_wikipedia_categories.where('amazon_instant_availability IS NULL')
+  #show = Show.where(:wikipedia_page_id => 156045)
   #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1)
   #show = Show.individual_season_filter.remove_wikipedia_categories.where( 'number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1 ).where('imdb_rating IS NULL')
   show.each do |show|
 
     string = show.show_name
-    name = string.gsub(/\(.*?\)/i,"").strip
+    name = string.gsub(/\(.*?\)|\*/i,"").strip
     puts name
     agent = Mechanize.new
     agent.get(url)
     search_form = agent.page.form_with(:action => "/find")
     search_form.q = name
-    search_form.s = "tt"
+    search_form.s = "tt" # This sets the search option to look for titles only. It helps narrow the results more precisely.
     search_form.submit
+
     if agent.page.link_with(:text => /#{name}/i).present?
       agent.page.link_with(:text => /#{name}/i).click
 
       # find rating and save to data table.
       if agent.page.at(".titlePageSprite.star-box-giga-star").present?
         rating = agent.page.at(".titlePageSprite.star-box-giga-star").text.strip
-        rating_count = agent.page.at("span[itemprop=ratingCount]").text.strip.gsub(/,/,"").to_i
+        if agent.page.at("span[itemprop=ratingCount]").present? then rating_count = agent.page.at("span[itemprop=ratingCount]").text.strip.gsub(/,/,"").to_i end
         page_link = agent.page.uri.to_s
         puts rating
         puts rating_count
@@ -48,7 +49,7 @@ task :get_imdb_ratings => :environment do
       # This code checks for amazon instant availability and own availability and then saves links in model.
       if agent.page.search('div.watch-bar a').present? # looks for watch-bar div links, which contain watch now link and show instant video availability
         agent.page.search('div.watch-bar a').each do |test|
-          if test.css('h3').text.match(/watch now/i) && test.css('p').text.match(/amazon/i)
+          if test.css('h3').text.match(/watch now/i) && test.css('p').text.match(/amazon|prime/i)
             relative_link = test[:href]
             absolute_link = url + "#{relative_link}"
             agent.get(absolute_link)
@@ -78,13 +79,13 @@ task :get_tv_dot_com_ratings => :environment do
   require 'mechanize'
 
   url = "http://www.tv.com" # set url to scrape
-  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('tv_dot_com_link IS NULL').where('show_name NOT LIKE ?', "V (2009 TV series)")
+  show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1).where('show_name NOT LIKE ?', "V (2009 TV series)").where('tv_dot_com_rating IS NULL').reverse_order
   #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1).where('tv_dot_com_rating IS NULL')
-  #show = Show.where(:wikipedia_page_id => 36860986)
+  #show = Show.where(:wikipedia_page_id => 156045)
   show.each do |show|
 
     string = show.show_name
-    name = string.gsub(/\(.*?\)/i,"").strip # remove description about show contained in parenthesis and unnecessary whitespace. If not done, this causes problems when searching.
+    name = string.gsub(/\(.*?\)|\*/i,"").strip # remove description about show contained in parenthesis and unnecessary whitespace. If not done, this causes problems when searching.
     puts name
     agent = Mechanize.new # initiate a new mechanize object to hold page results
     agent.get(url) # get the root url into the mechanize object
@@ -92,12 +93,13 @@ task :get_tv_dot_com_ratings => :environment do
     search_form.q = name # set the search form box to the show name. The "q" variable is the value of the search box. This is specific
                          # to tv.com and is determined by looking
     search_form.submit
+
     if agent.page.link_with(:text => /#{name}/i).present?
       agent.page.link_with(:text => /#{name}/i).click
 
       if agent.page.at(".score").present?
         rating = agent.page.at(".score").text.strip
-        rating_count = agent.page.at("span[itemprop=ratingCount]").text.strip.gsub(/,/,"").to_i
+        if agent.page.at("span[itemprop=ratingCount]").present? then rating_count = agent.page.at("span[itemprop=ratingCount]").text.strip.gsub(/,/,"").to_i end
         page_link = agent.page.uri.to_s
         puts rating
         puts rating_count
@@ -117,9 +119,9 @@ task :get_metacritic_ratings => :environment do
   require 'mechanize'
 
   url = "http://www.metacritic.com/"
-  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true)
+  #show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true)
   #show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('metacritic_rating IS NULL')
-  #show = Show.where(:wikipedia_page_id => 34119966)
+  show = Show.where(:wikipedia_page_id => 156045)
   show.each do |show|
 
     string = show.show_name
@@ -131,14 +133,15 @@ task :get_metacritic_ratings => :environment do
     search_form = agent.page.form_with(:action => "/search")
     search_form.search_term = name
     search_form.submit
+    name2 = name.gsub("*","\\*") # input slash in front of regex special characters that throw off search in line below
 
     # Search for and click on link to TV Shows in search box. This helps narrow results to only TV shows.
     if agent.page.link_with(:text => /TV Shows/).present?
       agent.page.link_with(:text => /TV Shows/).click
 
       # Click on link of TV-only search results where name of show is in text...this needs improvement.
-      if agent.page.link_with(:text => /#{name}/i).present?
-        agent.page.link_with(:text => /#{name}/i).click
+      if agent.page.link_with(:text => /#{name2}/i).present?
+        agent.page.link_with(:text => /#{name2}/i).click
 
         # This finds the rating and saves it into an array value.
         if agent.page.at("span[itemprop=ratingValue]").present?
@@ -185,3 +188,30 @@ task :get_metacritic_ratings => :environment do
     end
   end
 end
+
+# This currently checks availability and gets a link. Rating data did not seem to be available...need to check more.
+task :get_itunes_ratings => :environment do
+
+  require 'rubygems'
+  require 'json'
+  require 'net/http'
+
+  show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1)
+  ##show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('metacritic_rating IS NULL')
+  ##show = Show.where(:wikipedia_page_id => 34119966)
+
+  show.each do |show|
+    string = show.show_name
+    query = string.gsub(/\(.*?\)/i,"").gsub(/%|\//,"").strip
+    $itunesAPI = "https://itunes.apple.com/search?term=#{URI.escape(query)}&entity=tvShow"
+    response = Net::HTTP.get_response(URI.parse($itunesAPI))
+    data = response.body
+    hash = JSON.parse(data)
+    if hash["results"].present?
+      show.itunes_link = hash["results"].first["artistLinkUrl"]
+      puts hash["results"].first["artistLinkUrl"]
+      show.save
+    end
+  end
+end
+

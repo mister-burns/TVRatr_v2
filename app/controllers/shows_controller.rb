@@ -21,6 +21,7 @@ class ShowsController < ApplicationController
              .tv_dot_com_min_rating_count(params[:tv_dot_com_min_rating_count])
              .amazon_instant_filter(params[:amazon_instant])
              .amazon_own_filter(params[:amazon_own])
+             .itunes_filter(params[:itunes])
              .comedy_filter(params[:comedy])
              .drama_filter(params[:drama])
              .language_filter(params[:language])

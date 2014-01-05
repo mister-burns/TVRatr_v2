@@ -53,7 +53,13 @@ class Show < ActiveRecord::Base
     end
   end
 
-
+  def self.itunes_filter(itunes)
+    if itunes.present?
+      where('itunes_link IS NOT NULL')
+    else
+      Show.all
+    end
+  end
 
   def self.min_imdb_rating(min_imdb_rating)
     if min_imdb_rating.present?
