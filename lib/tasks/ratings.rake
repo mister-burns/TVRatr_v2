@@ -190,7 +190,7 @@ task :get_metacritic_ratings => :environment do
 end
 
 # This currently checks availability and gets a link. Rating data did not seem to be available...need to check more.
-task :get_itunes_ratings => :environment do
+task :get_itunes_availability => :environment do
 
   require 'rubygems'
   require 'json'
@@ -215,3 +215,28 @@ task :get_itunes_ratings => :environment do
   end
 end
 
+
+task :get_hulu_availability => :environment do
+  require 'mechanize'
+
+  url = "http://www.hulu.com/" # set url to scrape
+  #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1).where('show_name NOT LIKE ?', "V (2009 TV series)").where('tv_dot_com_rating IS NULL').reverse_order
+  #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1).where('tv_dot_com_rating IS NULL')
+  show = Show.where(:wikipedia_page_id => 187586)
+  show.each do |show|
+
+    string = show.show_name
+    name = string.gsub(/\(.*?\)|\*/i,"").strip
+    puts name
+    agent = Mechanize.new
+    agent.get(url)
+    puts agent.page
+    search_form = agent.page.form_with(:action => "/search")
+    puts search_form
+    search_form.q = name
+    search_form.submit
+
+    puts agent.page
+  end
+
+end
