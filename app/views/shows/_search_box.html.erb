@@ -1,6 +1,6 @@
 <!--This search tag is from rails cast 240-->
 <form class="form-inline" role="form">
-<%= form_tag shows_path, :method => 'get' do %>
+<%= form_tag shows_path, :method => 'post' do %>
     <%= hidden_field_tag :direction, params[:direction] %>
     <%= hidden_field_tag :sort, params[:sort] %>
 
@@ -16,6 +16,18 @@
     <%= check_box_tag :comedy, "comedy", params[:comedy] && params[:comedy].include?("comedy")  %>
     <%= label_tag :comedy, "Comedy", :class => "checkbox inline" %><br>
     <button type="submit" class="btn btn-default">Filter by Categories</button><br><br>
+
+    <h4>First Aired Filter</h4>
+      <%= label_tag :start_date_after, "After Date" %><br>
+      <%= date_select("start_date_after", "after_date", start_year: Time.now.year, end_year: 1950, order: [:month, :year], prompt: { month: 'Select month', year: 'Select year' }) %>
+      <%= label_tag :start_date_before, "Before Date" %><br>
+      <%= date_select("start_date_before", "before_date", start_year: Time.now.year, end_year: 1950, order: [:month, :year], prompt: { month: 'Select month', year: 'Select year' }) %>
+      <button type="submit" class="btn btn-default">Filter by First Aired</button><br><br>
+
+      <!--<h4>Last Aired Before:</h4>-->
+      <!--<%#= label_tag :last_aired_before, "Before Date" %>-->
+      <!--<%#= date_select("last_aired_before", "before_date", start_year: Time.now.year, end_year: 1950, order: [:month, :year], prompt: { month: 'Select month', year: 'Select year' }) %>-->
+      <!--<button type="submit" class="btn btn-default">Filter by Last Aired</button><br><br>-->
 
      <h4>Serialized Filter</h4>
      <%= check_box_tag :serialized_only, "serial", params[:serialized_only]  %>
@@ -63,11 +75,6 @@
       <%= number_field_tag :tv_dot_com_min_rating_count, params[:tv_dot_com_min_rating_count], :in => 1...10 %><br>
       <button type="submit" class="btn btn-default">Filter by Number of Ratings</button><br>
 
-    <%#= check_box_tag 'genres[]', "mystery"  %>
-    <%#= label_tag 'genres[]', "Mystery", :class => "checkbox inline" %>
-    <%#= check_box_tag 'genres[]', "teen"  %>
-    <%#= label_tag 'genres[]', "Teen", :class => "checkbox inline" %>
-
       <h4>Language Filter</h4>
       <%= check_box_tag :language, "english", params[:language]  %>
       <%= label_tag :language, "English Only", :class => "checkbox inline" %><br>
@@ -86,8 +93,13 @@
 
       <h4>Search by Network</h4>
       <%= text_field_tag :network_search, params[:network_search] %><br>
-      <button type="submit" class="btn btn-default btn-sm" name="nil">Search Networks</button>
+      <button type="submit" class="btn btn-default btn-sm" name="nil">Search Networks</button><br><br>
 
+      <h4>Search by Actor/Actress</h4>
+      <%= text_field_tag :actor_search, params[:actor_search] %><br>
+      <button type="submit" class="btn btn-default btn-sm" name="nil">Search Actors</button><br><br>
+
+      <h5>Search by Season & Epsiode Count</h5>
       <%= label_tag :min_seasons, "Minimum Number of Seasons", :class => "checkbox inline" %>
       <%= number_field_tag :min_seasons, params[:min_seasons], :in => 1...100 %><br>
       <%= label_tag :max_seasons, "Maximum Number of Seasons", :class => "checkbox inline" %>
@@ -99,13 +111,6 @@
       <%= label_tag :max_episodes, "Maximum Number of Episodes", :class => "checkbox inline" %>
       <%= number_field_tag :max_episodes, params[:max_episodes], :in => 1...100 %><br>
       <button type="submit" class="btn btn-default">Filter by Episode Count</button><br><br>
-
-      <!--<h4>Start Date Search:</h4>-->
-      <%#= label_tag :start_date_first, "From:" %><br>
-      <%#= date_select :start_date_first, params[:start_date_first], :discard_day => true, :order => [:month, :year], :start_year => 1950, :end_year => Time.now.year + 1, :include_blank => true %><br><br>
-      <%#= label_tag :start_date_last, "To:" %><br>
-      <%#= date_select :start_date_last, params[:start_date_last], :discard_day => true, :order => [:month, :year], :start_year => 1950, :end_year => Time.now.year + 1, :include_blank => true %><br><br>
-      <!--<button type="submit" class="btn btn-default">Search by Start Date</button><br><br>-->
 
 
 <% end %>

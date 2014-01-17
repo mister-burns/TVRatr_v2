@@ -5,12 +5,14 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.json
   def index
-    @test = params[:comedy]
+    @test = params[:start_date_before]
 
     @shows = Show.show_name_search(params[:show_name_search])
              .individual_season_filter
              .remove_wikipedia_categories
              .network_search(params[:network_search])
+             .first_aired_filter(params[:start_date_after], params[:start_date_before])
+             .last_aired_filter(params[:last_aired_before])
              .min_imdb_rating(params[:min_imdb_rating])
              .max_imdb_rating(params[:max_imdb_rating])
              .min_metacritic_rating(params[:min_metacritic_average_rating])
@@ -26,6 +28,7 @@ class ShowsController < ApplicationController
              .drama_filter(params[:drama])
              .language_filter(params[:language])
              .serialized_only_filter(params[:serialized_only])
+             .actor_search(params[:actor_search])
              .united_states_filter(params[:united_states])
              .united_kingdom_filter(params[:united_kingdom])
              .commonwealth_filter(params[:commonwealth])
@@ -37,8 +40,7 @@ class ShowsController < ApplicationController
              .paginate(:per_page => 50, :page => params[:page])
   end
 
-  #.min_imdb_rating(params[:min_imdb_rating])
-  #.max_imdb_rating(params[:max_imdb_rating])
+  #.start_date_filter(params[:start_date])
 
   def serialized
     @shows = Show.show_name_search(params[:show_name_search]).combo_filter(params[:drama], params[:comedy]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
@@ -157,7 +159,7 @@ class ShowsController < ApplicationController
 
     # This method is set up to provide a default to the column sorting if the params hash is empty. From railscast 228.
     def sort_column
-      Show.column_names.include?(params[:sort]) ? params[:sort] : "last_aired"
+      Show.column_names.include?(params[:sort]) ? params[:sort] : "imdb_rating"
     end
 
     # This method is set up to provide a default to the column sorting if the params hash is empty. From railscast 228.

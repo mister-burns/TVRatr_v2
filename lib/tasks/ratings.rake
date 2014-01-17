@@ -2,8 +2,10 @@ task :get_imdb_ratings => :environment do
   require 'mechanize'
 
   url = "http://www.imdb.com"
-  show = Show.individual_season_filter.remove_wikipedia_categories.where('amazon_instant_availability IS NULL')
-  #show = Show.where(:wikipedia_page_id => 156045)
+  date = Date.new(2013,6,1)
+  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true)
+  #show = Show.individual_season_filter.remove_wikipedia_categories.where('amazon_instant_availability IS NULL').where('first_aired > ?', date)
+  #show = Show.where(:wikipedia_page_id => 38411152)
   #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1)
   #show = Show.individual_season_filter.remove_wikipedia_categories.where( 'number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1 ).where('imdb_rating IS NULL')
   show.each do |show|
@@ -37,31 +39,28 @@ task :get_imdb_ratings => :environment do
       # Get cast list and save list in array in show model
       if agent.page.search(".cast_list").present? # Find cast list table
         table = agent.page.search(".cast_list")
-        @array = Array.new
         table.css('span[itemprop=name]').each do |row| #find nokogiri object in cast_last table where each row is actor name
-          @array << row.text.strip  # iterate over rows and add each name to @array
+          Actor.create(show_id: show.id, name: row.text.strip)
+          puts row.text.strip
         end
-        show.imdb_actors = @array
-        puts @array
-        show.save
       end
 
       # This code checks for amazon instant availability and own availability and then saves links in model.
       if agent.page.search('div.watch-bar a').present? # looks for watch-bar div links, which contain watch now link and show instant video availability
         agent.page.search('div.watch-bar a').each do |test|
           if test.css('h3').text.match(/watch now/i) && test.css('p').text.match(/amazon|prime/i)
-            relative_link = test[:href]
-            absolute_link = url + "#{relative_link}"
-            agent.get(absolute_link)
-            page_link = agent.page.uri.to_s
+            relative_link = test[:href] # find relative link to watch now
+            absolute_link = url + "#{relative_link}" # combine relative link and base url for absolute url
+            agent.get(absolute_link) # put absolute url into new mechanize object
+            page_link = agent.page.uri.to_s #set value for new absolute page link from mechanize object
             puts page_link
             show.amazon_instant_availability = page_link
             show.save
           elsif test.css('h3').text.match(/own it/i) && test.css('p').text.match(/amazon\.com/i)
             puts "own match"
-            relative_link = test[:href]
-            absolute_link = url + "#{relative_link}"
-            agent.get(absolute_link)
+            relative_link = test[:href] # find relative link to own option on amazon
+            absolute_link = url + "#{relative_link}" # combine relative link and base url for absolute url
+            agent.get(absolute_link) # put absolute url into new mechanize object
             page_link = agent.page.uri.to_s
             puts page_link
             show.amazon_own_availability = page_link
@@ -79,9 +78,10 @@ task :get_tv_dot_com_ratings => :environment do
   require 'mechanize'
 
   url = "http://www.tv.com" # set url to scrape
-  show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1).where('show_name NOT LIKE ?', "V (2009 TV series)").where('tv_dot_com_rating IS NULL').reverse_order
+  date = Date.new(2013,6,1)
+  #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1).where('show_name NOT LIKE ?', "V (2009 TV series)").where('tv_dot_com_rating IS NULL').where('first_aired > ?', date)
   #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1).where('tv_dot_com_rating IS NULL')
-  #show = Show.where(:wikipedia_page_id => 156045)
+  show = Show.where(:wikipedia_page_id => 38411152)
   show.each do |show|
 
     string = show.show_name
@@ -119,9 +119,10 @@ task :get_metacritic_ratings => :environment do
   require 'mechanize'
 
   url = "http://www.metacritic.com/"
+  date = Date.new(2013,6,1)
   #show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true)
-  #show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('metacritic_rating IS NULL')
-  show = Show.where(:wikipedia_page_id => 156045)
+  #show = Show.individual_season_filter.remove_wikipedia_categories.where('metacritic_rating IS NULL').where('first_aired > ?', date).reverse_order
+  show = Show.where(:wikipedia_page_id => 38411152)
   show.each do |show|
 
     string = show.show_name
@@ -198,7 +199,7 @@ task :get_itunes_availability => :environment do
 
   show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1)
   ##show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('metacritic_rating IS NULL')
-  ##show = Show.where(:wikipedia_page_id => 34119966)
+  show = Show.where(:wikipedia_page_id => 38411152)
 
   show.each do |show|
     string = show.show_name
@@ -219,7 +220,7 @@ end
 task :get_hulu_availability => :environment do
   require 'mechanize'
 
-  url = "http://www.hulu.com/" # set url to scrape
+  url = "http://www.hulu.com/search" # set url to scrape
   #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1).where('show_name NOT LIKE ?', "V (2009 TV series)").where('tv_dot_com_rating IS NULL').reverse_order
   #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1).where('tv_dot_com_rating IS NULL')
   show = Show.where(:wikipedia_page_id => 187586)
@@ -231,10 +232,10 @@ task :get_hulu_availability => :environment do
     agent = Mechanize.new
     agent.get(url)
     puts agent.page
-    search_form = agent.page.form_with(:action => "/search")
-    puts search_form
-    search_form.q = name
-    search_form.submit
+    #search_form = agent.page.form_with(:action => "/search")
+    #puts search_form
+    #search_form.q = name
+    #search_form.submit
 
     puts agent.page
   end

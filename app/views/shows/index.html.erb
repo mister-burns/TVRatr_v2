@@ -5,9 +5,10 @@
 
 <p>Show Count: <%= @shows.count %></p>
 <!--
-<p>Controller Test: <%= @test.present? %>
-<p>Controller Test: <%= @test2 %>
--->
+<p>Controller Test: <%#= @test.present? %>
+<p>Controller Test: <%#= @test["before_date(1i)"] %>
+<p></p><%#= params[:start_date_before]["before_date(1i)"] %></p>-->
+
 
 <table class="table table-striped">
   <thead>
@@ -39,7 +40,7 @@
       <tr>
         <td><%= link_to show.modified_show_name, "http://en.wikipedia.org/wiki/#{show.show_name}" %></td>
         <td><%= show.wikipedia_page_id %></td>
-        <td><%= show.chained_genre_names.try(:titleize) %></td>
+        <td><%= show.genres.pluck(:name).join(", ").try(:titleize) %></td>
         <td><%= if show.imdb_link.present? then link_to show.imdb_rating.to_s + "/10", show.imdb_link else show.imdb_rating end %></td>
         <td><%= number_with_delimiter(show.imdb_rating_count) %></td>
         <td><%= if show.tv_dot_com_link.present? then link_to show.tv_dot_com_rating.to_s + "/10", show.tv_dot_com_link else show.tv_dot_com_rating end %></td>
@@ -47,7 +48,7 @@
         <td><%= if show.metacritic_link.present? && show.metacritic_average_rating.present? then link_to number_with_precision(show.metacritic_average_rating, :precision => 0)+"/100", show.metacritic_link else show.metacritic_average_rating end %></td>
         <td><%= if show.amazon_instant_availability.present? then link_to "Watch", show.amazon_instant_availability end %> <%= if show.amazon_own_availability.present? then link_to "Own", show.amazon_own_availability end %></td>
         <td><%= if show.itunes_link.present? then link_to "Yes", show.itunes_link end %></td>
-        <td><%= show.modified_first_aired %></td>
+        <td><%= show.first_aired.try(:strftime, "%B %e, %Y") %></td>
         <!--<td><%#= show.first_aired_string %></td>-->
         <td><%= show.modified_last_aired %></td>
         <td><%= show.modified_number_of_seasons %></td>

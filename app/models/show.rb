@@ -1,4 +1,6 @@
 class Show < ActiveRecord::Base
+  has_many :actors
+  has_many :genres
   validates :wikipedia_page_id, uniqueness: true, presence: true
   serialize :metacritic_rating
   serialize :imdb_actors
@@ -11,7 +13,6 @@ class Show < ActiveRecord::Base
   scope :remove_wikipedia_categories, -> { where("show_name NOT LIKE ?", "%category:%") }
   scope :english_only, -> { where(t[:language].matches("%english%").or(t[:country_1].matches("%united%")).or(t[:country_1].matches("%austrailia%")).or(t[:country_1].matches("%england%")).or(t[:country_1].matches("%uk%")).or(t[:country_1].matches("%ireland%")).or(t[:country_1].matches("%new zealand%")) ) }
 
-
   def self.show_name_search(show_name_search)
     if show_name_search.present?
       where('show_name LIKE ?', "%#{show_name_search}%")
@@ -20,14 +21,51 @@ class Show < ActiveRecord::Base
     end
   end
 
-  def self.actor_search(actor_name)
-    if actor_name.present?
-      where('imdb_actors LIKE ?', "%#{show_name_search}%")
-      ['Cat', 'Dog', 'Bird'].include? 'Dog'
+  def self.first_aired_filter(start_date_after, start_date_before)
+    if start_date_after.present? || start_date_before.present?
+      
+      if start_date_after["after_date(1i)"].present? then after_year = start_date_after["after_date(1i)"].to_i else after_year = 1940 end
+      if start_date_after["after_date(2i)"].present? then after_month = start_date_after["after_date(2i)"].to_i else after_month = 1 end
+      if start_date_after["after_date(3i)"].present? then after_day = start_date_after["after_date(3i)"].to_i else after_day = 1 end
+
+      if start_date_before["before_date(1i)"].present? then before_year = start_date_before["before_date(1i)"].to_i else before_year = (Time.now.year + 1) end
+      if start_date_before["before_date(2i)"].present? then before_month = start_date_before["before_date(2i)"].to_i else before_month = 1 end
+      if start_date_before["before_date(3i)"].present? then before_day = start_date_before["before_date(3i)"].to_i else before_day = 1 end
+      
+      after_date = Date.new(after_year, after_month, after_day)
+      before_date = Date.new(before_year, before_month, before_day)
+      
+      where('first_aired > ? AND first_aired < ?', after_date, before_date)
     else
       Show.all
     end
   end
+
+  def self.last_aired_filter(last_aired_before)
+    if last_aired_before.present?
+
+      if last_aired_before["before_date(1i)"].present? then before_year = last_aired_before["before_date(1i)"].to_i else before_year = (Time.now.year + 1) end
+      if last_aired_before["before_date(2i)"].present? then before_month = last_aired_before["before_date(2i)"].to_i else before_month = 1 end
+      if last_aired_before["before_date(3i)"].present? then before_day = last_aired_before["before_date(3i)"].to_i else before_day = 1 end
+
+      before_date = Date.new(before_year, before_month, before_day)
+
+      where('last_aired > ?', before_date)
+    else
+      Show.all
+    end
+  end
+
+  def self.actor_search(actor_search)
+    if actor_search.present?
+      joins(:actors).where('actors.name LIKE ?', "%#{actor_search}%" )
+      #joins(:posts).where(title_array.map{|title| "posts.title like '%#{title}%'"}.join(' or '))
+      #http://stackoverflow.com/questions/17990419/rails-or-query-with-join-and-like
+    else
+      Show.all
+    end
+  end
+
 
   def self.network_search(network_search)
     if network_search.present?

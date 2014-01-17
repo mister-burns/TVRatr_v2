@@ -74,6 +74,49 @@ task :parse_and_save_genre_data => :environment do
 end
 
 
+task :parse_and_save_genre_data_v2 => :environment do
+  wikipediaapiquery = WikipediaApiQuery.all
+  #wikipediaapiquery = WikipediaApiQuery.where(:show_name => "Breaking Bad")
+  wikipediaapiquery.each do |wikipediaapiquery|
+    if wikipediaapiquery.infobox.nil?
+    else
+      page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
+      show = Show.find_by(:wikipedia_page_id => page)
+      puts show.show_name
+      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+      #puts string
+      #line below: remove "\n" tags and several Wikipedia phrases from string. If not removed, these items cause errors in later parsing steps.
+      string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\||\{\{Plainlist\}\}|
+                          \(radio and television\)|\(genre\)|\(format\)|\(fiction\)|1080i|1080p|480i|480p|hdtv|sdtv|standard-definition television|
+                          standard definition television|high-definition television|high definition television|720p|url|ubl|atsc|cite web|
+                          stereophonic sound|576i|stereo|\(sdtv\)|ntsc|pal|16\:9|4\:3|sd|hd/mi,"").gsub(/<\/?[^>]*>/, "|").gsub(/serial(\s|)\(radio and television\)/mi, "Serial") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
+      string3 = /\b(genre|format)\s*=.*?(?=\s\|)/mi.match(string2) #search for genre string
+
+        # the first 3 lines here help further parse the code and isolate each genre. Each show can have multiple genres.
+      if string3.nil?
+      else
+        string4 = string3.to_s.split("=") #splits genre line at the equals sign.
+        string5 = string4[1] #split from above creates an array. This code accessses the second part of the array, after the equals sign.
+        # this code parses out the individual words that make up the genres.
+        if string5.nil?
+        else
+          string6 = string5.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
+          # each genre match is accessed as an array and assigned a variable.
+          if string6.present?
+            string6.each do |name|
+              puts show.show_name
+              Genre.create(show_id: show.id, name: name.strip)
+              puts name.strip
+            end
+          end
+        end
+      end
+    end
+  end
+  puts "All genre data parsed"
+end
+
+
 task :parse_and_save_format_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   wikipediaapiquery.each do |wikipediaapiquery|
@@ -129,19 +172,62 @@ task :parse_and_save_format_data => :environment do
 end
 
 
+task :parse_and_save_format_data_v2 => :environment do
+  wikipediaapiquery = WikipediaApiQuery.all
+  #wikipediaapiquery = WikipediaApiQuery.where(:show_name => "Breaking Bad")
+  wikipediaapiquery.each do |wikipediaapiquery|
+    if wikipediaapiquery.infobox.nil?
+    else
+      page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
+      show = Show.find_by(:wikipedia_page_id => page)
+      puts show.show_name
+      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+      #puts string
+      #line below: remove "\n" tags and several Wikipedia phrases from string. If not removed, these items cause errors in later parsing steps.
+      string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\||\{\{Plainlist\}\}|
+                          \(radio and television\)|\(genre\)|\(format\)|\(fiction\)|1080i|1080p|480i|480p|hdtv|sdtv|standard-definition television|
+                          standard definition television|high-definition television|high definition television|720p|url|ubl|atsc|cite web|
+                          stereophonic sound|576i|stereo|\(sdtv\)|ntsc|pal|16\:9|4\:3|sd|hd/mi,"").gsub(/<\/?[^>]*>/, "|").gsub(/serial(\s|)\(radio and television\)/mi, "Serial") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
+      string3 = /\bformat\s*=.*?(?=\s\|)/mi.match(string2) #search for genre string
+
+      # the first 3 lines here help further parse the code and isolate each genre. Each show can have multiple genres.
+      if string3.nil?
+      else
+        string4 = string3.to_s.split("=") #splits genre line at the equals sign.
+        string5 = string4[1] #split from above creates an array. This code accessses the second part of the array, after the equals sign.
+        # this code parses out the individual words that make up the genres.
+        if string5.nil?
+        else
+          string6 = string5.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
+          # each genre match is accessed as an array and assigned a variable.
+          if string6.present?
+            string6.each do |name|
+              puts show.show_name
+              Genre.create(show_id: show.id, name: name.strip)
+              #Actor.create(show_id: show.id, name: name.text.strip)
+              puts name.strip
+            end
+          end
+        end
+      end
+    end
+  end
+  puts "All format data parsed"
+end
+
 task :parse_and_save_first_aired_data => :environment do
-  #wikipediaapiquery = WikipediaApiQuery.all
-  wikipediaapiquery = WikipediaApiQuery.where(:wikipedia_page_id =>   5221940)
+  wikipediaapiquery = WikipediaApiQuery.all
+  #wikipediaapiquery = WikipediaApiQuery.where(:wikipedia_page_id => 7759866)
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
     string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
     #string2 = string.gsub(/\\n/i," ").gsub(/df=\s?(y|yes)/,"") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
     #string3 = /\bfirst_aired\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
-    string2 = /\bfirst_aired\s*=.*?(?=\n)/mi.match(string)
-    string3 = string2.to_s.gsub(/df=\s?(y|yes)/,"")
+    string2 = /\bfirst_aired\s*=.*?(?=(\n|\s\|))/mi.match(string)
+    string3 = string2.to_s.gsub(/df=\s?(y|yes)|format=dmy/mi,"")
 
     #puts string
-    #puts string3
+    puts string3
 
     # this code checks in format string is nil, in which case end variables must first get set to nil.
     if string3.nil?
@@ -152,28 +238,41 @@ task :parse_and_save_first_aired_data => :environment do
       string4 = string3.to_s.split(/=\s?/) #splits the string at the equals sign followed by an optional space.
       #puts string4
       string5 = string4[1] # picks the second part of the split array, the part after the equals..
+      #puts string5
       if string5.nil?
         @first_aired = nil
+
       else
-        if string5.match(/\d{4}/).present?
-          @first_aired = string5.gsub(/df|es|ytv/mi,"").gsub(/\{\{(start\s?date|dts)\|/mi,"").gsub(/\{\{|\}\}|\[\[|\]\]/mi,"").gsub(/\|MM\|DD\|/mi,"").gsub(/<!--|--!?>/mi,"").gsub(/<ref.*/i,"").gsub("|","/").strip
-          @string = string5.gsub(/df|es|ytv/mi,"").gsub(/\{\{(start\s?date|dts)\|/mi,"").gsub(/\{\{|\}\}|\[\[|\]\]/mi,"").gsub(/\|MM\|DD\|/mi,"").gsub(/<!--|--!?>/mi,"").gsub(/<ref.*/i,"").gsub("|"," ").strip.truncate(200)
-        elsif string.match(/\blast_aired\s*=.*?(?=\n)/mi).present? #search for last aired string
+        if string5.match(/\d{4}/).present? #Check if year data is present. If yes, then remove certain characters from string.
+          @first_aired = string5.gsub(/df|es|ytv\|?|nfly\|?/mi,"").gsub(/\{\{(start\s?date)|dts\|\||dts/mi,"").gsub(/\{\{|\}\}|\[\[|\]\]/mi,"").gsub(/\|MM\|DD\|/mi,"").gsub(/<!--.+--!?>|<!--|--!?>/mi,"").gsub(/<ref.*/i,"").gsub("|","/").strip
+          @string = string5.gsub(/df|es|ytv\|?|nfly\|?/mi,"").gsub(/\{\{(start\s?date)|dts\|\||dts/mi,"").gsub(/\{\{|\}\}|\[\[|\]\]/mi,"").gsub(/\|MM\|DD\|/mi,"").gsub(/<!--.+--!?>|<!--|--!?>/mi,"").gsub(/<ref.*/i,"").gsub("|","/").strip.truncate(200)
+
+        #search for last aired string in order to look for year.  If year is present, then extract and concat with month and day data.
+        elsif string.match(/\blast_aired\s*=.*?(?=\n)/mi).present?
           string6 = /\blast_aired\s*=.*?(?=\n)/mi.match(string)
+          puts "true"
           string7 = string6.to_s.match(/\d{4}/)
-          string8 = string5.gsub(/df|es|ytv/mi,"").gsub(/\{\{(start\s?date|dts)\|/mi,"").gsub(/\{\{|\}\}|\[\[|\]\]/mi,"").gsub(/\|MM\|DD\|/mi,"").gsub(/<!--|--!?>/mi,"").gsub(/<ref>.*/i,"").gsub("|","/").strip
-          puts string8
-          puts string7
+          string8 = string5.gsub(/df|es|ytv\|?|nfly\|?/mi,"").gsub(/\{\{(start\s?date)|dts\|\||dts/mi,"").gsub(/\{\{|\}\}|\[\[|\]\]/mi,"").gsub(/\|MM\|DD\|/mi,"").gsub(/<!--.+--!?>|<!--|--!?>/mi,"").gsub(/<ref.*/i,"").gsub("|","/").strip
+          #puts string8
+          #puts string7
+
+          # Checks if both year and month day data are available, then concats into single string for parsing if true.
           if string8.present? && string7.present?
-            #puts string5 + "," + string7.to_s
-            @first_aired = string8 + " " + string7.to_s
+            #Checks if first_aired string has month name written out (/\w{3}/). If yes, concants year first, if no, concants behind.
+            # switching the concantenation help produe better results with Date.parse()
+            if string8.match(/\w{3}/)
+              string9 = string8 + "/" + string7.to_s
+            else
+              string9 = string7.to_s + "/" + string8
+            end
+            @first_aired = string9.strip.gsub(/\/\//, "/") # strips out potential double "/" and
           end
         end
       end
     end
-  #string5.match(/\d{4}/).present?
+
     puts @first_aired
-    puts @string
+    #puts @string
 
     #if statement to first look for dates in the "YYYY" format and add text of "/01/01" so they become Date.parse friendly
     if @first_aired =~ /^\d{4}\z/mi
@@ -215,7 +314,7 @@ task :parse_and_save_last_aired_data_v2 => :environment do
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
     string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
     #string2 = string.gsub(/\\n/i," ").gsub(/df=\s?(y|yes)/,"") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
-    string3 = /\blast_aired\s*=.*?(?=\n)/mi.match(string) #search for last aired string
+    string3 = /\blast_aired\s*=.*?(?=(\n|\s\|))/mi.match(string) #search for last aired string
 
     #puts string
     #puts string2

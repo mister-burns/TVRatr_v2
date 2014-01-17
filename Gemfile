@@ -12,6 +12,9 @@ end
 gem 'mechanize'
 gem 'nokogiri'
 
+# Used for time parsing
+gem 'chronic'
+
 # Using the twitter-bootstrap app for styling
 gem 'twitter-bootstrap-rails'
 
