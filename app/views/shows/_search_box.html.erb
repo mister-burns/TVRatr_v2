@@ -13,8 +13,19 @@
     <%= label_tag :drama, "Drama", :class => "checkbox inline" %><br>
     <%= check_box_tag :horror, "horror", params[:horror]  %>
     <%= label_tag :horror, "Horror", :class => "checkbox inline" %><br>
-    <%= check_box_tag :comedy, "comedy", params[:comedy] && params[:comedy].include?("comedy")  %>
+    <%= check_box_tag :comedy, "comedy", params[:comedy]  %>
     <%= label_tag :comedy, "Comedy", :class => "checkbox inline" %><br>
+    <%= check_box_tag :children, "children", params[:children]  %>
+    <%= label_tag :children, "Children's", :class => "checkbox inline" %><br>
+    <%= check_box_tag :crime, "crime", params[:crime]  %>
+    <%= label_tag :crime, "Crime", :class => "checkbox inline" %><br>
+    <%= check_box_tag :police, "police", params[:police]  %>
+    <%= label_tag :police, "Police Procedural", :class => "checkbox inline" %><br>
+    <%= check_box_tag :sitcom, "sitcom", params[:sitcom]  %>
+    <%= label_tag :sitcom, "Sitcom", :class => "checkbox inline" %><br>
+    <%= check_box_tag :science_fiction, "science fiction", params[:science_fiction]  %>
+    <%= label_tag :science_fiction, "Science Fiction", :class => "checkbox inline" %><br>
+    <%= text_field_tag :genre_search, params[:genre_search] %><br>
     <button type="submit" class="btn btn-default">Filter by Categories</button><br><br>
 
     <h4>First Aired Filter</h4>

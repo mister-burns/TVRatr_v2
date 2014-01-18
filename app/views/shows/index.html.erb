@@ -40,7 +40,7 @@
       <tr>
         <td><%= link_to show.modified_show_name, "http://en.wikipedia.org/wiki/#{show.show_name}" %></td>
         <td><%= show.wikipedia_page_id %></td>
-        <td><%= show.genres.pluck(:name).join(", ").try(:titleize) %></td>
+        <td><%= show.genres.limit(3).pluck(:name).join(", ").try(:titleize) %></td>
         <td><%= if show.imdb_link.present? then link_to show.imdb_rating.to_s + "/10", show.imdb_link else show.imdb_rating end %></td>
         <td><%= number_with_delimiter(show.imdb_rating_count) %></td>
         <td><%= if show.tv_dot_com_link.present? then link_to show.tv_dot_com_rating.to_s + "/10", show.tv_dot_com_link else show.tv_dot_com_rating end %></td>
