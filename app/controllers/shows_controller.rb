@@ -22,7 +22,7 @@ class ShowsController < ApplicationController
              .imdb_min_rating_count(params[:imdb_min_rating_count])
              .tv_dot_com_min_rating_count(params[:tv_dot_com_min_rating_count])
              .availability_filter(params[:amazon_instant], params[:amazon_own], params[:itunes])
-             .genre_filter(params[:drama], params[:comedy], params[:horror], params[:children], params[:crime], params[:police], params[:sitcom], params[:science_fiction], params[:genre_search])
+             .genre_filter(params[:drama], params[:comedy], params[:horror], params[:children], params[:documentary], params[:police], params[:reality], params[:sitcom], params[:science_fiction], params[:genre_search])
              .language_filter(params[:language])
              .serialized_filter(params[:serialized_only])
              .actor_search(params[:actor_search])

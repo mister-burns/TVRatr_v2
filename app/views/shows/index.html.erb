@@ -28,7 +28,7 @@
     <th><%= sortable "last_aired", "Last Aired" %></th>
     <th><%= sortable "modified_number_of_seasons", "Number of Seasons" %></th>
     <th><%= sortable "number_of_episodes", "Number of Episodes" %></th>
-    <th><%= sortable "modified_network_1", "Network" %></th>
+    <th>Network</th>
     <th><%= sortable "modified_language", "Language" %></th>
     <th><%= sortable "country_1", "Country" %></th>
     <th>Show Info</th>
@@ -53,7 +53,7 @@
         <td><%= show.modified_last_aired %></td>
         <td><%= show.modified_number_of_seasons %></td>
         <td><%= number_with_delimiter(show.number_of_episodes) %></td>
-        <td><%= show.modified_network_1 %></td>
+        <td><%= show.networks.limit(1).pluck(:name).join(", ") %></td>
         <td><%= show.modified_language.try(:titleize) %></td>
         <td><%= show.country_1.try(:titleize) %></td>
         <td><%= link_to t('.show', :default => t("helpers.links.show")),

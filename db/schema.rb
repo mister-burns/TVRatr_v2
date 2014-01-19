@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140117003711) do
+ActiveRecord::Schema.define(version: 20140119214645) do
 
   create_table "actors", force: true do |t|
     t.integer  "show_id"
@@ -27,12 +27,15 @@ ActiveRecord::Schema.define(version: 20140117003711) do
     t.string   "name"
   end
 
-  create_table "show_attribute_types", force: true do |t|
-    t.string   "genre"
-    t.string   "format"
-    t.string   "network"
-    t.string   "language"
-    t.string   "country"
+  create_table "network_shows", force: true do |t|
+    t.integer  "network_id"
+    t.integer  "show_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "networks", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,21 +48,9 @@ ActiveRecord::Schema.define(version: 20140117003711) do
     t.boolean  "show_active"
     t.integer  "number_of_episodes"
     t.integer  "number_of_seasons"
-    t.string   "genre_1"
-    t.string   "genre_2"
-    t.string   "genre_3"
-    t.string   "genre_4"
-    t.string   "genre_5"
-    t.string   "format_1"
-    t.string   "format_2"
-    t.string   "format_3"
-    t.string   "format_4"
-    t.string   "format_5"
     t.string   "country_1"
     t.string   "country_2"
     t.string   "country_3"
-    t.string   "network_1"
-    t.string   "network_2"
     t.string   "language"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -78,7 +69,6 @@ ActiveRecord::Schema.define(version: 20140117003711) do
     t.text     "metacritic_rating"
     t.string   "metacritic_link"
     t.float    "metacritic_average_rating"
-    t.text     "imdb_actors"
     t.text     "amazon_instant_availability"
     t.text     "amazon_own_availability"
     t.text     "itunes_link"

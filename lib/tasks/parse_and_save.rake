@@ -1,11 +1,10 @@
 # This task combines all parse rake tasks and runs them together.
 task :parse_all => [:parse_and_save_genre_data,
-                    :parse_and_save_format_data,
                     :parse_and_save_first_aired_data,
                     :parse_and_save_last_aired_data,
                     :parse_and_save_episode_count_data,
                     :parse_and_save_season_count_data,
-                    :parse_and_save_series_count_data_v2,
+                    :parse_and_save_series_count_data,
                     :parse_and_save_country_data,
                     :parse_and_save_network_data,
                     :parse_and_save_language_data
@@ -15,66 +14,6 @@ end
 
 
 task :parse_and_save_genre_data => :environment do
-  wikipediaapiquery = WikipediaApiQuery.all
-  #wikipediaapiquery = WikipediaApiQuery.where(:show_name => "Category:Thunderbirds (TV series)")
-  wikipediaapiquery.each do |wikipediaapiquery|
-    if wikipediaapiquery.infobox.nil?
-      else
-      page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
-      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
-      #puts string
-      #line below: remove "\n" tags and several Wikipedia phrases from string. If not removed, these items cause errors in later parsing steps.
-      string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\||\{\{Plainlist\}\}|
-                          \(radio and television\)|\(genre\)|\(format\)|\(fiction\)|1080i|1080p|480i|480p|hdtv|sdtv|standard-definition television|
-                          standard definition television|high-definition television|high definition television|720p|url|ubl|atsc|cite web|
-                          stereophonic sound|576i|stereo|\(sdtv\)|ntsc|pal|16\:9|4\:3|sd|hd/mi,"").gsub(/<\/?[^>]*>/, "|").gsub(/serial(\s|)\(radio and television\)/mi, "Serial") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
-      string3 = /\bgenre\s*=.*?(?=\s\|)/mi.match(string2) #search for genre string
-
-      # this code checks in genre string is nil, in which case end variables must first get set to nil.
-      if string3.nil?
-        @genre1 = nil
-        @genre2 = nil
-        @genre3 = nil
-        @genre4 = nil
-        @genre5 = nil
-      else
-        # the first 3 lines here help further parse the code and isolate each genre. Each show can have multiple genres.
-        string4 = string3.to_s.split("=") #splits genre line at the equals sign.
-        string5 = string4[1] #split from above creates an array. This code accessses the second part of the array, after the equals sign.
-        if string5.nil?
-          @genre1 = nil
-          @genre2 = nil
-          @genre3 = nil
-          @genre4 = nil
-          @genre5 = nil
-        else
-          # this code parses out the individual words that make up the genres.
-          string6 = string5.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
-          # each genre match is accessed as an array and assigned a variable.
-          @genre1 = string6[0]
-          @genre2 = string6[1]
-          @genre3 = string6[2]
-          @genre4 = string6[3]
-          @genre5 = string6[4]
-        end
-      end
-
-      #find the appropriate entry in the Show model and save the genre variables:
-      show = Show.where(:wikipedia_page_id => page).first
-      show.genre_1 = @genre1
-      show.genre_2 = @genre2
-      show.genre_3 = @genre3
-      show.genre_4 = @genre4
-      show.genre_5 = @genre5
-      show.save
-      puts show.show_name
-    end
-  end
-    puts "All genre data parsed"
-end
-
-
-task :parse_and_save_genre_data_v2 => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   #wikipediaapiquery = WikipediaApiQuery.where(:show_name => "Breaking Bad")
   wikipediaapiquery.each do |wikipediaapiquery|
@@ -113,107 +52,9 @@ task :parse_and_save_genre_data_v2 => :environment do
       end
     end
   end
-  puts "All genre data parsed"
+  puts "All genre and format data parsed"
 end
 
-
-task :parse_and_save_format_data => :environment do
-  wikipediaapiquery = WikipediaApiQuery.all
-  wikipediaapiquery.each do |wikipediaapiquery|
-    page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
-    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
-    #line below: remove "\n" tags and several Wikipedia phrases from string. If not removed, these items cause errors in later parsing steps.
-    string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\||\{\{Plainlist\}\}
-                          |\(genre\)|\(format\)|\(fiction\)|1080i|1080p|480i|480p|hdtv|sdtv|standard-definition television|
-                          standard definition television|high-definition television|high definition television|720p|url|ubl|atsc|cite web|
-                          stereophonic sound|576i|stereo|\(sdtv\)|ntsc|pal|16\:9|4\:3|sd|hd/mi,"").gsub(/<\/?[^>]*>/, "|").gsub(/serial(\s|)\(radio and television\)/mi, "Serial") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
-    string3 = /\bformat\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
-
-    # this code checks in format string is nil, in which case end variables must first get set to nil.
-    if string3.nil?
-      @format1 = nil
-      @format2 = nil
-      @format3 = nil
-      @format4 = nil
-      @format5 = nil
-    else
-      # the first 3 lines here help further parse the code and isolate each format. Each show can have multiple formats.
-      string4 = string3.to_s.split("=") #splits format line at the equals sign.
-      string5 = string4[1] #split from above creates an array. This code accessses the second part of the array, after the equals sign.
-      if string5.nil?
-        @format1 = nil
-        @format2 = nil
-        @format3 = nil
-        @format4 = nil
-        @format5 = nil
-      else
-        # this code parses out the individual words that make up the formats.
-        string6 = string5.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
-        # each format match is accessed as an array and assigned a variable.
-        @format1 = string6[0]
-        @format2 = string6[1]
-        @format3 = string6[2]
-        @format4 = string6[3]
-        @format5 = string6[4]
-      end
-    end
-
-    #find the appropriate entry in the Show model and save the format variables:
-    show = Show.where(:wikipedia_page_id => page).first
-    show.format_1 = @format1
-    show.format_2 = @format2
-    show.format_3 = @format3
-    show.format_4 = @format4
-    show.format_5 = @format5
-    show.save
-    puts show.show_name
-  end
-  puts "All format data parsed"
-end
-
-
-task :parse_and_save_format_data_v2 => :environment do
-  wikipediaapiquery = WikipediaApiQuery.all
-  #wikipediaapiquery = WikipediaApiQuery.where(:show_name => "Breaking Bad")
-  wikipediaapiquery.each do |wikipediaapiquery|
-    if wikipediaapiquery.infobox.nil?
-    else
-      page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
-      show = Show.find_by(:wikipedia_page_id => page)
-      puts show.show_name
-      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
-      #puts string
-      #line below: remove "\n" tags and several Wikipedia phrases from string. If not removed, these items cause errors in later parsing steps.
-      string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\||\{\{Plainlist\}\}|
-                          \(radio and television\)|\(genre\)|\(format\)|\(fiction\)|1080i|1080p|480i|480p|hdtv|sdtv|standard-definition television|
-                          standard definition television|high-definition television|high definition television|720p|url|ubl|atsc|cite web|
-                          stereophonic sound|576i|stereo|\(sdtv\)|ntsc|pal|16\:9|4\:3|sd|hd/mi,"").gsub(/<\/?[^>]*>/, "|").gsub(/serial(\s|)\(radio and television\)/mi, "Serial") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
-      string3 = /\bformat\s*=.*?(?=\s\|)/mi.match(string2) #search for genre string
-
-      # the first 3 lines here help further parse the code and isolate each genre. Each show can have multiple genres.
-      if string3.nil?
-      else
-        string4 = string3.to_s.split("=") #splits genre line at the equals sign.
-        string5 = string4[1] #split from above creates an array. This code accessses the second part of the array, after the equals sign.
-        # this code parses out the individual words that make up the genres.
-        if string5.nil?
-        else
-          string6 = string5.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
-          # each genre match is accessed as an array and assigned a variable.
-          if string6.present?
-            string6.each do |name|
-              puts show.show_name
-              Genre.create(show_id: show.id, name: name.strip)
-              #Actor.create(show_id: show.id, name: name.text.strip)
-              puts name.strip
-            end
-          end
-        end
-      end
-    end
-  end
-  puts "All format data parsed"
-end
 
 task :parse_and_save_first_aired_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
@@ -483,7 +324,7 @@ task :parse_and_save_season_count_data => :environment do
 end
 
 
-task :parse_and_save_series_count_data_v2 => :environment do
+task :parse_and_save_series_count_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
@@ -515,29 +356,6 @@ task :parse_and_save_series_count_data_v2 => :environment do
   puts "All series data parsed"
 end
 
-
-#This task parses the num_series infobox value. Num_series is sometimes used instead of num_seasons,
-#especially for UK shows.
-task :parse_and_save_series_count_data => :environment do
-  wikipediaapiquery = WikipediaApiQuery.all
-  wikipediaapiquery.each do |wikipediaapiquery|
-    page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
-    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
-    series_match = /(?:num_series\s*=\s*)([0-9]+)/m.match(string) #look for patterns in the data to start at num_series and end at the last date digit of the number
-
-    #run an if statement to weed out nil data, so I can call the match grouping in the else statement
-    if series_match.nil?
-      @series_value = nil
-    else
-      @series_value = series_match[1] #set series value to second group of the match data
-    end
-
-    #Call the show model object where the wikipedia ID matches the page number of the JSON we just parsed.
-    show = Show.where(:wikipedia_page_id => page).first
-    show.number_of_series = @series_value
-    show.save
-  end
-end
 
 
 task :parse_and_save_country_data => :environment do
@@ -581,41 +399,36 @@ task :parse_and_save_country_data => :environment do
   puts "All country data parsed"
 end
 
+
 task :parse_and_save_network_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
+    show = Show.find_by(:wikipedia_page_id => page)
+    puts show.show_name
     string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
     #line below: remove "\n" tags and several Wikipedia phrases from string. If not removed, these items cause errors in later parsing steps.
     string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\||\{\{Plainlist\}\}/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|")
-    string3 = /\b(network|channel)\s*=.*?(?=\s\|)/mi.match(string2) #search for genre string
+    string3 = /\b(network|channel)\s*=.*?(?=(\n|\s\|))/mi.match(string2) #search for genre string
 
     # this code checks in genre string is nil, in which case end variables must first get set to nil.
     if string3.nil?
-      @genre1 = nil
-      @genre2 = nil
     else
-      # the first 3 lines here help further parse the code and isolate each genre. Each show can have multiple genres.
+      # the first 3 lines here help further parse the code and isolate each network name. Each show can have multiple genres.
       string4 = string3.to_s.split("=") #splits genre line at the equals sign.
       string5 = string4[1] #split from above creates an array. This code accessses the second part of the array, after the equals sign.
       if string5.nil?
-        @genre1 = nil
-        @genre2 = nil
       else
-        # this code parses out the individual words that make up the genres.
-        string6 = string5.gsub(/[0-9]{4}/,"").gsub(/American Broadcasting Company/im,"ABC").gsub(/Fox Broadcasting Company/im,"FOX").gsub(/Columbia Broadcasting System/im,"CBS").gsub(/National Broadcasting Company/im,"NBC").gsub(/Public Broadcasting Service/im,"PBS").gsub(/home box office/im,"HBO")
+        string6 = string5.gsub(/[0-9]{4}/,"").gsub(/American Broadcasting Company/im,"ABC").gsub(/Fox Broadcasting Company/im,"FOX").gsub(/Columbia Broadcasting System/im,"CBS").gsub(/National Broadcasting Company/im,"NBC").gsub(/Public Broadcasting Service/im,"PBS").gsub(/home box office/im,"HBO").gsub(/\(tv channel\)|\(channel\)|\(tv network\)/im,"")
         string7 = string6.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
-        # each genre match is accessed as an array and assigned a variable.
-        @network1 = string7[0]
-        @network2 = string7[1]
+        string7.each do |network_string|
+          puts network_string
+          network = Network.find_or_create_by(:name => network_string.strip)
+          puts network.name
+          network.network_shows.create(show_id: show.id)
+        end
       end
     end
-
-    #find the appropriate entry in the Show model and save the genre variables:
-    show = Show.where(:wikipedia_page_id => page).first
-    show.network_1 = @network1
-    show.network_2 = @network2
-    show.save
   end
   puts "All network data parsed"
 end

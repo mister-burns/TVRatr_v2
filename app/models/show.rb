@@ -1,9 +1,11 @@
 class Show < ActiveRecord::Base
   has_many :actors
   has_many :genres
+  has_many :network_shows
+  has_many :networks, :through => :network_shows
+
   validates :wikipedia_page_id, uniqueness: true, presence: true
   serialize :metacritic_rating
-  serialize :imdb_actors
 
   # Use this scope to filter out bad data from wikipedia. Some shows (ex. sons of anarchy) have individual seasons listed as
   # full shows. This is obviously incorrect and not what my users want to see. This scope weeds out those entries.
@@ -62,6 +64,14 @@ class Show < ActiveRecord::Base
     end
   end
 
+  def self.network_search(network_search)
+    if network_search.present?
+      joins(:networks).where('networks.name LIKE ?', "%#{network_search}%" ).uniq
+    else
+      Show.all
+    end
+  end
+
 
   def self.serialized_filter(serialized_only)
     if serialized_only.present?
@@ -72,14 +82,15 @@ class Show < ActiveRecord::Base
   end
 
 
-  def self.genre_filter(drama, comedy, horror, children, crime, police, sitcom, science_fiction, genre_search)
+  def self.genre_filter(drama, comedy, horror, children, documentary, police, reality, sitcom, science_fiction, genre_search)
     genre_array = Array.new
     if drama.present? then genre_array << drama end
     if comedy.present? then genre_array << comedy end
     if horror.present? then genre_array << horror end
     if children.present? then genre_array << children << "kids" end
-    if crime.present? then genre_array << crime end
+    if documentary.present? then genre_array << documentary end
     if police.present? then genre_array << police << "detective" end
+    if reality.present? then genre_array << reality end
     if sitcom.present? then genre_array << sitcom end
     if science_fiction.present? then genre_array << science_fiction << "sci fi" << "scifi" << "science" end
     if genre_search.present? then genre_array << genre_search end
@@ -88,15 +99,6 @@ class Show < ActiveRecord::Base
       joins(:genres).where(genre_array.map{|genre| "genres.name LIKE '%#{genre}%'" }.join(' OR ')).uniq
       #joins(:genres).where(genre_array.map{|genre| "genres.name LIKE '%#{genre}%'" }.join(' OR ')).uniq
       #http://stackoverflow.com/questions/17990419/rails-or-query-with-join-and-like
-    else
-      Show.all
-    end
-  end
-
-
-  def self.network_search(network_search)
-    if network_search.present?
-      where('network_1 LIKE ? OR network_2 LIKE ?', "%#{network_search}%", "%#{network_search}%")
     else
       Show.all
     end
@@ -298,7 +300,7 @@ class Show < ActiveRecord::Base
     if network_1.nil?
       nil
     else
-      network_1.gsub(/\(tv channel\)|\(tv network\)|\(U\.?S\.? TV (channel|network)\)|\(United States\)/i, "")
+      network_1.gsub(/\(U\.?S\.? TV (channel|network)\)|\(United States\)/i, "")
     end
   end
 
