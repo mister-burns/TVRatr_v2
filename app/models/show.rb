@@ -1,6 +1,9 @@
 class Show < ActiveRecord::Base
   has_many :actors
-  has_many :genres
+
+  has_many :genre_shows
+  has_many :genres, :through => :genre_shows
+
   has_many :network_shows
   has_many :networks, :through => :network_shows
 

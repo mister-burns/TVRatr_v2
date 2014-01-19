@@ -42,10 +42,10 @@ task :parse_and_save_genre_data => :environment do
           string6 = string5.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
           # each genre match is accessed as an array and assigned a variable.
           if string6.present?
-            string6.each do |name|
-              puts show.show_name
-              Genre.create(show_id: show.id, name: name.strip)
-              puts name.strip
+            string6.each do |genre_string|
+              genre = Genre.find_or_create_by(:name => genre_string.strip)
+              puts genre.name
+              genre.genre_shows.create(show_id: show.id)
             end
           end
         end
