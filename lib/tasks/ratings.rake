@@ -39,9 +39,10 @@ task :get_imdb_ratings => :environment do
       # Get cast list and save list in array in show model
       if agent.page.search(".cast_list").present? # Find cast list table
         table = agent.page.search(".cast_list")
-        table.css('span[itemprop=name]').each do |row| #find nokogiri object in cast_last table where each row is actor name
-          Actor.create(show_id: show.id, name: row.text.strip)
-          puts row.text.strip
+        table.css('span[itemprop=name]').each do |actor_string| #find nokogiri object in cast_last table where each row is actor name
+          actor = Actor.find_or_create_by(:name => actor_string.text.strip)
+          actor.actor_shows.create(show_id: show.id)
+          puts actor.name
         end
       end
 

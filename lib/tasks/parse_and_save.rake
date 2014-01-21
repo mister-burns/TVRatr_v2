@@ -21,7 +21,6 @@ task :parse_and_save_genre_data => :environment do
     else
       page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
       show = Show.find_by(:wikipedia_page_id => page)
-      puts show.show_name
       string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
       #puts string
       #line below: remove "\n" tags and several Wikipedia phrases from string. If not removed, these items cause errors in later parsing steps.
@@ -55,6 +54,48 @@ task :parse_and_save_genre_data => :environment do
   puts "All genre and format data parsed"
 end
 
+
+task :parse_and_save_starring_data => :environment do
+  wikipediaapiquery = WikipediaApiQuery.all
+  #wikipediaapiquery = WikipediaApiQuery.where(:show_name => "Breaking Bad")
+  wikipediaapiquery.each do |wikipediaapiquery|
+    if wikipediaapiquery.infobox.nil?
+    else
+      page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
+      show = Show.find_by(:wikipedia_page_id => page)
+      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+      #line below: remove "\n" tags and several Wikipedia phrases from string. If not removed, these items cause errors in later parsing steps.
+      string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\||\{\{Plainlist\}\}|/mi,"") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
+      string3 = /\bstarring\s*=.*?(?=\s\|)/mi.match(string2) #search for genre string
+
+      # the first 3 lines here help further parse the code and isolate each genre. Each show can have multiple genres.
+      if string3.nil?
+      else
+        string4 = string3.to_s.split("=") #splits genre line at the equals sign.
+        string5 = string4[1] #split from above creates an array. This code accessses the second part of the array, after the equals sign.
+        # this code parses out the individual words that make up the genres.
+        if string5.nil?
+          puts string5
+        else
+          #string6 = string5.scan(/(?<=\[\[).*?((?=\|)|(?=\]\]))/i)
+          string6 = string5.scan(/(?<=\[\[).*?(?=\]\])/i)
+          # each genre match is accessed as an array and assigned a variable.
+          puts show.show_name
+          if string6.present?
+            string6.each do |actor_string|
+              actor_string2 = actor_string.split("|")
+              actor_string3 = actor_string2[0]
+              actor_string4 = actor_string3.gsub(/\(.+\)/,"")
+              actor = Actor.find_or_create_by(:name => actor_string4.strip)
+              actor.actor_shows.create(show_id: show.id)
+            end
+          end
+        end
+      end
+    end
+  end
+  puts "All starring data parsed"
+end
 
 task :parse_and_save_first_aired_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
@@ -357,44 +398,34 @@ task :parse_and_save_series_count_data => :environment do
 end
 
 
-
 task :parse_and_save_country_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
+    show = Show.find_by(:wikipedia_page_id => page)
     string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
     string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
     string3 = /\bcountry\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
 
     # this code checks in format string is nil, in which case end variables must first get set to nil.
     if string3.nil?
-      @country_1 = nil
-      @country_2 = nil
-      @country_3 = nil
     else
       # the first 3 lines here help further parse the code and isolate each format. Each show can have multiple formats.
       string4 = string3.to_s.split("=") #takes out format and a few other words.
       string5 = string4[1] #regex used to isolate each format name.
       if string5.nil?
-        @country_1 = nil
-        @country_2 = nil
-        @country_3 = nil
       else
-        string6 = string5.gsub(/USA|TVUS|United States of America/i,"United States").gsub(/Television (in|of) the/i,"").gsub(/flagcountry|flag|flagicon|icon/i,"")
+        string6 = string5.gsub(/USA|TVUS|United States of America|U\.S\.A\.|U\.S\.|\bUS/i,"United States").gsub(/Television (in|of)( the)?|\(.*\)/i,"").gsub(/flagcountry|flag|flagicon|icon|\burl|cite (news|web)|airs in the|\.|english( language)?/i,"").gsub(/\buk|tvuk|Great Britain/i,"United Kingdom").gsub(/México/i, "Mexico")
         string7 = string6.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
-        @country_1 = string7[0]
-        @country_2 = string7[1]
-        @country_3 = string7[2]
+        string7.each do |country_string|
+          #puts country_string
+          #country_string2 = country_string.gsub(/\bUSA|TVUS|United States of America|U\.S\.A\.|U\.S\.|\bUS/i,"United States").gsub(/Television (in|of)( the)?|/i,"").gsub(/flagcountry|flag|flagicon|icon/i,"").gsub(/\buk/i,"United Kingdom").gsub(/México/i, "Mexico")
+          country = Country.find_or_create_by(:name => country_string.strip)
+          puts country.name
+          country.country_shows.create(show_id: show.id)
+        end
       end
     end
-
-
-    #find the appropriate entry in the Show model and save the first aired date:
-    show = Show.where(:wikipedia_page_id => page).first
-    show.country_1 = @country_1
-    show.country_2 = @country_2
-    show.country_3 = @country_3
-    show.save
   end
   puts "All country data parsed"
 end
@@ -419,7 +450,7 @@ task :parse_and_save_network_data => :environment do
       string5 = string4[1] #split from above creates an array. This code accessses the second part of the array, after the equals sign.
       if string5.nil?
       else
-        string6 = string5.gsub(/[0-9]{4}/,"").gsub(/American Broadcasting Company/im,"ABC").gsub(/Fox Broadcasting Company/im,"FOX").gsub(/Columbia Broadcasting System/im,"CBS").gsub(/National Broadcasting Company/im,"NBC").gsub(/Public Broadcasting Service/im,"PBS").gsub(/home box office/im,"HBO").gsub(/\(tv channel\)|\(channel\)|\(tv network\)/im,"")
+        string6 = string5.gsub(/[0-9]{4}/,"").gsub(/American Broadcasting Company|abc/i,"ABC").gsub(/Fox Broadcasting Company|fox/i,"FOX").gsub(/Columbia Broadcasting System|cbs/i,"CBS").gsub(/National Broadcasting Company|nbc/i,"NBC").gsub(/Public Broadcasting Service|pbs/i,"PBS").gsub(/home box office|hbo/i,"HBO").gsub(/\(tv channel\)|\(channel\)|\(tv network\)|cite web|/i,"")
         string7 = string6.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
         string7.each do |network_string|
           puts network_string

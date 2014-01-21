@@ -1,0 +1,28 @@
+<%- model_class = Network -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<p>Network Count: <%= @networks.count %></p>
+<!--
+<p>Controller Test: <%#= @test.present? %>
+<p>Controller Test: <%#= @test["before_date(1i)"] %>
+<p></p><%#= params[:start_date_before]["before_date(1i)"] %></p>-->
+
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= sortable "name", "Network Name" %></th>
+    <th>Network's Show Count</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @networks.each do |network| %>
+      <tr>
+        <td><%= network.name %></td>
+        <td><%= network.shows.count %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,28 @@
+<%- model_class = Actor -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<p>Actor Count: <%= @actors.count %></p>
+<!--
+<p>Controller Test: <%#= @test.present? %>
+<p>Controller Test: <%#= @test["before_date(1i)"] %>
+<p></p><%#= params[:start_date_before]["before_date(1i)"] %></p>-->
+
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= sortable "name", "Actor Name" %></th>
+    <th>Actor's Show Count</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @actors.each do |actor| %>
+      <tr>
+        <td><%= actor.name %></td>
+        <td><%= actor.shows.count %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

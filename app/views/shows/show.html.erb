@@ -22,16 +22,12 @@
   <%= @show.number_of_seasons %> <br>
   <strong> Genres:</strong>
   <%= @show.genres.pluck(:name).join(", ").try(:titleize) %> <br>
-  <strong><%= model_class.human_attribute_name(:country_1) %>:</strong>
-  <%= @show.country_1 %> <br>
-  <strong><%= model_class.human_attribute_name(:country_2) %>:</strong>
-  <%= @show.country_2 %>  <br>
-  <strong><%= model_class.human_attribute_name(:country_3) %>:</strong>
-  <%= @show.country_3 %><br>
-  <strong><%= model_class.human_attribute_name(:network_1) %>:</strong>
-  <%= @show.network_1 %>  <br>
-  <strong><%= model_class.human_attribute_name(:network_2) %>:</strong>
-  <%= @show.network_2 %> <br>
+  <strong> Actors/Actresses:</strong>
+  <%= @show.actors.pluck(:name).join(", ") %> <br>
+  <strong> Country:</strong>
+  <%= @show.countries.pluck(:name).join(", ") %> <br>
+  <strong> Networks:</strong>
+  <%= @show.networks.pluck(:name).join(", ") %>  <br>
   <strong><%= model_class.human_attribute_name(:language) %>:</strong>
   <%= @show.language %>  <br>
   <strong><%= model_class.human_attribute_name(:serialized) %>:</strong>

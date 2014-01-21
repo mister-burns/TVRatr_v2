@@ -11,11 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140119215601) do
+ActiveRecord::Schema.define(version: 20140120231150) do
+
+  create_table "actor_shows", force: true do |t|
+    t.integer  "actor_id"
+    t.integer  "show_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "actors", force: true do |t|
-    t.integer  "show_id"
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "countries", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "country_shows", force: true do |t|
+    t.integer  "country_id"
+    t.integer  "show_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -54,9 +73,6 @@ ActiveRecord::Schema.define(version: 20140119215601) do
     t.boolean  "show_active"
     t.integer  "number_of_episodes"
     t.integer  "number_of_seasons"
-    t.string   "country_1"
-    t.string   "country_2"
-    t.string   "country_3"
     t.string   "language"
     t.datetime "created_at"
     t.datetime "updated_at"

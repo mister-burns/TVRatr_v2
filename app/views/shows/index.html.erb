@@ -30,7 +30,7 @@
     <th><%= sortable "number_of_episodes", "Number of Episodes" %></th>
     <th>Network</th>
     <th><%= sortable "modified_language", "Language" %></th>
-    <th><%= sortable "country_1", "Country" %></th>
+    <th>Country</th>
     <th>Show Info</th>
     <th><%=t '.actions', :default => t("helpers.actions") %></th>
   </tr>
@@ -55,7 +55,7 @@
         <td><%= number_with_delimiter(show.number_of_episodes) %></td>
         <td><%= show.networks.limit(1).pluck(:name).join(", ") %></td>
         <td><%= show.modified_language.try(:titleize) %></td>
-        <td><%= show.country_1.try(:titleize) %></td>
+        <td><%= show.countries.limit(1).pluck(:name).join(", ") %></td>
         <td><%= link_to t('.show', :default => t("helpers.links.show")),
                         show_path(show), :class => 'btn btn-mini' %></td>
         <td>

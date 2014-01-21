@@ -11,6 +11,8 @@
     <h4>Category Filter</h4>
     <%= check_box_tag :drama, "drama", params[:drama] %>
     <%= label_tag :drama, "Drama", :class => "checkbox inline" %><br>
+    <%= check_box_tag :adventure, "adventure", params[:adventure] %>
+    <%= label_tag :adventure, "Action/Adventure/Thriller", :class => "checkbox inline" %><br>
     <%= check_box_tag :horror, "horror", params[:horror]  %>
     <%= label_tag :horror, "Horror", :class => "checkbox inline" %><br>
     <%= check_box_tag :comedy, "comedy", params[:comedy]  %>
@@ -101,7 +103,7 @@
       <%= label_tag :united_kingdom, "United Kingdom", :class => "checkbox inline" %><br>
       <%= check_box_tag :commonwealth, "commonwealth", params[:commonwealth] %>
       <%= label_tag :commonwealth, "Other English Speaking Countries", :class => "checkbox inline" %>
-
+      <%= text_field_tag :country_search, params[:country_search] %><br>
       <button type="submit" class="btn btn-default">Filter by Country</button><br><br>
 
       <h4>Search by Network</h4>

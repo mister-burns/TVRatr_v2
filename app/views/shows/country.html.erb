@@ -1,0 +1,23 @@
+<%- model_class = Country -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<p>Country Count: <%= @countries.count %></p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= sortable "name", "Country Name" %></th>
+    <th>Shows In Country</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @countries.each do |country| %>
+      <tr>
+        <td><%= country.name %></td>
+        <td><%= country.shows.count %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

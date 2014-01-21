@@ -2,9 +2,10 @@ TvratrV2::Application.routes.draw do
   root :to => "shows#index"
   resources :shows do
     collection do
-      get :serialized
-      get :drama_display
-      get :children
+      get :country
+      get :actors
+      get :networks
+      get :genres
       get :test_page
     end
   end

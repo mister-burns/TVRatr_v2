@@ -1,4 +1,7 @@
 class Actor < ActiveRecord::Base
-  belongs_to :show
-  validates :name, :uniqueness => { :scope => :show_id }
+  has_many :actor_shows
+  has_many :shows, :through => :actor_shows
+
+  validates :name, uniqueness: true, presence: true
+
 end

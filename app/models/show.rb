@@ -1,11 +1,15 @@
 class Show < ActiveRecord::Base
-  has_many :actors
+  has_many :actor_shows
+  has_many :actors, :through => :actor_shows
 
   has_many :genre_shows
   has_many :genres, :through => :genre_shows
 
   has_many :network_shows
   has_many :networks, :through => :network_shows
+
+  has_many :country_shows
+  has_many :countries, :through => :country_shows
 
   validates :wikipedia_page_id, uniqueness: true, presence: true
   serialize :metacritic_rating
@@ -85,9 +89,10 @@ class Show < ActiveRecord::Base
   end
 
 
-  def self.genre_filter(drama, comedy, horror, children, documentary, police, reality, sitcom, science_fiction, genre_search)
+  def self.genre_filter(drama, adventure, comedy, horror, children, documentary, police, reality, sitcom, science_fiction, genre_search)
     genre_array = Array.new
     if drama.present? then genre_array << drama end
+    if adventure.present? then genre_array << adventure << "action" << "thriller" end
     if comedy.present? then genre_array << comedy end
     if horror.present? then genre_array << horror end
     if children.present? then genre_array << children << "kids" end
@@ -213,32 +218,20 @@ class Show < ActiveRecord::Base
     end
   end
 
-  def self.united_states_filter(united_states)
-    t = arel_table
-    if united_states.present?
-      where(t[:country_1].matches("%united states%").or(t[:country_1].matches("US")).or(t[:country_1].matches("%america%")).or(t[:country_2].matches("%united states%")).or(t[:country_2].matches("US")).or(t[:country_2].matches("%america%")) )
+  def self.country_filter(united_states, united_kingdom, commonwealth, country_search)
+    country_array = Array.new
+    if united_states.present? then country_array << united_states end
+    if united_kingdom.present? then country_array << united_kingdom << "Wales" << "Scotland" << "England" << "Northern Ireland" end
+    if commonwealth.present? then country_array << commonwealth << "Canada" << "Australia" << "New Zealand" end
+    if country_search.present? then country_array << country_search end
+    if country_array.present?
+      #Check if the following like in safe from SQL injection attack:
+      joins(:countries).where(country_array.map{|country| "countries.name LIKE '%#{country}%'" }.join(' OR ')).uniq
     else
       Show.all
     end
   end
 
-  def self.united_kingdom_filter(united_kingdom)
-    t = arel_table
-    if united_kingdom.present?
-      where(t[:country_1].matches("%united kingdom%").or(t[:country_1].matches("UK")).or(t[:country_1].matches("%england%")).or(t[:country_1].matches("%wales%")).or(t[:country_1].matches("%scotland%")).or(t[:country_2].matches("%united kingdom%")).or(t[:country_2].matches("%wales%")).or(t[:country_2].matches("UK")).or(t[:country_2].matches("%england%")).or(t[:country_2].matches("%scotland%")) )
-    else
-      Show.all
-    end
-  end
-
-  def self.commonwealth_filter(commonwealth)
-    t = arel_table
-    if commonwealth.present?
-      where(t[:country_1].matches("%australia%").or(t[:country_1].matches("%canada")).or(t[:country_1].matches("%ireland%")).or(t[:country_1].matches("%new zealand%")) )
-    else
-      Show.all
-    end
-  end
 
   def self.min_seasons_filter(min_seasons)
     if min_seasons.present?

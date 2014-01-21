@@ -22,13 +22,11 @@ class ShowsController < ApplicationController
              .imdb_min_rating_count(params[:imdb_min_rating_count])
              .tv_dot_com_min_rating_count(params[:tv_dot_com_min_rating_count])
              .availability_filter(params[:amazon_instant], params[:amazon_own], params[:itunes])
-             .genre_filter(params[:drama], params[:comedy], params[:horror], params[:children], params[:documentary], params[:police], params[:reality], params[:sitcom], params[:science_fiction], params[:genre_search])
+             .genre_filter(params[:drama], params[:adventure], params[:comedy], params[:horror], params[:children], params[:documentary], params[:police], params[:reality], params[:sitcom], params[:science_fiction], params[:genre_search])
              .language_filter(params[:language])
              .serialized_filter(params[:serialized_only])
              .actor_search(params[:actor_search])
-             .united_states_filter(params[:united_states])
-             .united_kingdom_filter(params[:united_kingdom])
-             .commonwealth_filter(params[:commonwealth])
+             .country_filter(params[:united_states], params[:united_kingdom], params[:commonwealth], params[:country_search])
              .min_seasons_filter(params[:min_seasons])
              .max_seasons_filter(params[:max_seasons])
              .min_episodes_filter(params[:min_episodes])
@@ -39,50 +37,20 @@ class ShowsController < ApplicationController
 
   #.start_date_filter(params[:start_date])
 
-  def serialized
-    @shows = Show.show_name_search(params[:show_name_search]).combo_filter(params[:drama], params[:comedy]).order(sort_column + " " + sort_direction).paginate(:per_page => 50, :page => params[:page])
+  def country
+    @countries = Country.all
   end
 
-  def drama_display
-    @shows = Show.show_name_search(params[:show_name_search])
-             .where("genre_1 LIKE ? OR genre_2 LIKE ? OR genre_3 LIKE ? OR genre_4 LIKE ? OR genre_5 LIKE ? OR format_1 LIKE ? OR format_2 LIKE ? OR format_3 LIKE ? OR format_4 LIKE ? OR format_5 LIKE ?", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%", "%drama%")
-             .individual_season_filter
-             .remove_wikipedia_categories
-             .network_search(params[:network_search])
-             .comedy_filter(params[:comedy])
-             .drama_filter(params[:drama])
-             .language_filter(params[:language])
-             .serialized_only_filter(params[:serialized_only])
-             .united_states_filter(params[:united_states])
-             .united_kingdom_filter(params[:united_kingdom])
-             .commonwealth_filter(params[:commonwealth])
-             .min_seasons_filter(params[:min_seasons])
-             .max_seasons_filter(params[:max_seasons])
-             .min_episodes_filter(params[:min_episodes])
-             .max_episodes_filter(params[:max_episodes])
-             .order(sort_column + " " + sort_direction)
-             .paginate(:per_page => 50, :page => params[:page])
+  def actors
+    @actors = Actor.all
   end
 
-  def children
-    @shows = Show.show_name_search(params[:show_name_search])
-    .where("genre_1 LIKE ? OR genre_2 LIKE ? OR genre_3 LIKE ? OR genre_4 LIKE ? OR genre_5 LIKE ? OR format_1 LIKE ? OR format_2 LIKE ? OR format_3 LIKE ? OR format_4 LIKE ? OR format_5 LIKE ?", "%children%", "%children%", "%children%", "%children%", "%children%", "%children%", "%children%", "%children%", "%children%", "%children%")
-    .individual_season_filter
-    .remove_wikipedia_categories
-    .network_search(params[:network_search])
-    .comedy_filter(params[:comedy])
-    .drama_filter(params[:drama])
-    .language_filter(params[:language])
-    .serialized_only_filter(params[:serialized_only])
-    .united_states_filter(params[:united_states])
-    .united_kingdom_filter(params[:united_kingdom])
-    .commonwealth_filter(params[:commonwealth])
-    .min_seasons_filter(params[:min_seasons])
-    .max_seasons_filter(params[:max_seasons])
-    .min_episodes_filter(params[:min_episodes])
-    .max_episodes_filter(params[:max_episodes])
-    .order(sort_column + " " + sort_direction)
-    .paginate(:per_page => 50, :page => params[:page])
+  def networks
+    @networks = Network.all
+  end
+
+  def genres
+    @genres = Genre.all
   end
 
   def test_page
