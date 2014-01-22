@@ -11,6 +11,9 @@ class Show < ActiveRecord::Base
   has_many :country_shows
   has_many :countries, :through => :country_shows
 
+  has_many :language_shows
+  has_many :languages, :through => :language_shows
+
   validates :wikipedia_page_id, uniqueness: true, presence: true
   serialize :metacritic_rating
 
@@ -297,14 +300,6 @@ class Show < ActiveRecord::Base
       nil
     else
       network_1.gsub(/\(U\.?S\.? TV (channel|network)\)|\(United States\)/i, "")
-    end
-  end
-
-  def modified_language
-    if language.nil?
-      nil
-    else
-      language.gsub(/language/i, "")
     end
   end
 

@@ -1,5 +1,6 @@
 # This task combines all parse rake tasks and runs them together.
 task :parse_all => [:parse_and_save_genre_data,
+                    :parse_and_save_starring_data,
                     :parse_and_save_first_aired_data,
                     :parse_and_save_last_aired_data,
                     :parse_and_save_episode_count_data,
@@ -453,7 +454,6 @@ task :parse_and_save_network_data => :environment do
         string6 = string5.gsub(/[0-9]{4}/,"").gsub(/American Broadcasting Company|abc/i,"ABC").gsub(/Fox Broadcasting Company|fox/i,"FOX").gsub(/Columbia Broadcasting System|cbs/i,"CBS").gsub(/National Broadcasting Company|nbc/i,"NBC").gsub(/Public Broadcasting Service|pbs/i,"PBS").gsub(/home box office|hbo/i,"HBO").gsub(/\(tv channel\)|\(channel\)|\(tv network\)|cite web|/i,"")
         string7 = string6.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
         string7.each do |network_string|
-          puts network_string
           network = Network.find_or_create_by(:name => network_string.strip)
           puts network.name
           network.network_shows.create(show_id: show.id)
@@ -464,6 +464,37 @@ task :parse_and_save_network_data => :environment do
   puts "All network data parsed"
 end
 
+
+task :parse_and_save_language_data_v2 => :environment do
+  wikipediaapiquery = WikipediaApiQuery.all
+  wikipediaapiquery.each do |wikipediaapiquery|
+    page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
+    show = Show.find_by(:wikipedia_page_id => page)
+    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+    string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
+    string3 = /\blanguage\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
+
+    # this code checks in format string is nil, in which case end variables must first get set to nil.
+    if string3.nil?
+    else
+      # the first 3 lines here help further parse the code and isolate each format. Each show can have multiple formats.
+      string4 = string3.to_s.split("=") #takes out format and a few other words.
+      string5 = string4[1] #regex used to isolate each format name.
+      if string5.nil?
+      else
+        string6 = string5.gsub(/american english|australian english|U\.?S\.? english|british english|scottish english|english/i,"English").gsub(/language|\(.*\)|\.|subtitle|cite news|citeweb|url|nowrap/i,"").gsub(/quebec french/i,"French")
+        string7 = string6.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
+        string7.each do |language_string|
+          language_string2 = language_string.split("/")
+          language = Language.find_or_create_by(:name => language_string2[0].strip)
+          puts language.name
+          language.language_shows.create(show_id: show.id)
+        end
+      end
+    end
+  end
+  puts "All language data parsed"
+end
 
 task :parse_and_save_language_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
