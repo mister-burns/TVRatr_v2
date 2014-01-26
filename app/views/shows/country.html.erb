@@ -16,7 +16,7 @@
   <% @countries.each do |country| %>
       <tr>
         <td><%= country.name %></td>
-        <td><%= country.shows.count %></td>
+        <td><%= number_with_delimiter(country.shows.count) %></td>
       </tr>
   <% end %>
   </tbody>

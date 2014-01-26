@@ -4,6 +4,19 @@ task :query_active_categories => [:category_query_english_language_television_pr
                                   :category_query_british_drama_television_series,
                                   :category_query_2010s_American_television_series,
                                   :category_query_2010s_British_television_series,
+                                  :category_query_American_childrens_television_series,
+                                  :category_query_British_childrens_television_programmes,
+                                  :query_serial_drama_list_and_mark_show_as_serialized
+] do
+  puts "Everything has been queried!"
+end
+
+
+task :query_all_categories => [:category_query_english_language_television_programming,
+                                  :category_query_serial_drama_television_series,
+                                  :category_query_british_drama_television_series,
+                                  :category_query_2010s_American_television_series,
+                                  :category_query_2010s_British_television_series,
                                   :category_query_2000s_American_television_series,
                                   :category_query_2000s_British_television_series,
                                   :category_query_1990s_American_television_series,
@@ -45,6 +58,7 @@ task :category_query_english_language_television_programming => :environment do
     show = WikipediaApiQuery.new
     show.wikipedia_page_id = hash2["pageid"]
     show.show_name = hash2["title"]
+    puts show.show_name
     show.save
   end
 
@@ -71,6 +85,7 @@ task :category_query_english_language_television_programming => :environment do
        show = WikipediaApiQuery.new
        show.wikipedia_page_id = hash2["pageid"]
        show.show_name = hash2["title"]
+       puts show.show_name
        show.save
      end
   end
@@ -105,6 +120,7 @@ task :category_query_serial_drama_television_series => :environment do
     show = WikipediaApiQuery.new
     show.wikipedia_page_id = hash2["pageid"]
     show.show_name = hash2["title"]
+    puts show.show_name
     show.save
   end
 
@@ -131,6 +147,7 @@ task :category_query_serial_drama_television_series => :environment do
       show = WikipediaApiQuery.new
       show.wikipedia_page_id = hash2["pageid"]
       show.show_name = hash2["title"]
+      puts show.show_name
       show.save
     end
   end
@@ -164,6 +181,7 @@ task :category_query_british_drama_television_series => :environment do
     show = WikipediaApiQuery.new
     show.wikipedia_page_id = hash2["pageid"]
     show.show_name = hash2["title"]
+    puts show.show_name
     show.save
   end
 
@@ -190,6 +208,7 @@ task :category_query_british_drama_television_series => :environment do
       show = WikipediaApiQuery.new
       show.wikipedia_page_id = hash2["pageid"]
       show.show_name = hash2["title"]
+      puts show.show_name
       show.save
     end
   end
@@ -224,6 +243,7 @@ task :category_query_2010s_American_television_series => :environment do
     show = WikipediaApiQuery.new
     show.wikipedia_page_id = hash2["pageid"]
     show.show_name = hash2["title"]
+    puts show.show_name
     show.save
   end
 
@@ -250,6 +270,7 @@ task :category_query_2010s_American_television_series => :environment do
       show = WikipediaApiQuery.new
       show.wikipedia_page_id = hash2["pageid"]
       show.show_name = hash2["title"]
+      puts show.show_name
       show.save
     end
   end
@@ -284,6 +305,7 @@ task :category_query_2000s_American_television_series => :environment do
     show = WikipediaApiQuery.new
     show.wikipedia_page_id = hash2["pageid"]
     show.show_name = hash2["title"]
+    puts show.show_name
     show.save
   end
 
@@ -310,6 +332,7 @@ task :category_query_2000s_American_television_series => :environment do
       show = WikipediaApiQuery.new
       show.wikipedia_page_id = hash2["pageid"]
       show.show_name = hash2["title"]
+      puts show.show_name
       show.save
     end
   end
@@ -344,6 +367,7 @@ task :category_query_2010s_British_television_series => :environment do
     show = WikipediaApiQuery.new
     show.wikipedia_page_id = hash2["pageid"]
     show.show_name = hash2["title"]
+    puts show.show_name
     show.save
   end
 
@@ -370,6 +394,7 @@ task :category_query_2010s_British_television_series => :environment do
       show = WikipediaApiQuery.new
       show.wikipedia_page_id = hash2["pageid"]
       show.show_name = hash2["title"]
+      puts show.show_name
       show.save
     end
   end
@@ -404,6 +429,7 @@ task :category_query_2000s_British_television_series => :environment do
     show = WikipediaApiQuery.new
     show.wikipedia_page_id = hash2["pageid"]
     show.show_name = hash2["title"]
+    puts show.show_name
     show.save
   end
 
@@ -430,6 +456,7 @@ task :category_query_2000s_British_television_series => :environment do
       show = WikipediaApiQuery.new
       show.wikipedia_page_id = hash2["pageid"]
       show.show_name = hash2["title"]
+      puts show.show_name
       show.save
     end
   end
@@ -464,6 +491,7 @@ task :category_query_1990s_American_television_series => :environment do
     show = WikipediaApiQuery.new
     show.wikipedia_page_id = hash2["pageid"]
     show.show_name = hash2["title"]
+    puts show.show_name
     show.save
   end
 
@@ -490,6 +518,7 @@ task :category_query_1990s_American_television_series => :environment do
       show = WikipediaApiQuery.new
       show.wikipedia_page_id = hash2["pageid"]
       show.show_name = hash2["title"]
+      puts show.show_name
       show.save
     end
   end
@@ -523,6 +552,7 @@ task :category_query_1990s_British_television_series => :environment do
     show = WikipediaApiQuery.new
     show.wikipedia_page_id = hash2["pageid"]
     show.show_name = hash2["title"]
+    puts show.show_name
     show.save
   end
 
@@ -549,6 +579,7 @@ task :category_query_1990s_British_television_series => :environment do
       show = WikipediaApiQuery.new
       show.wikipedia_page_id = hash2["pageid"]
       show.show_name = hash2["title"]
+      puts show.show_name
       show.save
     end
   end
@@ -583,6 +614,7 @@ task :category_query_American_childrens_television_series => :environment do
     show = WikipediaApiQuery.new
     show.wikipedia_page_id = hash2["pageid"]
     show.show_name = hash2["title"]
+    puts show.show_name
     show.save
   end
 
@@ -609,6 +641,7 @@ task :category_query_American_childrens_television_series => :environment do
       show = WikipediaApiQuery.new
       show.wikipedia_page_id = hash2["pageid"]
       show.show_name = hash2["title"]
+      puts show.show_name
       show.save
     end
   end
@@ -644,6 +677,7 @@ task :category_query_British_childrens_television_programmes => :environment do
     show = WikipediaApiQuery.new
     show.wikipedia_page_id = hash2["pageid"]
     show.show_name = hash2["title"]
+    puts show.show_name
     show.save
   end
 
@@ -670,6 +704,7 @@ task :category_query_British_childrens_television_programmes => :environment do
       show = WikipediaApiQuery.new
       show.wikipedia_page_id = hash2["pageid"]
       show.show_name = hash2["title"]
+      puts show.show_name
       show.save
     end
   end
@@ -704,6 +739,7 @@ task :category_query_1980s_American_television_series => :environment do
     show = WikipediaApiQuery.new
     show.wikipedia_page_id = hash2["pageid"]
     show.show_name = hash2["title"]
+    puts show.show_name
     show.save
   end
 
@@ -730,6 +766,7 @@ task :category_query_1980s_American_television_series => :environment do
       show = WikipediaApiQuery.new
       show.wikipedia_page_id = hash2["pageid"]
       show.show_name = hash2["title"]
+      puts show.show_name
       show.save
     end
   end
@@ -790,6 +827,7 @@ task :query_serial_drama_list_and_mark_show_as_serialized => :environment do
       page_id = hash2["pageid"]
       show = Show.where(:wikipedia_page_id => page_id).first_or_create
       show.serialized = true
+      puts show.show_name
       show.save
     end
   end

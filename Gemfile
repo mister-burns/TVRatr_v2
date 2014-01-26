@@ -5,12 +5,15 @@ gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record moved to development group for heroku push
 group :development do
-  gem 'sqlite3'
+  gem 'pg'
 end
 
 # Used for web scraping
 gem 'mechanize'
 gem 'nokogiri'
+
+# Used for transferring data from sqlite to postgres. Suggested by a railscast.
+gem 'taps'
 
 # Used for time parsing
 gem 'chronic'
@@ -48,11 +51,11 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :production do
-  gem 'pg'
-  gem 'rails_12factor'
-  gem 'activerecord-postgresql-adapter'
-end
+#group :production do
+  #gem 'pg'
+  #gem 'rails_12factor'
+  #gem 'activerecord-postgresql-adapter'
+#end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

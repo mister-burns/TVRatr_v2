@@ -21,7 +21,7 @@
   <% @networks.each do |network| %>
       <tr>
         <td><%= network.name %></td>
-        <td><%= network.shows.count %></td>
+        <td><%= number_with_delimiter(network.shows.count) %></td>
       </tr>
   <% end %>
   </tbody>

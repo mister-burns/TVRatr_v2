@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3499667723">
+  <component name="DataSourceManagerImpl" format="xml" hash="2942661958">
     <data-source source="LOCAL" name="Rails tvratr_v2: development" uuid="762a04ba-5ea4-4247-a3f0-087b6f88e568">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:postgresql:tvratr_v4_development</jdbc-url>
+      <user-name>jgoldstein</user-name>
       <libraries>
         <library>
           <url>file://$USER_HOME$/Library/Preferences/RubyMine50/jdbc-drivers/xerial-sqlite-license.txt</url>
@@ -17,7 +18,15 @@
     <data-source source="LOCAL" name="Rails tvratr_v2: production" uuid="f9f40483-dbff-428f-ace1-ee20c7c6ebe4">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql:db/production.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:postgresql:tvratr_v4_production</jdbc-url>
+      <user-name>jgoldstein</user-name>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails tvratr_v2: test" uuid="db2f3a4a-60dd-47d3-95ce-64b1a68a9c6f">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:tvratr_v4_test</jdbc-url>
+      <user-name>jgoldstein</user-name>
       <libraries />
     </data-source>
   </component>

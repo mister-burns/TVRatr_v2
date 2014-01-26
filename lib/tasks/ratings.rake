@@ -3,7 +3,7 @@ task :get_imdb_ratings => :environment do
 
   url = "http://www.imdb.com"
   date = Date.new(2013,6,1)
-  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true)
+  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('amazon_instant_availability IS NULL')
   #show = Show.individual_season_filter.remove_wikipedia_categories.where('amazon_instant_availability IS NULL').where('first_aired > ?', date)
   #show = Show.where(:wikipedia_page_id => 38411152)
   #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1)
@@ -34,16 +34,6 @@ task :get_imdb_ratings => :environment do
         show.imdb_rating_count = rating_count
         show.imdb_link = page_link
         show.save
-      end
-
-      # Get cast list and save list in array in show model
-      if agent.page.search(".cast_list").present? # Find cast list table
-        table = agent.page.search(".cast_list")
-        table.css('span[itemprop=name]').each do |actor_string| #find nokogiri object in cast_last table where each row is actor name
-          actor = Actor.find_or_create_by(:name => actor_string.text.strip)
-          actor.actor_shows.create(show_id: show.id)
-          puts actor.name
-        end
       end
 
       # This code checks for amazon instant availability and own availability and then saves links in model.
@@ -80,9 +70,10 @@ task :get_tv_dot_com_ratings => :environment do
 
   url = "http://www.tv.com" # set url to scrape
   date = Date.new(2013,6,1)
+  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('tv_dot_com_rating IS NULL')
   #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1).where('show_name NOT LIKE ?', "V (2009 TV series)").where('tv_dot_com_rating IS NULL').where('first_aired > ?', date)
   #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1).where('tv_dot_com_rating IS NULL')
-  show = Show.where(:wikipedia_page_id => 38411152)
+  #show = Show.where(:wikipedia_page_id => 38411152)
   show.each do |show|
 
     string = show.show_name
@@ -121,9 +112,9 @@ task :get_metacritic_ratings => :environment do
 
   url = "http://www.metacritic.com/"
   date = Date.new(2013,6,1)
-  #show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true)
+  show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true)
   #show = Show.individual_season_filter.remove_wikipedia_categories.where('metacritic_rating IS NULL').where('first_aired > ?', date).reverse_order
-  show = Show.where(:wikipedia_page_id => 38411152)
+  #show = Show.where(:wikipedia_page_id => 38411152)
   show.each do |show|
 
     string = show.show_name
@@ -198,9 +189,10 @@ task :get_itunes_availability => :environment do
   require 'json'
   require 'net/http'
 
-  show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1)
-  ##show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('metacritic_rating IS NULL')
-  show = Show.where(:wikipedia_page_id => 38411152)
+  show = Show.individual_season_filter.remove_wikipedia_categories.where('itunes_link IS NULL')
+  #show = Show.individual_season_filter.remove_wikipedia_categories.where('number_of_seasons >= ? AND number_of_episodes >= ?', 1, 1)
+  #show = Show.individual_season_filter.remove_wikipedia_categories.where(:serialized => true).where('metacritic_rating IS NULL')
+  #show = Show.where(:wikipedia_page_id => 38411152)
 
   show.each do |show|
     string = show.show_name

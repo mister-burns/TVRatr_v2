@@ -4,17 +4,25 @@
 # Third, in ":copy_page_id_and_name_from_wikipediaapiquery_to_show", the show names and wikipedia ID numbers are copied from the WikipediaApiQuery model to the Show model.
 # Fourth,in ":parse_all", the infobox is parsed for show details which are saved to attributes in the Show.rb model.
 
-task :master_rake => [:query_active_categories,
-                      :infobox_query_from_wikipedia_page_id,
-                      :copy_page_id_and_name_from_wikipediaapiquery_to_show,
-                      :parse_all
+task :master_rake => [:wikipedia_rake,
+                      :rakings_rake
+] do
+  puts "All rakes complete!"
+end
+
+task :wikipedia_rake => [:query_all_categories,
+                         :new_shows_infobox_query,
+                         :active_shows_infobox_query,
+                         :copy_page_id_and_name_from_wikipediaapiquery_to_show,
+                         :parse_all
 ] do
   puts "Wikipedia rakes complete!"
 end
 
-task :master_ratings_rake => [:get_imdb_ratings,
-                              :get_tv_dot_com_ratings,
-                              :get_metacritic_ratings
+task :ratings_rake => [:get_imdb_ratings,
+                       :get_tv_dot_com_ratings,
+                       :get_metacritic_ratings,
+                       :get_itunes_availability
 ] do
   puts "Ratings rakes complete!"
 end

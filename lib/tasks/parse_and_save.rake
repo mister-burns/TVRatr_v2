@@ -22,7 +22,13 @@ task :parse_and_save_genre_data => :environment do
     else
       page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
       show = Show.find_by(:wikipedia_page_id => page)
-      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+
+      begin
+        string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+      rescue
+        string = ""
+      end
+
       #puts string
       #line below: remove "\n" tags and several Wikipedia phrases from string. If not removed, these items cause errors in later parsing steps.
       string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\||\{\{Plainlist\}\}|
@@ -64,7 +70,13 @@ task :parse_and_save_starring_data => :environment do
     else
       page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
       show = Show.find_by(:wikipedia_page_id => page)
-      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+
+      begin
+        string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+      rescue
+        string = ""
+      end
+
       #line below: remove "\n" tags and several Wikipedia phrases from string. If not removed, these items cause errors in later parsing steps.
       string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\||\{\{Plainlist\}\}|/mi,"") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
       string3 = /\bstarring\s*=.*?(?=\s\|)/mi.match(string2) #search for genre string
@@ -76,7 +88,7 @@ task :parse_and_save_starring_data => :environment do
         string5 = string4[1] #split from above creates an array. This code accessses the second part of the array, after the equals sign.
         # this code parses out the individual words that make up the genres.
         if string5.nil?
-          puts string5
+          #puts string5
         else
           #string6 = string5.scan(/(?<=\[\[).*?((?=\|)|(?=\]\]))/i)
           string6 = string5.scan(/(?<=\[\[).*?(?=\]\])/i)
@@ -103,14 +115,20 @@ task :parse_and_save_first_aired_data => :environment do
   #wikipediaapiquery = WikipediaApiQuery.where(:wikipedia_page_id => 7759866)
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
-    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+
+    begin
+      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+    rescue
+      string = ""
+    end
+
     #string2 = string.gsub(/\\n/i," ").gsub(/df=\s?(y|yes)/,"") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
     #string3 = /\bfirst_aired\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
     string2 = /\bfirst_aired\s*=.*?(?=(\n|\s\|))/mi.match(string)
     string3 = string2.to_s.gsub(/df=\s?(y|yes)|format=dmy/mi,"")
 
     #puts string
-    puts string3
+    #puts string3
 
     # this code checks in format string is nil, in which case end variables must first get set to nil.
     if string3.nil?
@@ -133,7 +151,7 @@ task :parse_and_save_first_aired_data => :environment do
         #search for last aired string in order to look for year.  If year is present, then extract and concat with month and day data.
         elsif string.match(/\blast_aired\s*=.*?(?=\n)/mi).present?
           string6 = /\blast_aired\s*=.*?(?=\n)/mi.match(string)
-          puts "true"
+          #puts "true"
           string7 = string6.to_s.match(/\d{4}/)
           string8 = string5.gsub(/df|es|ytv\|?|nfly\|?/mi,"").gsub(/\{\{(start\s?date)|dts\|\||dts/mi,"").gsub(/\{\{|\}\}|\[\[|\]\]/mi,"").gsub(/\|MM\|DD\|/mi,"").gsub(/<!--.+--!?>|<!--|--!?>/mi,"").gsub(/<ref.*/i,"").gsub("|","/").strip
           #puts string8
@@ -154,7 +172,7 @@ task :parse_and_save_first_aired_data => :environment do
       end
     end
 
-    puts @first_aired
+    #puts @first_aired
     #puts @string
 
     #if statement to first look for dates in the "YYYY" format and add text of "/01/01" so they become Date.parse friendly
@@ -172,7 +190,7 @@ task :parse_and_save_first_aired_data => :environment do
       @first_aired_datetime = nil
     end
 
-    puts @first_aired_datetime
+    #puts @first_aired_datetime
 
     #find the appropriate entry in the Show model and save the first aired date:
     begin
@@ -190,12 +208,18 @@ task :parse_and_save_first_aired_data => :environment do
 end
 
 
-task :parse_and_save_last_aired_data_v2 => :environment do
+task :parse_and_save_last_aired_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   #wikipediaapiquery = WikipediaApiQuery.where(:wikipedia_page_id => 2223177)
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
-    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+
+    begin
+      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+    rescue
+      string = ""
+    end
+
     #string2 = string.gsub(/\\n/i," ").gsub(/df=\s?(y|yes)/,"") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
     string3 = /\blast_aired\s*=.*?(?=(\n|\s\|))/mi.match(string) #search for last aired string
 
@@ -262,49 +286,17 @@ task :parse_and_save_last_aired_data_v2 => :environment do
 end
 
 
-task :parse_and_save_last_aired_data => :environment do
-  wikipediaapiquery = WikipediaApiQuery.all
-  wikipediaapiquery.each do |wikipediaapiquery|
-    page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
-    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
-    string2 = /(last_aired\s*=\s*+)(.+?(?=\s\|))/m.match(string) #look for patterns in the data to start at first_aired and end after the date
-    #take the date out of string above, substitute "/" for "|" because you cannot parse the date below without doing this
-    string3 = /((\d+)\|?(\d+)\|?(\d+)|present)/mi.match(string2.to_s).to_s.gsub("|","/")
-
-    #if statement to first look for dates in the "YYYY" format and add text of "/01/01" so they become Date.parse friendly
-    if ( string3 =~ /^\d{4}\z/m )
-      @string4 = string3.to_s.concat("/01/01")
-    elsif ( string3 =~ /present/mi )
-      show = Show.where(:wikipedia_page_id => page).first
-      show.last_aired_present = "present"
-      show.save
-      @string4 = Date.today
-    else
-      @string4 = string3 #set variable to original parsed result if it is not in "YYYY" format
-    end
-
-    #This test was necessary to prevent the Date.parse function from throwing an error when...
-    #...the @string4 variable was nil, then sets @first_aired_match to nil if @string4 is nil.
-    begin
-      @last_aired_match = Date.parse(@string4)
-    rescue
-      @last_aired_match = nil
-    end
-
-    #find the appropriate entry in the Show model and save the first aired date:
-    show = Show.where(:wikipedia_page_id => page).first
-    show.last_aired = @last_aired_match
-    show.save
-  end
-  puts "All last aired data parsed"
-end
-
-
 task :parse_and_save_episode_count_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
-    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+
+    begin
+      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+    rescue
+      string = ""
+    end
+
     string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
     string3 = /\bnum_episodes\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
 
@@ -337,7 +329,13 @@ task :parse_and_save_season_count_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
-    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+
+    begin
+      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+    rescue
+      string = ""
+    end
+
     string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
     string3 = /\bnum_seasons\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
 
@@ -370,7 +368,13 @@ task :parse_and_save_series_count_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
-    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+
+    begin
+      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+    rescue
+      string = ""
+    end
+
     string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
     string3 = /\bnum_series\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
 
@@ -404,7 +408,13 @@ task :parse_and_save_country_data => :environment do
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
     show = Show.find_by(:wikipedia_page_id => page)
-    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+
+    begin
+      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+    rescue
+      string = ""
+    end
+
     string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
     string3 = /\bcountry\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
 
@@ -437,8 +447,13 @@ task :parse_and_save_network_data => :environment do
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
     show = Show.find_by(:wikipedia_page_id => page)
-    puts show.show_name
-    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+
+    begin
+      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+    rescue
+      string = ""
+    end
+
     #line below: remove "\n" tags and several Wikipedia phrases from string. If not removed, these items cause errors in later parsing steps.
     string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\||\{\{Plainlist\}\}/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|")
     string3 = /\b(network|channel)\s*=.*?(?=(\n|\s\|))/mi.match(string2) #search for genre string
@@ -465,12 +480,18 @@ task :parse_and_save_network_data => :environment do
 end
 
 
-task :parse_and_save_language_data_v2 => :environment do
+task :parse_and_save_language_data => :environment do
   wikipediaapiquery = WikipediaApiQuery.all
   wikipediaapiquery.each do |wikipediaapiquery|
     page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
     show = Show.find_by(:wikipedia_page_id => page)
-    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+
+    begin
+      string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
+    rescue
+      string = ""
+    end
+
     string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
     string3 = /\blanguage\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
 
@@ -494,45 +515,4 @@ task :parse_and_save_language_data_v2 => :environment do
     end
   end
   puts "All language data parsed"
-end
-
-task :parse_and_save_language_data => :environment do
-  wikipediaapiquery = WikipediaApiQuery.all
-  wikipediaapiquery.each do |wikipediaapiquery|
-    page = wikipediaapiquery.wikipedia_page_id  # set page variable to help parse JSON hash in next line
-    string = JSON.parse(wikipediaapiquery.infobox)["query"]["pages"]["#{page}"]["revisions"].first["*"] #parse JSON hash
-    string2 = string.gsub(/\\n/i," ").gsub(/\{\{Plainlist \||\{\{Unbulleted list\||\{\{Plainlist\|/mi,"").gsub(/\{\{ubl\|/mi,"").gsub(/<\/?[^>]*>/, "|") #remove "\n" tags from string. If not removed, these tags cause errors in later parsing steps.
-    string3 = /\blanguage\s*=.*?(?=\s\|)/mi.match(string2) #search for format string
-
-    # this code checks in format string is nil, in which case end variables must first get set to nil.
-    if string3.nil?
-      @language = nil
-
-    else
-      # the first 3 lines here help further parse the code and isolate each format. Each show can have multiple formats.
-      string4 = string3.to_s.split("=") #takes out format and a few other words.
-      string5 = string4[1] #regex used to isolate each format name.
-        if string5.nil?
-          @language = nil
-        else
-          string6 = string5.scan(/\w+[^\|\[\]\{\}\*,](?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?(?:\w*[^\|\[\]\{\}\*,])?/m)
-          @language = string6[0]
-        end
-    end
-
-    #find the appropriate entry in the Show model and save the first aired date:
-    show = Show.where(:wikipedia_page_id => page).first
-    show.language = @language
-    show.save
-  end
-  puts "All language data parsed"
-end
-
-
-task :delete_first_aired_strings => :environment do
-  show = Show.all
-  show.each do |show|
-    show.first_aired_string = nil
-    show.save
-  end
 end

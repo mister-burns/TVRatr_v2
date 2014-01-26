@@ -53,4 +53,7 @@
   <data-source source="LOCAL" name="Rails tvratr_v2: production" uuid="f9f40483-dbff-428f-ace1-ee20c7c6ebe4">
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
+  <data-source source="LOCAL" name="Rails tvratr_v2: test" uuid="db2f3a4a-60dd-47d3-95ce-64b1a68a9c6f">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
 </component>

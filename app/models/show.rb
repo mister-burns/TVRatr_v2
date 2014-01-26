@@ -19,13 +19,13 @@ class Show < ActiveRecord::Base
 
   # Use this scope to filter out bad data from wikipedia. Some shows (ex. sons of anarchy) have individual seasons listed as
   # full shows. This is obviously incorrect and not what my users want to see. This scope weeds out those entries.
-  scope :individual_season_filter, -> { where("show_name NOT LIKE ?", "%(season%") }
-  scope :remove_wikipedia_categories, -> { where("show_name NOT LIKE ?", "%category:%") }
+  scope :individual_season_filter, -> { where("show_name NOT ILIKE ?", "%(season%") }
+  scope :remove_wikipedia_categories, -> { where("show_name NOT ILIKE ?", "%category:%") }
   scope :english_only, -> { where(t[:language].matches("%english%").or(t[:country_1].matches("%united%")).or(t[:country_1].matches("%austrailia%")).or(t[:country_1].matches("%england%")).or(t[:country_1].matches("%uk%")).or(t[:country_1].matches("%ireland%")).or(t[:country_1].matches("%new zealand%")) ) }
 
   def self.show_name_search(show_name_search)
     if show_name_search.present?
-      where('show_name LIKE ?', "%#{show_name_search}%")
+      where('show_name ILIKE ?', "%#{show_name_search}%")
     else
       Show.all
     end
@@ -68,7 +68,7 @@ class Show < ActiveRecord::Base
 
   def self.actor_search(actor_search)
     if actor_search.present?
-      joins(:actors).where('actors.name LIKE ?', "%#{actor_search}%" ).uniq
+      joins(:actors).where('actors.name ILIKE ?', "%#{actor_search}%" ).uniq
     else
       Show.all
     end
@@ -76,7 +76,7 @@ class Show < ActiveRecord::Base
 
   def self.network_search(network_search)
     if network_search.present?
-      joins(:networks).where('networks.name LIKE ?', "%#{network_search}%" ).uniq
+      joins(:networks).where('networks.name ILIKE ?', "%#{network_search}%" ).uniq
     else
       Show.all
     end
@@ -85,7 +85,7 @@ class Show < ActiveRecord::Base
 
   def self.serialized_filter(serialized_only)
     if serialized_only.present?
-      joins(:genres).where('genres.name LIKE ? OR genres.name LIKE ?', "%#{serialized_only}%", "%serialized%" ).uniq
+      joins(:genres).where('genres.name ILIKE ? OR genres.name ILIKE ?', "%#{serialized_only}%", "%serialized%" ).uniq
     else
       Show.all
     end
@@ -107,7 +107,7 @@ class Show < ActiveRecord::Base
     if genre_search.present? then genre_array << genre_search end
     if genre_array.present?
       #Check if the following like in safe from SQL injection attack:
-      joins(:genres).where(genre_array.map{|genre| "genres.name LIKE '%#{genre}%'" }.join(' OR ')).uniq
+      joins(:genres).where(genre_array.map{|genre| "genres.name ILIKE '%#{genre}%'" }.join(' OR ')).uniq
       #joins(:genres).where(genre_array.map{|genre| "genres.name LIKE '%#{genre}%'" }.join(' OR ')).uniq
       #http://stackoverflow.com/questions/17990419/rails-or-query-with-join-and-like
     else
@@ -201,6 +201,16 @@ class Show < ActiveRecord::Base
     end
   end
 
+  def self.language_filter_v2(language)
+    if language.present?
+      joins(:languages, :countries).where('languages.name ILIKE ? OR countries.name ILIKE ?', "English", "United States").uniq
+      #joins(:countries, :languages).where('countries.name ILIKE ?', "United States").uniq
+    else
+      Show.all
+    end
+  end
+
+  #includes(:physicians, :appointments).where('physicians.id = ? AND appointments.appointment_date = ?', <id or ids array>, Date.today)
 
   def self.language_filter(language)
     t = arel_table
@@ -214,7 +224,7 @@ class Show < ActiveRecord::Base
   def self.serialized_only_filter(serialized_only)
     t = arel_table
     if serialized_only.present?
-      #where("genre_1 LIKE ? OR genre_2 LIKE ? OR genre_3 LIKE ? OR genre_4 LIKE ? OR genre_5 LIKE ? OR format_1 LIKE ? OR format_2 LIKE ? OR format_3 LIKE ? OR format_4 LIKE ? OR format_5 LIKE ?", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%")
+      #where("genre_1 ILIKE ? OR genre_2 ILIKE ? OR genre_3 ILIKE ? OR genre_4 ILIKE ? OR genre_5 ILIKE ? OR format_1 ILIKE ? OR format_2 ILIKE ? OR format_3 ILIKE ? OR format_4 ILIKE ? OR format_5 ILIKE ?", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%", "%serial%")
       where(t[:genre_1].matches("%serial%").or(t[:genre_2].matches("%serial%")).or(t[:genre_3].matches("%serial%")).or(t[:genre_4].matches("%serial%")).or(t[:genre_5].matches("%serial%")).or(t[:format_1].matches("%serial%")).or(t[:format_2].matches("%serial%")).or(t[:format_3].matches("%serial%")).or(t[:format_4].matches("%serial%")).or(t[:format_5].matches("%serial%")).or(t[:serialized].eq(true)) )
     else
       Show.all
@@ -229,7 +239,7 @@ class Show < ActiveRecord::Base
     if country_search.present? then country_array << country_search end
     if country_array.present?
       #Check if the following like in safe from SQL injection attack:
-      joins(:countries).where(country_array.map{|country| "countries.name LIKE '%#{country}%'" }.join(' OR ')).uniq
+      joins(:countries).where(country_array.map{|country| "countries.name ILIKE '%#{country}%'" }.join(' OR ')).uniq
     else
       Show.all
     end
@@ -271,7 +281,7 @@ class Show < ActiveRecord::Base
 
   def modified_last_aired
     if last_aired_present == "present"
-      "present"
+      "Present"
     elsif last_aired.try(:strftime, "%m%d") == "0101"
       last_aired.try(:strftime, "%Y")
     else
