@@ -4,28 +4,6 @@
     <list default="true" id="50138401-41a6-45d8-9758-d7e9f0a8eca4" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TVRatr_v2/json_tests.rb" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TVRatr_v2/nokogiri_test.rb" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20140119190309_drop_networks_shows.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20140119190601_drop_show_attribute_types.rb" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.rakeTasks" afterPath="$PROJECT_DIR$/.idea/.rakeTasks" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/copy_id_and_name_from_wikipediaapiquery_to_show.rake" afterPath="$PROJECT_DIR$/lib/tasks/copy_id_and_name_from_wikipediaapiquery_to_show.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shows/country.html.erb" afterPath="$PROJECT_DIR$/app/views/shows/country.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.yml" afterPath="$PROJECT_DIR$/config/database.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shows/genres.html.erb" afterPath="$PROJECT_DIR$/app/views/shows/genres.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/infobox_query.rake" afterPath="$PROJECT_DIR$/lib/tasks/infobox_query.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/master_list.rake" afterPath="$PROJECT_DIR$/lib/tasks/master_list.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shows/networks.html.erb" afterPath="$PROJECT_DIR$/app/views/shows/networks.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/parse_and_save.rake" afterPath="$PROJECT_DIR$/lib/tasks/parse_and_save.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/query_and_save.rake" afterPath="$PROJECT_DIR$/lib/tasks/query_and_save.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/ratings.rake" afterPath="$PROJECT_DIR$/lib/tasks/ratings.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/show.rb" afterPath="$PROJECT_DIR$/app/models/show.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/shows_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/shows_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tvratr_v2.iml" afterPath="$PROJECT_DIR$/.idea/tvratr_v2.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tvratr_v2.iws" />
@@ -75,7 +53,7 @@
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_format_data__tvratr_v2.coverage" NAME="parse_and_save_format_data: tvratr_v2 Coverage Results" MODIFIED="1387920923980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@get_metacritic_ratings__tvratr_v2.coverage" NAME="get_metacritic_ratings: tvratr_v2 Coverage Results" MODIFIED="1389676891320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@delete_first_aired_strings__tvratr_v2.coverage" NAME="delete_first_aired_strings: tvratr_v2 Coverage Results" MODIFIED="1387519038598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
-    <SUITE FILE_PATH="coverage/tvratr_v4@get_imdb_ratings__tvratr_v2.coverage" NAME="get_imdb_ratings: tvratr_v2 Coverage Results" MODIFIED="1390755099355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
+    <SUITE FILE_PATH="coverage/tvratr_v4@get_imdb_ratings__tvratr_v2.coverage" NAME="get_imdb_ratings: tvratr_v2 Coverage Results" MODIFIED="1390755464029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@get_tv_dot_com_ratings__tvratr_v2.coverage" NAME="get_tv_dot_com_ratings: tvratr_v2 Coverage Results" MODIFIED="1389676870746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@parse_and_save_series_count_data_v2__tvratr_v2.coverage" NAME="parse_and_save_series_count_data_v2: tvratr_v2 Coverage Results" MODIFIED="1386985485467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
     <SUITE FILE_PATH="coverage/tvratr_v2@category_query_2010s_American_television_series__tvratr_v2.coverage" NAME="category_query_2010s_American_television_series: tvratr_v2 Coverage Results" MODIFIED="1385878865249" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="tvratr_v2" />
@@ -158,7 +136,7 @@
       <file leaf-file-name="ratings.rake" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/tasks/ratings.rake">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="201" column="61" selection-start="10062" selection-end="10062" vertical-scroll-proportion="8.920118" vertical-offset="0" max-vertical-offset="3615">
+            <state line="37" column="8" selection-start="1846" selection-end="1846" vertical-scroll-proportion="0.71005917" vertical-offset="315" max-vertical-offset="3615">
               <folding />
             </state>
           </provider>
@@ -324,8 +302,8 @@
         <option value="$PROJECT_DIR$/db/schema.rb" />
         <option value="$PROJECT_DIR$/lib/tasks/master_list.rake" />
         <option value="$PROJECT_DIR$/lib/tasks/infobox_query.rake" />
-        <option value="$PROJECT_DIR$/lib/tasks/ratings.rake" />
         <option value="$PROJECT_DIR$/app/models/show.rb" />
+        <option value="$PROJECT_DIR$/lib/tasks/ratings.rake" />
       </list>
     </option>
   </component>
@@ -337,6 +315,7 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="1" />
     <option name="y" value="22" />
     <option name="width" value="1366" />
     <option name="height" value="669" />
@@ -841,8 +820,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Rake.get_itunes_availability: tvratr_v2" />
-        <item index="1" class="java.lang.String" itemvalue="Rake.get_imdb_ratings: tvratr_v2" />
+        <item index="0" class="java.lang.String" itemvalue="Rake.get_imdb_ratings: tvratr_v2" />
+        <item index="1" class="java.lang.String" itemvalue="Rake.get_itunes_availability: tvratr_v2" />
         <item index="2" class="java.lang.String" itemvalue="Rake.get_tv_dot_com_ratings: tvratr_v2" />
         <item index="3" class="java.lang.String" itemvalue="Rake.get_metacritic_ratings: tvratr_v2" />
         <item index="4" class="java.lang.String" itemvalue="Rake.wikipedia_rake: tvratr_v2" />
@@ -881,15 +860,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1366" height="669" extended-state="6" />
-    <editor active="false" />
+    <frame x="1" y="22" width="1366" height="669" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32715008" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921174" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32987398" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24981467" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23572475" sideWeight="0.6677909" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23572475" sideWeight="0.6677909" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1218,7 +1197,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/tasks/ratings.rake">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="201" column="61" selection-start="10062" selection-end="10062" vertical-scroll-proportion="8.920118" vertical-offset="0" max-vertical-offset="3615">
+        <state line="37" column="8" selection-start="1846" selection-end="1846" vertical-scroll-proportion="0.71005917" vertical-offset="315" max-vertical-offset="3615">
           <folding />
         </state>
       </provider>
