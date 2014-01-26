@@ -4,19 +4,14 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record moved to development group for heroku push
-group :development do
-  gem 'pg'
-end
+#group :development do
+gem 'pg'
+gem 'rails_12factor'
+#end
 
 # Used for web scraping
 gem 'mechanize'
 gem 'nokogiri'
-
-# Used for transferring data from sqlite to postgres. Suggested by a railscast.
-gem 'taps'
-
-# Used for time parsing
-gem 'chronic'
 
 # Using the twitter-bootstrap app for styling
 gem 'twitter-bootstrap-rails'
